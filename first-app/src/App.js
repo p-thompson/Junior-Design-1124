@@ -1,7 +1,7 @@
-// import logo from './logo.svg';
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Helmet from 'react-helmet';
 import './App.css';
 
 function App() {
@@ -17,10 +17,13 @@ function App() {
   }
 
   return (
-    <div className="Login">
+    <div className="Login" style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
+      <Helmet>
+        <style>{'body { background-color: SeaGreen; }'}</style>
+      </Helmet>
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Email:{' '}</Form.Label>
           <Form.Control
             autoFocus
             type="email"
@@ -29,12 +32,20 @@ function App() {
           />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Password:{'   '}</Form.Label>
           <Form.Control
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+        </Form.Group>
+        <Form.Group size="lg" controlId="Forgot Password?">
+          <Form.Label>Forgot Password?</Form.Label>
+          {/* <Form.Control
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          /> */}
         </Form.Group>
         <Button block size="lg" type="submit" disabled={!validateForm()}>
           Login
