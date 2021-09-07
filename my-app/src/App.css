@@ -1,0 +1,10 @@
+.App {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 50;
+}
+
+body {
+  background: rgb(110, 199, 122);
+}
