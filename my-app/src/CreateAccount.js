@@ -11,6 +11,7 @@ import {Helmet} from 'react-helmet'
 function CreateAccount() {
     const history = useHistory();
     const goToLogin = () => history.goBack();
+    const goToDashboard = () => history.push('/dashboard');
 
     return (
         <div className="CreateAccount">
@@ -19,7 +20,7 @@ function CreateAccount() {
         </Helmet>
         <MuiThemeProvider>
         <Grid>
-            <Paper elevation={5} style={{padding: 50, height: '70vh', width:280, margin: "100px auto"}}>
+            <Paper elevation={5} style={{padding: 50, height: '500px', width:280, margin: "100px auto"}}>
                 <Grid align='center'>
                 <h1>Create Account</h1>
                 </Grid>
@@ -46,7 +47,7 @@ function CreateAccount() {
                     <option value={"admin"}>Admin</option>
                 </Select>
                 </FormControl>
-                <RaisedButton label="Create Account" primary={true} variant="contained" fullWidth style={{margin: '20px 0'}}/>
+                <RaisedButton label="Create Account" primary={true} variant="contained" fullWidth style={{margin: '20px 0'}} onClick={goToDashboard}/>
                 <Button 
                 disableFocusRipple disableRipple style={{ textTransform: "none" }} 
                 variant="text"
