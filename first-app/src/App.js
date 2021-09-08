@@ -17,18 +17,41 @@ function App() {
   }
   return (
     
-    <div class="row">
+    <div class="body">
       <Helmet>
-        <style>{'body { background-color: LightBlue; }'}</style>
+        <style>{'body { background-color: LightGreen; }'}</style>
       </Helmet>
       <h1 class="font-weight-bold py-3 mb-4">
         <center>Account Settings</center>
       </h1>
       <div class="profile">
-        <tr>
-          <div class = "propic">
+        <div class="inner">
+          <div class="propic">
+            <div class = "img">
+              <img src="https://tr.rbxcdn.com/7238712e1a7d1a9a0e140643d9323c03/420/420/Avatar/Png" alt="MyPic" width="170px"></img>
+            </div>
           </div>
-        </tr>
+          <div class="prop">
+            
+          </div>
+          <div class="personal">
+              <tr class="bio">Name: Jeffrey Etoile</tr>
+              <tr class = "bio">Bio: Loves Dogs, Cooking</tr>
+              <tr class="bio">Rating: 4.98/5</tr>     
+          </div>  
+        </div>
+        <div class = "changling">
+          <th class = "change">Change Name</th>
+        </div>
+        <div class = "changling">
+          <th class = "change">Change Bio</th>
+        </div>
+        <div class = "changling">
+          <th class = "change">Change Contact Information</th>
+        </div>  
+        <div class = "changling">
+          <th class = "change">Change Username/Password</th>
+        </div>        
       </div>
       <div class = "roletable">
         <table>
@@ -71,9 +94,28 @@ function App() {
           </tr>
           <tr>
             <div class = "services">  
+              <h4 class="servicetitle">
+                <leftCenter>Services:</leftCenter>
+              </h4>
+              <label class="container">Childcare
+                <input type="checkbox" checked="checked"></input>
+                <span class="checkmark"></span>
+              </label>
+              <label class="container">Looking for Work
+                <input type="checkbox" checked="checked"></input>
+                <span class="checkmark"></span>
+              </label>
+              <label class="container">Carpooling
+                <input type="checkbox" checked="checked"></input>
+                <span class="checkmark"></span>
+              </label>
+              <label class="container">Food Providers
+                <input type="checkbox" checked="checked"></input>
+                <span class="checkmark"></span>
+              </label>
             </div>
             <div class = "save">
-              <button class="savechanges">Save Changes</button>
+              <button class="savechanges">Save All Changes</button>
             </div>
           </tr>
         </table> 
