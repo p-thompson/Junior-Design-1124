@@ -2,13 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Login from './Login';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Route } from 'react-router-dom';
+import CreateAccount from './CreateAccount';
+import ForgotPassword from './ForgotPassword';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App/>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Route exact path="/" component={Login} />
+    <Route path='/createaccount' component={CreateAccount}/>
+    <Route path="/forgotpassword" component={ForgotPassword}/>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
