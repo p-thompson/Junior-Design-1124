@@ -11,23 +11,18 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
+import VillageNavBar from './VillageNavBar';
 
 
 
-class SearchScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.style = {
-      table: {
-        minWidth: 200,
-        maxWidth: 200,
-        marginTop: 100
-      },
-    }
+function SearchScreen() {
+  const style = {
+    table: {
+      minWidth: 200,
+      maxWidth: 200,
+      marginTop: 100
+    },
   }
-
-  render() {
 
   return (
     <><Box bgcolor="text.disabled" color="primary.contrastText" p={4} fontSize={30}>
@@ -35,7 +30,7 @@ class SearchScreen extends Component {
     </Box>
 
     <TableContainer class="tableContainer">
-        <Table className={this.style.table} aria-label="simple table" align="center">
+        <Table className={style.table} aria-label="simple table" align="center">
           <TableBody align="center">
             <TableRow align="center">
               <TableCell align="center" component="th" scope="row">
@@ -103,8 +98,8 @@ class SearchScreen extends Component {
             </TableRow>
           </TableBody>
         </Table>
+        <VillageNavBar/>
       </TableContainer></>
   )
-  }
 }
-export default SearchScreen;
+export default SearchScreen
