@@ -1,14 +1,17 @@
 // All necessary imports;
 import React, {Component} from 'react';
-import {Helmet} from 'react-helmet'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
 import {Grid, Paper, Avatar, Button, Box} from "@material-ui/core";
 import VillageNavBar from './VillageNavBar';
-import LockedOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { useHistory } from "react-router-dom";
+
+
 
 function CreateListing() {
+    const history = useHistory();
+    const goToSpecificView = () => history.push('/profileselection');
+
     return(
         <Grid container spacing={24} align='left'>
             <Grid item xs={4}>
@@ -22,7 +25,7 @@ function CreateListing() {
                 </Paper>
             </Grid>
             <Grid item xs={4}>
-                <RaisedButton label="Request Contact Information" primary={true} variant="contained" align="center" width="30vh" style={{margin: '15% 25%'}}/>
+                <RaisedButton label="Request Contact Information" primary={true} variant="contained" align="center" width="30vh" style={{margin: '15% 25%'}} onClick={goToSpecificView}/>
             </Grid>
             <Grid item>
                 <VillageNavBar/>
@@ -32,8 +35,6 @@ function CreateListing() {
 }
 
 function ProfileView() {
-
-
     return (
       <MuiThemeProvider>
             <Paper elevation={5} style={{padding: 50, height: '100vh', width:'90%', margin: "20px auto"}}>
@@ -44,6 +45,5 @@ function ProfileView() {
             </Paper>
       </MuiThemeProvider>
     );
-  
 }
 export default ProfileView;
