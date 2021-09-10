@@ -15,19 +15,16 @@ function Login() {
     const history = useHistory();
     const goToCreateAccount = () => history.push('/createaccount');
     const goToForgotPassword = () => history.push('/forgotpassword');
+    const goToDashboard = () => history.push('/dashboard');
 
     return (
         <div className="Login">
         <Helmet>
         <title>ItTakesAVillage</title>
         </Helmet>
-        <Router>
-        <Route path="/createaccount" component={CreateAccount}/>
-        <Route path="/forgotpassword" component={ForgotPassword}/>
-        </Router>
         <MuiThemeProvider>
         <Grid>
-            <Paper elevation={5} style={{padding: 50, height: '50vh', width:280, margin: "100px auto"}}>
+            <Paper elevation={5} style={{padding: 50, height: '400px', width:280, margin: "100px auto"}}>
                 <Grid align='center'>
                     <Avatar style={{backgroundColor: 'green'}}>
                         <LockedOutlinedIcon>
@@ -38,7 +35,7 @@ function Login() {
                 </Grid>
                 <TextField label='Username' hintText='Enter Username' required fullWidth/>
                 <TextField label='Password' hintText='Enter Password' required fullWidth/>
-                <RaisedButton label="Login" primary={true} variant="contained" fullWidth style={{margin: '15px 0'}}/>
+                <RaisedButton label="Login" primary={true} variant="contained" fullWidth style={{margin: '15px 0'}} onClick={goToDashboard}/>
                 <RaisedButton label="Create Account" primary={true} onClick={goToCreateAccount} variant="contained" fullWidth style={{margin: '15px 0'}}/>
                 <Button disableFocusRipple disableRipple style={{ textTransform: "none" }} variant="text" 
                 style={{justifyContent:'center'}}
