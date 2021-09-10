@@ -7,12 +7,14 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import CreateAccount from './CreateAccount';
 import ForgotPassword from './ForgotPassword';
 import Dashboard from './dashboard';
+import SearchScreen from './SearchScreen';
 
 ReactDOM.render(
   <BrowserRouter>
     <Route exact path="/" component={Login} />
     <Route path='/createaccount' component={CreateAccount}/>
     <Route path="/forgotpassword" component={ForgotPassword}/>
+    <Route path="/searchscreen" component={SearchScreen}/>
     <Route path='/dashboard' component={Dashboard}/>
 
   </BrowserRouter>,
