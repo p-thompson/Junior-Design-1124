@@ -16,6 +16,9 @@
     font-size: 60px;
     
   }
+  .propicture {
+    
+  }
   
   th,
   td {
@@ -157,6 +160,7 @@
   }
   .prop {
     padding: 7px;
+    padding-bottom: 20px;
   }
   .protitle {
     box-shadow: 8px 8px 16px 0px rgba(0,0,0,0.3);

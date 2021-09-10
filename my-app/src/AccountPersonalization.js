@@ -19,7 +19,7 @@ function AccountPersonalization() {
         <div class="inner">
           <div class="propic">
             <div class = "img">
-              <img src="https://tr.rbxcdn.com/7238712e1a7d1a9a0e140643d9323c03/420/420/Avatar/Png" alt="MyPic" width="170px"></img>
+              <center><img class="propicture" src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" center alt="Pic" width="150px" height="150px"></img></center>
             </div>
           </div>
           <div class="prop">
