@@ -8,6 +8,7 @@ import CreateAccount from './CreateAccount';
 import ForgotPassword from './ForgotPassword';
 import Dashboard from './dashboard';
 import SearchScreen from './SearchScreen';
+import ProfileView from './ProfileView';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -16,7 +17,7 @@ ReactDOM.render(
     <Route path="/forgotpassword" component={ForgotPassword}/>
     <Route path="/searchscreen" component={SearchScreen}/>
     <Route path='/dashboard' component={Dashboard}/>
-
+    <Route path='/profiles' component={ProfileView}/>
   </BrowserRouter>,
   document.getElementById('root')
 );
