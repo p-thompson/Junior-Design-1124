@@ -1,0 +1,185 @@
+
+/*the outermost layer*/
+.roletable {
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    padding-left: 275px;
+    padding-top: 0px;
+  }
+  th {
+    background-color: white;
+    color: black;
+    padding: 50px;
+    box-shadow: 8px 8px 16px 0px rgba(0,0,0,0.3);
+  }
+  .title {
+    font-size: 60px;
+    
+  }
+  
+  th,
+  td {
+    width: 250px;
+    text-align: center;
+    border: 1px solid transparent;
+    padding: 5px;
+  }
+  .dropbtn {
+    background-color: teal;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    box-shadow: 8px 8px 16px 0px rgba(0,0,0,0.3);
+  }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 8px 8px 16px 0px rgba(0,0,0,0.3);
+    z-index: 1;
+  }
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    box-shadow: 8px 8px 16px 0px rgba(0,0,0,0.3);
+  }
+  .dropdown-content a:hover {background-color: #ddd;}
+  .dropdown:hover .dropdown-content {display: block;}
+  .dropdown:hover .dropbtn {background-color: grey;}
+  
+  .tofrom {
+    background-color: transparent;
+    color: black;
+    width: 90px;
+    text-align: center;
+    border: 1px solid transparent;
+    padding: 5px;
+    box-shadow: 0px 0px 0px 0px transparent;
+    padding-bottom: 25px;
+  }
+  .services {
+    
+    max-width: 525px;
+    min-width: 525px;
+    min-height: 180px;
+    border: 1px solid transparent;
+    box-shadow: 8px 8px 16px 0px rgba(0,0,0,0.3);
+    background-color: white;
+    
+  }
+  .servicetitle {
+    padding-top: 20px;
+    padding-left: 30px;
+    
+  }
+  
+  .container {
+    padding-left: 390px;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 16px;
+  }
+  .container input {
+    
+  
+  }
+  .checkmark {
+   
+  }
+  
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .container .checkmark:after {
+  
+  }
+  
+  .save {
+    padding-top:33px;
+    padding-left: 65px;
+  }
+  .savechanges {
+    padding-top: 20px;
+    background-color: teal;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    width: 400px;
+    box-shadow: 8px 8px 16px 0px rgba(0,0,0,0.3);
+  }
+  .profile {
+    
+    position: absolute;
+    right: 340px;
+    bottom: 120px;
+    padding-left: 55px;
+    padding-top: 30px;
+    width: 280px;
+    height:  480px;
+    background-color: white;
+    box-shadow: 8px 8px 16px 0px rgba(0,0,0,0.3);
+    
+   
+  }
+  .propic {
+    width: 220px;
+    height: 170px;
+    padding-top: 20px;
+    border: 1px solid black;
+  }
+  .personal {
+    padding-top: 5px;
+    padding-left: 5px;
+    border: 1px solid black;
+    width: 220px;
+    height: 70px;
+  
+  }
+  
+  .bio {
+    font-size: 14px;
+  }
+  .prop {
+    padding: 7px;
+  }
+  .protitle {
+    box-shadow: 8px 8px 16px 0px rgba(0,0,0,0.3);
+  
+  }
+  .infos {
+    width: 600px;
+  }
+  .descript {
+    padding-right: 180px;
+    font-size: 12px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0);
+    background-color: transparent;
+  }
+  .changling {
+    padding-top: 10px;
+  }
+  .change {
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,.3);
+    width: 220px;
+    height: 15px;
+    font-size: 14px;
+  }
+  .save:hover .savechanges {background-color: grey;}
+  
+  

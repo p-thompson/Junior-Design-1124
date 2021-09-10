@@ -7,6 +7,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import CreateAccount from './CreateAccount';
 import ForgotPassword from './ForgotPassword';
 import Dashboard from './dashboard';
+import AccountPersonalization from './AccountPersonalization';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -14,6 +15,7 @@ ReactDOM.render(
     <Route path='/createaccount' component={CreateAccount}/>
     <Route path="/forgotpassword" component={ForgotPassword}/>
     <Route path='/dashboard' component={Dashboard}/>
+    <Route path = '/accountpersonalization' component={AccountPersonalization}/>
 
   </BrowserRouter>,
   document.getElementById('root')
