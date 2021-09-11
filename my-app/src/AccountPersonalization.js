@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       background: 'white',
       height:'550px',
-      width: "1800px"
+      width: "1800px",
     },
   toolbar: {
       paddingRight: 24, // keep right padding when drawer closed
@@ -67,6 +67,13 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "auto",
       marginRight: -12
     },
+    account: {
+      paddingLeft: "180px",
+      
+    },
+    pageelems: {
+      
+    },
 }));
 
 function AccountPersonalization() {
@@ -92,9 +99,9 @@ function AccountPersonalization() {
         <Helmet>
           <title>ItTakesAVillage</title>
         </Helmet>
-        <TableRow class="pageelems">
-          <TableCell class="account">
-            <Grid container style={{width: 700}} className={classes.container}>
+        <TableRow className={classes.pageelems}>
+          <TableCell class="account" className={classes.account}>
+            <Grid container style={{width: 600}} className={classes.container}>
               <Grid item xs={8} className={classes.grid}>
                   <Paper className={classes.paper}>
                     <center><h2>Account Personalization</h2></center>
