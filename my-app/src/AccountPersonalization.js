@@ -71,6 +71,8 @@ const useStyles = makeStyles((theme) => ({
 
 function AccountPersonalization() {
   const classes = useStyles();
+  const history = useHistory();
+  const goToLogin = () => history.push('/');
 
   return (
     <div className={classes.root}>
@@ -80,6 +82,7 @@ function AccountPersonalization() {
             <section className={classes.logout}>
                 <Button 
                     color='inherit'
+                    onClick={goToLogin}
                 >
                     logout
                 </Button>
@@ -89,7 +92,7 @@ function AccountPersonalization() {
         <Helmet>
           <title>ItTakesAVillage</title>
         </Helmet>
-        <TableRow>
+        <TableRow class="pageelems">
           <TableCell class="account">
             <Grid container style={{width: 700}} className={classes.container}>
               <Grid item xs={8} className={classes.grid}>
@@ -170,10 +173,22 @@ function AccountPersonalization() {
                         <Typography align="left">Name: Jeff Smith</Typography>
                         <Typography align="left">Bio: Loves Dogs, Cooking</Typography>
                         <Typography align="left">Rating: 4.96/5</Typography>
+                        <Grid>
+                          <th><br></br></th>
+                        </Grid>
+                        <Grid>
+                          <th><br></br></th>
+                        </Grid>
                         <Button>Change Name</Button>
                         <Button>Change Bio</Button>
                         <Button>Change Contact Information</Button>
                         <Button>Change Username/Password</Button>
+                        <Grid>
+                          <th><br></br></th>
+                        </Grid>
+                        <Grid>
+                          <th><br></br></th>
+                        </Grid>
                     </Paper>
                   </Grid>
                 </Paper>
