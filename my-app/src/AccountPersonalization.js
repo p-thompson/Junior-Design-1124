@@ -1,121 +1,209 @@
 import React, { useState } from "react";
-import Helmet from 'react-helmet';
 import './AccountPersonalization.css';
 import { Typography } from '@material-ui/core';
 import VillageNavBar from './VillageNavBar';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import {Grid, Paper, Select, Avatar, Button, FormControl, InputLabel} from "@material-ui/core";
+import './CreateAccount.css';
+import { useHistory} from "react-router-dom";
+import {Helmet} from 'react-helmet'
+import { positions } from '@material-ui/system';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Box from "@material-ui/core/Box";
+import MultiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import LockedOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableRow from "@material-ui/core/TableRow";
+import MenuItem from '@material-ui/core/MenuItem';
+import { Checkbox } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+      display: 'flex',
+      background: 'white',
+      height:'550px',
+      width: "1800px"
+    },
+  toolbar: {
+      paddingRight: 24, // keep right padding when drawer closed
+    },
+    appBar: {
+      position:"fixed",
+      background: '#6EC77A',
+      zIndex: theme.zIndex.drawer + 1,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+    },
+  title: {
+      flexgrow: 1
+  },
+  container: {
+    
+      paddingTop: '80px',
+      paddingLeft: "30px"
+  },
+    grid: {
+      padding: theme.spacing(1),
+    },
+    paper: {
+      padding: theme.spacing(2),
+      display: 'flex',
+      overflow: 'auto',
+      flexDirection: 'column',
+    },
+    fixedHeight: {
+      height: 240,
+    },
+    logout: {
+      marginLeft: "auto",
+      marginRight: -12
+    },
+}));
 
 function AccountPersonalization() {
+  const classes = useStyles();
 
   return (
-  
-    <div class="body">
-      <Helmet>
-        <style>{'body { background-color: LightGreen; }'}</style>
-      </Helmet>
-      <h1 class="title">
-        <center><Typography component="h1" variant="h6" color="inherit" noWrap >Account Personalization</Typography></center>
-      </h1>
-      <div class="profile">
-        <div class="inner">
-          <div class="propic">
-            <div class = "img">
-              <center><img class="propicture" src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" center alt="Pic" width="150px" height="150px"></img></center>
-            </div>
-          </div>
-          <div class="prop">
-            
-          </div>
-          <div class="personal">
-              <tr class="bio">Name: Jeffrey Etoile</tr>
-              <tr class = "bio">Bio: Loves Dogs, Cooking</tr>
-              <tr class="bio">Rating: 4.98/5</tr>     
-          </div>  
-        </div>
-        <div class = "changling">
-          <th class = "change">Change Name</th>
-        </div>
-        <div class = "changling">
-          <th class = "change">Change Bio</th>
-        </div>
-        <div class = "changling">
-          <th class = "change">Change Contact Information</th>
-        </div>  
-        <div class = "changling">
-          <th class = "change">Change Username/Password</th>
-        </div>        
-      </div>
-      <div class = "roletable">
-        <table>
-          <h3 class="font-weight-bold py-3 mb-4">
-              <leftCenter><center><Typography component="h1" variant="h6" color="inherit" noWrap >Choose a Role:</Typography></center></leftCenter>
-          </h3>
-          <tr>
-            <div class= "roles">
-              <th>Parent</th>
-              <th>Volunteer</th>
-            </div>
-          </tr>
-          <tr>
-            <h4 class="font-weight-bold py-3 mb-4">
-              <leftCenter><center><Typography component="h1" variant="h6" color="inherit" noWrap >Times Needed/Availability:</Typography></center></leftCenter>
-            </h4>
-            <tr>
-              <th class = "tofrom">To:</th>
-              <div class="dropdown">
-                <button class="dropbtn">Choose Time</button>
-                <div class="dropdown-content">
-                  <a href="#">Link 1</a>
-                  <a href="#">Link 2</a>
-                  <a href="#">Link 3</a>
-                </div>
-              </div>
-              <th class = "tofrom">From:</th>
-              <div class="dropdown">
-                <button class="dropbtn">Choose Time</button>
-                <div class="dropdown-content">
-                  <a href="#">Link 1</a>
-                  <a href="#">Link 2</a>
-                  <a href="#">Link 3</a>
-                </div>
-              </div>
-              <h4 class="font-weight-bold py-3 mb-4">
-                <leftCenter>  </leftCenter>
-              </h4>   
-            </tr>
-          </tr>
-          <tr>
-            <div class = "services">  
-              <h4 class="servicetitle">
-                <leftCenter>Services:</leftCenter>
-              </h4>
-              <label class="container">Childcare
-                <input type="checkbox" checked="checked"></input>
-                <span class="checkmark"></span>
-              </label>
-              <label class="container">Looking for Work
-                <input type="checkbox" checked="checked"></input>
-                <span class="checkmark"></span>
-              </label>
-              <label class="container">Carpooling
-                <input type="checkbox" checked="checked"></input>
-                <span class="checkmark"></span>
-              </label>
-              <label class="container">Food Providers
-                <input type="checkbox" checked="checked"></input>
-                <span class="checkmark"></span>
-              </label>
-            </div>
-            <div class = "save">
-              <button class="savechanges">Save All Changes</button>
-            </div>
-          </tr>
-          <VillageNavBar/>
-        </table> 
-      </div>
-    </div>    
+    <div className={classes.root}>
+    <AppBar position="fixed" color='primary' className={classes.appBar}>
+        <Toolbar position="absolute" className={classes.toolbar}>
+            <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}className={classes.title}>It Takes a Village</Typography>
+            <section className={classes.logout}>
+                <Button 
+                    color='inherit'
+                >
+                    logout
+                </Button>
+            </section>
+        </Toolbar>
+    </AppBar>
+        <Helmet>
+          <title>ItTakesAVillage</title>
+        </Helmet>
+        <TableRow>
+          <TableCell class="account">
+            <Grid container style={{width: 700}} className={classes.container}>
+              <Grid item xs={8} className={classes.grid}>
+                  <Paper className={classes.paper}>
+                    <center><h2>Account Personalization</h2></center>
+                    <left><Typography>Choose a Role:</Typography></left>
+                    <Button>Parent</Button>
+                    <Button>Volunteer</Button>
+                    <left><Typography>Choose Available Times:</Typography></left>
+                    <TableRow>
+                      <TableCell align="center" >
+                        <FormControl style={{ minWidth: 105 }}>
+                          <InputLabel id="demo-simple-select-label">Begin Time</InputLabel>
+                          <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            autoWidth
+                          >
+                            <MenuItem value={10}>12:00</MenuItem>
+                            <MenuItem value={20}>1:00</MenuItem>
+                            <MenuItem value={30}>2:00</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </TableCell>
+                      <TableCell align="center">
+                        <FormControl style={{ minWidth: 105 }}>
+                          <InputLabel id="demo-simple-select-label">End Time</InputLabel>
+                          <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            autoWidth
+                          >
+                            <MenuItem value={10}>1:00</MenuItem>
+                            <MenuItem value={20}>2:00</MenuItem>
+                            <MenuItem value={30}>3:00</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>
+                        <TableCell align="center" >
+                          <FormControl style={{ minWidth: 105 }}>
+                            <leftCenter><Typography class="services">Childcare</Typography></leftCenter>
+                            <leftCenter><Typography class="services">Looking for Work</Typography></leftCenter>
+                            <leftCenter><Typography class="services">Carpooling</Typography></leftCenter>
+                            <leftCenter><Typography class="services">Food Providers</Typography></leftCenter>
+                          
+                          </FormControl>
+                        </TableCell>
+                        <TableCell align="center">
+                          <FormControl style={{ minWidth: 105 }}>
+                            <Checkbox>Childcare</Checkbox>
+                            <Checkbox>Childcare</Checkbox>
+                            <Checkbox>Childcare</Checkbox>
+                            <Checkbox>Childcare</Checkbox>
+                          </FormControl>
+                        </TableCell>
+                      </TableCell>  
+                    </TableRow>
+                  </Paper>
+              </Grid>         
+            </Grid>      
+          </TableCell>
+          <TableCell class="profile">
+            <Grid container style={{width: 600}} className={classes.container}>
+              <Grid item xs={8} className={classes.grid}>
+                <Paper className={classes.paper}>
+                  <Grid className={classes.elems} align='center'>
+                    <Avatar style={{backgroundColor: 'green'}}>
+
+                    </Avatar>
+                    <th class="space">Change Profile Picture</th>
+                    <h1>It Takes a Village</h1>
+                    <th class="hello">Hello, Jeff</th>
+                    
+                    <Paper className={classes.paper}>
+                        <Typography align="left">Name: Jeff Smith</Typography>
+                        <Typography align="left">Bio: Loves Dogs, Cooking</Typography>
+                        <Typography align="left">Rating: 4.96/5</Typography>
+                        <Button>Change Name</Button>
+                        <Button>Change Bio</Button>
+                        <Button>Change Contact Information</Button>
+                        <Button>Change Username/Password</Button>
+                    </Paper>
+                  </Grid>
+                </Paper>
+              </Grid>            
+            </Grid>
+
+          </TableCell>
+        </TableRow>
+        <VillageNavBar></VillageNavBar>
+        
+    </div> 
+    
+    
   );
 }
 
+/*
+<Grid className={classes.elems} align='center'>
+                      <Avatar style={{backgroundColor: 'green'}}>
 
+                      </Avatar>
+                      <th class="space">Change Profile Picture</th>
+                      <h1>It Takes a Village</h1>
+                      <th class="hello">Hello, Jeff</th>
+                      
+                      <Paper className={classes.paper}>
+                          <Typography align="left">Name: Jeff Smith</Typography>
+                          <Typography align="left">Bio: Loves Dogs, Cooking</Typography>
+                      </Paper>
+                  </Grid>
+*/
 
 export default AccountPersonalization;
