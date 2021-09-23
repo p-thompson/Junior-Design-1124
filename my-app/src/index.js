@@ -7,8 +7,10 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import CreateAccount from './CreateAccount';
 import ForgotPassword from './ForgotPassword';
 import Dashboard from './dashboard';
+import AccountPersonalization from './AccountPersonalization';
 import SearchScreen from './SearchScreen';
-
+import ProfileView from './ProfileView';
+import SpecificProfileView from './SpecificProfileView';
 ReactDOM.render(
   <BrowserRouter>
     <Route exact path="/" component={Login} />
@@ -17,6 +19,10 @@ ReactDOM.render(
     <Route path="/searchscreen" component={SearchScreen}/>
     <Route path='/dashboard' component={Dashboard}/>
 
+    <Route path = '/accountpersonalization' component={AccountPersonalization}/>
+
+    <Route path='/profiles' component={ProfileView}/>
+    <Route path='/profileselection' component={SpecificProfileView}/>
   </BrowserRouter>,
   document.getElementById('root')
 );

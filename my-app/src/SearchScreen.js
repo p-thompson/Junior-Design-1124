@@ -12,6 +12,7 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import VillageNavBar from './VillageNavBar';
+import { useHistory } from "react-router-dom";
 
 
 
@@ -23,6 +24,11 @@ function SearchScreen() {
       marginTop: 100
     },
   }
+
+
+  const history = useHistory();
+  const goToProfileView = () => history.push('/profiles');
+
 
   return (
     <><Box bgcolor="text.disabled" color="primary.contrastText" p={4} fontSize={30}>
@@ -86,12 +92,12 @@ function SearchScreen() {
             </TableRow>
             <TableRow style={{ height: 150 }} align="center">
               <TableCell align="center">
-                <Button variant="contained" color="secondary" align="center">
+                <Button variant="contained" color="secondary" align="center" onClick={goToProfileView}>
                   Enter
                 </Button>
               </TableCell>
               <TableCell align="center">
-                <Button variant="contained" color="secondary" align="center" style={{ maxWidth: '100px', maxHeight: '50px', minWidth: '30px', minHeight: '30px' }}>
+                <Button variant="contained" color="secondary" align="center" style={{ maxWidth: '100px', maxHeight: '50px', minWidth: '30px', minHeight: '30px' }} onClick={goToProfileView}>
                   Automatic Matches
                 </Button>
               </TableCell>
