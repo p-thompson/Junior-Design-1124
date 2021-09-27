@@ -10,16 +10,16 @@ USE demo_app;
 -- Table Creation for an Application User
 DROP TABLE IF EXISTS app_user;
 CREATE TABLE app_user (
-	username char(15) NOT NULL,
-	pass char(15) NOT NULL,
+	username varchar(20) NOT NULL,
+	pass varchar(50) NOT NULL,
     first_name char(30) NOT NULL,
 	last_name char(30) NOT NULL,
 	zip char(5),
 	state char(2),
 	city char(30),
 	street char(30),
-    cell char(15),
-    email char(30),
+    cell varchar(15),
+    email varchar(30),
 	PRIMARY KEY (username)
 ) ENGINE=InnoDB;
 
@@ -147,4 +147,4 @@ and parent.username = i_username);
 END //
 DELIMITER ;
 
-CALL parent_automatic_matching('janedoe34');
+-- CALL parent_automatic_matching('janedoe34');
