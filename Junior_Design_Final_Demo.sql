@@ -148,3 +148,13 @@ END //
 DELIMITER ;
 
 CALL parent_automatic_matching('janedoe34');
+
+
+DROP FUNCTION IF EXISTS validate_login;
+CREATE FUNCTION validate_login (i_username varchar(20), i_password varchar(50))
+RETURNS VARCHAR(50) DETERMINISTIC
+RETURN (SELECT username
+from app_user
+where i_username = username and i_password = pass);
+
+select validate_login('janedoe34', 'mypassword') as username;
