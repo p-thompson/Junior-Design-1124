@@ -68,8 +68,10 @@ CREATE TABLE volunteer_days_available (
 DROP TABLE IF EXISTS volunteer_services_provided;
 CREATE TABLE volunteer_services_provided (
 	username char(15) NOT NULL,
-    service char(20) NOT NULL,
-    PRIMARY KEY (username, service),
+    tutor boolean default false,
+    babysit boolean default false,
+    transportation boolean default false,
+    PRIMARY KEY (username),
 	CONSTRAINT services_provided_username_constraint FOREIGN KEY (username) REFERENCES volunteer (username)
 ) ENGINE=InnoDB;
 
@@ -77,8 +79,10 @@ CREATE TABLE volunteer_services_provided (
 DROP TABLE IF EXISTS parent_services_needed;
 CREATE TABLE parent_services_needed (
 	username char(15) NOT NULL,
-    service char(20) NOT NULL,
-    PRIMARY KEY (username, service),
+    tutor boolean default false,
+    babysit boolean default false,
+    transportation boolean default false,
+    PRIMARY KEY (username),
 	CONSTRAINT services_needed_username_constraint FOREIGN KEY (username) REFERENCES parent (username)
 ) ENGINE=InnoDB;
 
@@ -100,65 +104,49 @@ INSERT INTO volunteer VALUES ('bobwilson88', 'My name is Bob. I am a volunteer w
 INSERT INTO volunteer VALUES ('annasmith20', 'My name is Anna. I can tutor in english and I can also babysit and do housework.');
 
 -- Insert into Parent Services Needed and Days Available
-INSERT INTO parent_services_needed VALUES ('janedoe34', 'tutor');
+INSERT INTO parent_services_needed VALUES ('janedoe34', true, true, false);
 INSERT INTO parent_days_available VALUES ('janedoe34', 'Monday', '11:30', '15:00');
 INSERT INTO parent_days_available VALUES ('janedoe34', 'Wednesday', '11:30', '15:00');
 INSERT INTO parent_days_available VALUES ('janedoe34', 'Friday', '11:30', '15:00');
 
-INSERT INTO parent_services_needed VALUES ('joebrown56', 'tutor');
-INSERT INTO parent_services_needed VALUES ('joebrown56', 'babysitter');
+INSERT INTO parent_services_needed VALUES ('joebrown56', true, true, true);
 INSERT INTO parent_days_available VALUES ('joebrown56', 'Tuesday', '11:30', '15:00');
 INSERT INTO parent_days_available VALUES ('joebrown56', 'Tuesday', '8:00', '10:45');
 
 -- Insert into Volunteer Services Provided and Days Available
-INSERT INTO volunteer_services_provided VALUES ('bobwilson88', 'tutor');
+INSERT INTO volunteer_services_provided VALUES ('bobwilson88', true, true, false);
 INSERT INTO volunteer_days_available VALUES ('bobwilson88', 'Wednesday', '10:00', '17:00');
 INSERT INTO volunteer_days_available VALUES ('bobwilson88', 'Friday', '10:00', '17:00');
 
-INSERT INTO volunteer_services_provided VALUES ('annasmith20', 'tutor');
-INSERT INTO volunteer_services_provided VALUES ('annasmith20', 'babysitter');
+INSERT INTO volunteer_services_provided VALUES ('annasmith20', true, true, true);
 INSERT INTO volunteer_days_available VALUES ('annasmith20', 'Tuesday', '7:00', '13:00');
 INSERT INTO volunteer_days_available VALUES ('annasmith20', 'Friday', '10:00', '17:00');
 
 -- ----------------------------------------------------- Automatic Match Algorithm -------------------------------------------------------
-DROP PROCEDURE IF EXISTS parent_automatic_matching;
-DELIMITER //
+-- DROP PROCEDURE IF EXISTS parent_automatic_matching;
+-- DELIMITER //
 
-CREATE PROCEDURE parent_automatic_matching(
-	   IN i_username varchar(15)
-)
-BEGIN
-SELECT concat(app_user.first_name, ' ', app_user.last_name) as volunteer, 
-volunteer_services_provided.service as service,
-volunteer_days_available.day_avail as day,
-volunteer_days_available.time_begin as start_time, 
-volunteer_days_available.time_end as end_time
-from volunteer 
-join app_user on app_user.username = volunteer.username
-join volunteer_days_available on volunteer.username = volunteer_days_available.username
-join parent_days_available on volunteer_days_available.day_avail = parent_days_available.day_avail 
-join parent on parent.username = parent_days_available.username
-join parent_services_needed on parent.username = parent_services_needed.username
-join volunteer_services_provided on volunteer.username = volunteer_services_provided.username
-where (volunteer_days_available.time_begin <= parent_days_available.time_begin 
-and volunteer_days_available.time_end >= parent_days_available.time_end
-and volunteer_services_provided.service = parent_services_needed.service
-and parent.username = i_username);
-END //
-DELIMITER ;
+-- CREATE PROCEDURE parent_automatic_matching(
+-- 	   IN i_username varchar(15)
+-- )
+-- BEGIN
+-- SELECT concat(app_user.first_name, ' ', app_user.last_name) as volunteer, 
+-- volunteer_services_provided.service as service,
+-- volunteer_days_available.day_avail as day,
+-- volunteer_days_available.time_begin as start_time, 
+-- volunteer_days_available.time_end as end_time
+-- from volunteer 
+-- join app_user on app_user.username = volunteer.username
+-- join volunteer_days_available on volunteer.username = volunteer_days_available.username
+-- join parent_days_available on volunteer_days_available.day_avail = parent_days_available.day_avail 
+-- join parent on parent.username = parent_days_available.username
+-- join parent_services_needed on parent.username = parent_services_needed.username
+-- join volunteer_services_provided on volunteer.username = volunteer_services_provided.username
+-- where (volunteer_days_available.time_begin <= parent_days_available.time_begin 
+-- and volunteer_days_available.time_end >= parent_days_available.time_end
+-- and volunteer_services_provided.service = parent_services_needed.service
+-- and parent.username = i_username);
+-- END //
+-- DELIMITER ;
 
-<<<<<<< HEAD
-CALL parent_automatic_matching('janedoe34');
-
-
-DROP FUNCTION IF EXISTS validate_login;
-CREATE FUNCTION validate_login (i_username varchar(20), i_password varchar(50))
-RETURNS VARCHAR(50) DETERMINISTIC
-RETURN (SELECT username
-from app_user
-where i_username = username and i_password = pass);
-
-select validate_login('janedoe34', 'mypassword') as username;
-=======
 -- CALL parent_automatic_matching('janedoe34');
->>>>>>> 07b5b409244df81e6dd57302119cdb22dc41619b
