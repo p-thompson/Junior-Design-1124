@@ -32,7 +32,7 @@ function SearchScreen() {
 
   return (
     <><Box bgcolor="text.disabled" color="primary.contrastText" p={4} fontSize={30}>
-      Search Screen
+      Search Screentest
     </Box>
 
     <TableContainer class="tableContainer">
