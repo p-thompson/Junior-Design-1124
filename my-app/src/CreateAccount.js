@@ -20,16 +20,21 @@ function CreateAccount() {
         </Helmet>
         <MuiThemeProvider>
         <Grid>
-            <Paper elevation={5} style={{padding: 50, height: '500px', width:280, margin: "100px auto"}}>
+            <Paper elevation={5} style={{padding: 50, height: '500px', width:300, margin: "100px auto", overflow: "auto"}}>
                 <Grid align='center'>
                 <h1>Create Account</h1>
                 </Grid>
-                <TextField label='Username' hintText='Enter Username' required fullWidth/>
-                <TextField label='Password' hintText='Enter Password' required fullWidth/>
+                <TextField label='Username' hintText='Username' required fullWidth/>
+                <TextField label='Password' hintText='Password' required fullWidth/>
                 <TextField label='Password' hintText='Confirm Password' required fullWidth/>
-                <TextField label='Full Name' hintText='Full Name' required fullWidth/>
+                <TextField label='First Name' hintText='First Name' required fullWidth/>
+                <TextField label='Last Name' hintText='Last Name' required fullWidth/>
                 <TextField label='Email' hintText='Email' required fullWidth/>
                 <TextField label='Cell' hintText='Cell Number' required fullWidth/>
+                <TextField label='Street' hintText='Street' required fullWidth/>
+                <TextField label='City' hintText='City' required fullWidth/>
+                <TextField label='State' hintText='State' required fullWidth/>
+                <TextField label='Zip' hintText='Zip' required fullWidth/>
                 <FormControl>
                 <InputLabel>Type</InputLabel>
                 <Select
