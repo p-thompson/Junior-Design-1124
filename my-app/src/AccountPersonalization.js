@@ -204,7 +204,7 @@ function AccountPersonalization() {
 
           </TableCell>
         </TableRow>
-        <VillageNavBar></VillageNavBar>
+        <VillageNavBar page="account"/>
         
     </div> 
     
