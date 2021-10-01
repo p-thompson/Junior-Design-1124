@@ -28,7 +28,7 @@ function CreateListing() {
                 <RaisedButton label="Request Contact Information" primary={true} variant="contained" align="center" width="30vh" style={{margin: '15% 25%'}} onClick={goToSpecificView}/>
             </Grid>
             <Grid item>
-                <VillageNavBar/>
+                <VillageNavBar page="search"/>
             </Grid>
         </Grid> 
     )

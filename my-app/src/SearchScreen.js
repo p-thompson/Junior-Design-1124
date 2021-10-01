@@ -104,7 +104,7 @@ function SearchScreen() {
             </TableRow>
           </TableBody>
         </Table>
-        <VillageNavBar/>
+        <VillageNavBar page="search"/>
       </TableContainer></>
   )
 }

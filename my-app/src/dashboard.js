@@ -90,7 +90,7 @@ function Dashboard() {
                         </Paper>
                     </Grid>
                     <Grid item>
-                    <VillageNavBar/>
+                    <VillageNavBar page="home"/>
                     </Grid>
                 </Grid>
         </div>
