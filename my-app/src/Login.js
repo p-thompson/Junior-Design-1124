@@ -1,12 +1,14 @@
 // All necessary imports;
-import React from 'react';
+import React, {useState} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {Grid, Paper, Avatar, Button} from "@material-ui/core";
+import {Alert} from '@mui/material';
 import LockedOutlinedIcon from '@material-ui/icons/LockOutlined';
 import './Login.css';
 import { useHistory,  BrowserRouter as Router, Route } from "react-router-dom";
+import ReactDOM from 'react-dom';
 import ForgotPassword from "./ForgotPassword";
 import CreateAccount from "./CreateAccount";
 import {Helmet} from 'react-helmet'
@@ -17,8 +19,25 @@ function Login() {
     const goToForgotPassword = () => history.push('/forgotpassword');
     const goToDashboard = () => history.push('/dashboard');
 
+    const [usernameValue, setUsernameValue] = useState("")
+    const [passwordValue, setPasswordValue] = useState("")
+    const [errorValue, setErrorValue] = useState("")
+
+    function ValidateCredentials() {
+        if (usernameValue.length === 0) {
+            setErrorValue("Invalid Username.")
+        } else if (passwordValue.length === 0) {
+            setErrorValue("Invalid Password.")
+        } else if (usernameValue != passwordValue) {
+            setErrorValue("Username and Password do not match")
+        } else {
+            goToDashboard()
+        }
+    }
+
     return (
         <div className="Login">
+        {errorValue && <Alert severity="error">{errorValue}</Alert>}
         <Helmet>
         <title>ItTakesAVillage</title>
         </Helmet>
@@ -33,9 +52,9 @@ function Login() {
                     </Avatar>
                     <h1>It Takes a Village</h1>
                 </Grid>
-                <TextField label='Username' hintText='Enter Username' required fullWidth/>
-                <TextField label='Password' hintText='Enter Password' required fullWidth/>
-                <RaisedButton label="Login" primary={true} variant="contained" fullWidth style={{margin: '15px 0'}} onClick={goToDashboard}/>
+                <TextField id='Username' value={usernameValue} onChange={(e) => setUsernameValue(e.target.value)} label='Username' hintText='Enter Username' required fullWidth/>
+                <TextField id='Password' type="password" value={passwordValue} onChange={(e) => setPasswordValue(e.target.value)} label='Password' hintText='Enter Password' required fullWidth/>
+                <RaisedButton label="Login" primary={true} variant="contained" fullWidth style={{margin: '15px 0'}} onClick={ValidateCredentials}/>
                 <RaisedButton label="Create Account" primary={true} onClick={goToCreateAccount} variant="contained" fullWidth style={{margin: '15px 0'}}/>
                 <Button disableFocusRipple disableRipple style={{ textTransform: "none" }} variant="text" 
                 style={{justifyContent:'center'}}
@@ -50,3 +69,5 @@ function Login() {
 
 }
 export default Login;
+
+
