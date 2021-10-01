@@ -2,6 +2,7 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "libs/mysql-connector-java-8.0.26.jar",
-        "libs/junit-4.10.jar"
+        "libs/junit-4.10.jar",
+        "libs/javax.ws.rs-api-2.1.1"
     ]
 }

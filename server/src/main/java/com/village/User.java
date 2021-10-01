@@ -1,4 +1,4 @@
-package server.src.main.java.com.village;
+package com.village;
 
 public class User {
     private String username;

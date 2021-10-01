@@ -1,4 +1,4 @@
-package server.src.main.java.com.village;
+package com.village;
 
 /**
  * Hello world!

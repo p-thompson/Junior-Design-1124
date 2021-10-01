@@ -1,4 +1,4 @@
-package server.src.main.java.com.village;
+package com.village;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

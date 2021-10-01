@@ -1,4 +1,4 @@
-package server.src.test.java.com.village;
+package com.village;
 
 import static org.junit.Assert.assertTrue;
 
