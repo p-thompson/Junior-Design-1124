@@ -6,12 +6,12 @@
   padding-bottom: 20px;
 }
 .profile {
-  
-  
+ left: 200px;
 
 }
 .account {
-  padding-left: 250px;
+ 
 }
-.pageelems {
+.row {
+  padding: 10px;
 }
