@@ -179,8 +179,11 @@ function AccountPersonalization() {
   const history = useHistory();
   const goToLogin = () => history.push('/');
   const options = ['Option 1', 'Option 2'];
-  const [startDate, setStartDate] = useState(new Date());
   const [value, setValue] = useState([new Date(), new Date()]);
+  const [times, setUsers] = useState([
+    { row: 1, day: 'Tuesday', start: '1:00pm', end: '4:00pm'},
+    { row: 2, day: 'Monday', start: '2:00pm', end: '5:00pm'}
+  ]);
 
   
   /*
@@ -254,15 +257,56 @@ function AccountPersonalization() {
               <Paper style={{width: 407, paddingLeft: 0}} className={classes.times}>
                 <center><h3 className={classes.avail}>Your Availability</h3></center>
                 <Paper className={classes.mytimes} style={{width: 357, height: 392}}>
+                  <table className="table table-striped table-bordered" style={{borderCollapse: 'separate', borderSpacing: '30px 20px'}}>
+                    <thead>
+                        <tr> 
+                            <th>Row</th>
+                            <th>Day</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {times && times.map(times =>
+                            <tr key={times.id}>
+                                <td>{times.row}</td>
+                                <td>{times.day}</td>
+                                <td>{times.start}</td>
+                                <td>{times.end}</td>
+                            </tr>
+                        )}
+                    </tbody>
+                  </table>
                   <tr></tr>
                 </Paper>
                 <TableRow>
                   <TableCell>
                     <FormControl style={{ paddingBottom: 10, minWidth: 85, paddingLeft: 14, paddingTop: 5, fontSize: 12 }}>          
-                      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />    
+                    <FormControl>
+                    <InputLabel>Day</InputLabel>
+                    <Select
+                        native
+                        required
+                        displayEmpty
+                        fullWidth
+                        inputProps={{
+                        name: 'name',
+                        id: 'name'
+                        }}
+                    >
+                        <option value={"Sunday"}>Sunday</option>
+                        <option value={"Monday"}>Monday</option>
+                        <option value={"Tuesday"}>Tuesday</option>
+                        <option value={"Wednesday"}>Wednesday</option>
+                        <option value={"Thursday"}>Thursday</option>
+                        <option value={"Friday"}>Friday</option>
+                        <option value={"Saturday"}>Saturday</option>
+                    </Select>
+                    </FormControl>    
                       <TimeRangePicker
                         onChange={(newValue)=>setValue(value)}
                         value={value}
+                        disableClock={true}
                       />
                     </FormControl>
                   </TableCell>
