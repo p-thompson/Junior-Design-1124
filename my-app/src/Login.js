@@ -1,5 +1,5 @@
 // All necessary imports;
-import React from 'react';
+import React, {useState} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -12,11 +12,14 @@ import CreateAccount from "./CreateAccount";
 import {Helmet} from 'react-helmet'
 
 function Login() {
+    const [userInfo, setUserInfo] = useState(new Map());
     const history = useHistory();
     const goToCreateAccount = () => history.push('/createaccount');
     const goToForgotPassword = () => history.push('/forgotpassword');
-    const goToDashboard = () => history.push('/dashboard');
+    const goToDashboard = () => history.push('/dashboard', userInfo);
 
+    // const {fname, lname} = userInfo;
+    // onClick={() => setUserInfo({fname: "Meg", lname: "K"}
     return (
         <div className="Login">
         <Helmet>

@@ -80,6 +80,10 @@ function AccountPersonalization() {
   const classes = useStyles();
   const history = useHistory();
   const goToLogin = () => history.push('/');
+  const fname = history.location.state.get("fname");
+  const lname = history.location.state.get("lname");
+  const rating = history.location.state.get("rating");
+  const bio = history.location.state.get("bio");
 
   return (
     <div className={classes.root}>
@@ -174,12 +178,12 @@ function AccountPersonalization() {
                     </Avatar>
                     <th class="space">Change Profile Picture</th>
                     <h1>It Takes a Village</h1>
-                    <th class="hello">Hello, Jeff</th>
+                    <th class="hello">Hello, {fname}</th>
                     
                     <Paper className={classes.paper}>
-                        <Typography align="left">Name: Jeff Smith</Typography>
-                        <Typography align="left">Bio: Loves Dogs, Cooking</Typography>
-                        <Typography align="left">Rating: 4.96/5</Typography>
+                        <Typography align="left">Name: {fname} {lname}</Typography>
+                        <Typography align="left">Bio: {bio}</Typography>
+                        <Typography align="left">Rating: {rating}</Typography>
                         <Grid>
                           <th><br></br></th>
                         </Grid>
@@ -204,7 +208,7 @@ function AccountPersonalization() {
 
           </TableCell>
         </TableRow>
-        <VillageNavBar></VillageNavBar>
+        <VillageNavBar page="account"/>
         
     </div> 
     

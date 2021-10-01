@@ -1,5 +1,5 @@
 // All necessary imports;
-import React from 'react';
+import React, {useState} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -10,8 +10,13 @@ import {Helmet} from 'react-helmet'
 
 function CreateAccount() {
     const history = useHistory();
+    const [userInfo, setUserInfo] = useState(new Map());
     const goToLogin = () => history.goBack();
-    const goToDashboard = () => history.push('/dashboard');
+    const goToDashboard = () => {
+        setUserInfo(new Map(userInfo.set("rating","5/5")));
+        setUserInfo(new Map(userInfo.set("bio","Add a Bio!")));
+        history.push('/dashboard', userInfo);
+    }
 
     return (
         <div className="CreateAccount">
@@ -24,17 +29,17 @@ function CreateAccount() {
                 <Grid align='center'>
                 <h1>Create Account</h1>
                 </Grid>
-                <TextField label='Username' hintText='Username' required fullWidth/>
-                <TextField label='Password' hintText='Password' required fullWidth/>
+                <TextField label='Username' hintText='Username' onChange={(e) => setUserInfo(new Map(userInfo.set("username",e.target.value)))} required fullWidth/>
+                <TextField label='Password' hintText='Password' onChange={(e) => setUserInfo(new Map(userInfo.set("password",e.target.value)))} required fullWidth/>
                 <TextField label='Password' hintText='Confirm Password' required fullWidth/>
-                <TextField label='First Name' hintText='First Name' required fullWidth/>
-                <TextField label='Last Name' hintText='Last Name' required fullWidth/>
-                <TextField label='Email' hintText='Email' required fullWidth/>
-                <TextField label='Cell' hintText='Cell Number' required fullWidth/>
-                <TextField label='Street' hintText='Street' required fullWidth/>
-                <TextField label='City' hintText='City' required fullWidth/>
-                <TextField label='State' hintText='State' required fullWidth/>
-                <TextField label='Zip' hintText='Zip' required fullWidth/>
+                <TextField label='First Name' hintText='First Name' onChange={(e) => setUserInfo(new Map(userInfo.set("fname",e.target.value)))} required fullWidth/>
+                <TextField label='Last Name' hintText='Last Name' onChange={(e) => setUserInfo(new Map(userInfo.set("lname",e.target.value)))} required fullWidth/>
+                <TextField label='Email' hintText='Email' onChange={(e) => setUserInfo(new Map(userInfo.set("email",e.target.value)))} required fullWidth/>
+                <TextField label='Cell' hintText='Cell Number' onChange={(e) => setUserInfo(new Map(userInfo.set("cell",e.target.value)))} required fullWidth/>
+                <TextField label='Street' hintText='Street' onChange={(e) => setUserInfo(new Map(userInfo.set("street",e.target.value)))} required fullWidth/>
+                <TextField label='City' hintText='City' onChange={(e) => setUserInfo(new Map(userInfo.set("city",e.target.value)))} required fullWidth/>
+                <TextField label='State' hintText='State' onChange={(e) => setUserInfo(new Map(userInfo.set("state",e.target.value)))} required fullWidth/>
+                <TextField label='Zip' hintText='Zip' onChange={(e) => setUserInfo(new Map(userInfo.set("zip",e.target.value)))} required fullWidth/>
                 <FormControl>
                 <InputLabel>Type</InputLabel>
                 <Select
