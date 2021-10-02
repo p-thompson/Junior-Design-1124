@@ -91,7 +91,7 @@ function SpecificProfileView() {
                         </Paper>
                     </Grid>
                     <Grid item>
-                        <VillageNavBar/>
+                        <VillageNavBar page="search"/>
                     </Grid>
                 </Grid>
             </Paper>
