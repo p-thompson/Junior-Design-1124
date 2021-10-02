@@ -7,10 +7,11 @@
   <groupId>com.village</groupId>
   <artifactId>server</artifactId>
   <version>1.0</version>
+  <packaging>war</packaging>
 
   <name>server</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>http://localhost:8080/server-1.0</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,6 +39,14 @@
       <version>8.0.19</version>
   </dependency>
   
+  <dependency>
+    <groupId>javax</groupId>
+    <artifactId>javaee-api</artifactId>
+    <version>8.0</version>
+    <scope>provided</scope>
+  </dependency>
+
+
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>

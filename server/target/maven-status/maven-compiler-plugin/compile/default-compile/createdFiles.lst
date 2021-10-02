@@ -1,7 +1,0 @@
-com\village\UserDao.class
-com\village\UserService.class
-com\village\UserWebService.class
-com\village\User.class
-com\village\DbConnection.class
-com\village\App.class
-com\village\UserType.class
