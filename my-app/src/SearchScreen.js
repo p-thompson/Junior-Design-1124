@@ -113,7 +113,7 @@ function SearchScreen() {
                     >
                       <MenuItem value={10}>Tutoring</MenuItem>
                       <MenuItem value={20}>Babysitting</MenuItem>
-                      <MenuItem value={20}>Transportation</MenuItem>
+                      <MenuItem value={30}>Transportation</MenuItem>
                     </Select>
                   </FormControl>
                   <TableCell></TableCell>
