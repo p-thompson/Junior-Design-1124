@@ -79,7 +79,7 @@ function CreateAccount() {
                 <TextField onChange={(e) => setCityValue(e.target.value)} label='City' hintText='City' required fullWidth/>
                 <TextField onChange={(e) => setStateValue(e.target.value)} label='State' hintText='State' required fullWidth/>
                 <TextField onChange={(e) => setZipValue(e.target.value)} label='Zip' hintText='Zip' required fullWidth/>
-                <FormControl>
+                <FormControl fullWidth>
                 <InputLabel>Type</InputLabel>
                 <Select
                     native
