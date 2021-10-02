@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
+import { nanoid } from "nanoid";
 import './AccountPersonalization.css';
 import { Typography } from '@material-ui/core';
 import VillageNavBar from './VillageNavBar';
@@ -26,6 +27,9 @@ import { Checkbox } from '@material-ui/core';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker'
+import ReadOnlyRow from "./ReadOnlyRow";
+import EditableRow from "./EditableRow";
+import data from "./mock-data.json";
 
 /*
 <TableCell align="center" style={{paddingLeft: 0, paddingRight: 0}} class="profile" >
@@ -184,6 +188,103 @@ function AccountPersonalization() {
     { row: 1, day: 'Tuesday', start: '1:00pm', end: '4:00pm'},
     { row: 2, day: 'Monday', start: '2:00pm', end: '5:00pm'}
   ]);
+  const [contacts, setContacts] = useState(data);
+  const [addFormData, setAddFormData] = useState({
+    Row: "",
+    Day: "",
+    start: "",
+    end: "",
+  });
+  const [editFormData, setEditFormData] = useState({
+    row: "",
+    day: "",
+    start: "",
+    end: "",
+  });
+  const [editContactId, setEditContactId] = useState(null);
+
+  const handleAddFormChange = (event) => {
+    event.preventDefault();
+
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...addFormData };
+    newFormData[fieldName] = fieldValue;
+
+    setAddFormData(newFormData);
+  };
+  const handleEditFormChange = (event) => {
+    event.preventDefault();
+
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...editFormData };
+    newFormData[fieldName] = fieldValue;
+
+    setEditFormData(newFormData);
+  };
+  const handleAddFormSubmit = (event) => {
+    event.preventDefault();
+
+    const newContact = {
+      id: nanoid(),
+      row: addFormData.row,
+      day: addFormData.day,
+      start: addFormData.start,
+      end: addFormData.end,
+    };
+    const newContacts = [...contacts, newContact];
+    setContacts(newContacts);
+  };
+  const handleEditFormSubmit = (event) => {
+    event.preventDefault();
+
+    const editedContact = {
+      id: editContactId,
+      row: editFormData.row,
+      day: editFormData.day,
+      start: editFormData.start,
+      end: editFormData.end,
+    };
+
+    const newContacts = [...contacts];
+
+    const index = contacts.findIndex((contact) => contact.id === editContactId);
+
+    newContacts[index] = editedContact;
+
+    setContacts(newContacts);
+    setEditContactId(null);
+  };
+  const handleEditClick = (event, contact) => {
+    event.preventDefault();
+    setEditContactId(contact.id);
+
+    const formValues = {
+      row: contact.row,
+      day: contact.day,
+      start: contact.start,
+      end: contact.end,
+    };
+    setEditFormData(formValues);
+  };
+  const handleCancelClick = () => {
+    setEditContactId(null);
+  };
+
+  const handleDeleteClick = (contactId) => {
+    const newContacts = [...contacts];
+
+    const index = contacts.findIndex((contact) => contact.id === contactId);
+
+    newContacts.splice(index, 1);
+
+    setContacts(newContacts);
+  };
+
+  
 
   
   /*
@@ -254,10 +355,10 @@ function AccountPersonalization() {
           </TableCell>
           <TableCell align="center" className={classes.myavail} style={{paddingLeft: 0, paddingTop: 85}}>
             <Grid style={{paddingRight: 0, paddingLeft: 0}}>
-              <Paper style={{width: 407, paddingLeft: 0}} className={classes.times}>
+              <Paper style={{width: 390, height: 540, paddingLeft: 0}} className={classes.times}>
                 <center><h3 className={classes.avail}>Your Availability</h3></center>
-                <Paper className={classes.mytimes} style={{width: 357, height: 392}}>
-                  <table className="table table-striped table-bordered" style={{borderCollapse: 'separate', borderSpacing: '30px 20px'}}>
+                <Paper className={classes.mytimes} style={{width: 347, height: 362, right: 10}}>
+                  <table style={{borderCollapse: 'separate', borderSpacing: '25px 15px'}}>
                     <thead>
                         <tr> 
                             <th>Row</th>
@@ -266,15 +367,25 @@ function AccountPersonalization() {
                             <th>End Time</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {times && times.map(times =>
-                            <tr key={times.id}>
-                                <td>{times.row}</td>
-                                <td>{times.day}</td>
-                                <td>{times.start}</td>
-                                <td>{times.end}</td>
-                            </tr>
-                        )}
+                    <tbody style={{width:350}}>
+                    
+                      {contacts.map((contact) => (
+                        <Fragment>
+                          {editContactId === contact.id ? (
+                            <EditableRow
+                              editFormData={editFormData}
+                              handleEditFormChange={handleEditFormChange}
+                              handleCancelClick={handleCancelClick}
+                            />
+                          ) : (
+                            <ReadOnlyRow
+                              contact={contact}
+                              handleEditClick={handleEditClick}
+                              handleDeleteClick={handleDeleteClick}
+                            />
+                          )}
+                        </Fragment>
+                      ))}
                     </tbody>
                   </table>
                   <tr></tr>
@@ -304,6 +415,7 @@ function AccountPersonalization() {
                     </Select>
                     </FormControl>    
                       <TimeRangePicker
+                        disableClock= {true}
                         onChange={(newValue)=>setValue(value)}
                         value={value}
                         disableClock={true}
