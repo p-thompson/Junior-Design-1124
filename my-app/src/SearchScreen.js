@@ -118,7 +118,7 @@ function SearchScreen() {
                   <TableCell></TableCell>
                   <left>Select Time Range</left>
                   <TimeRangePicker
-                    disableClock = {true}
+                    disableClock= {true}
                     onChange={(newValue) => setValue(value)}
                     value={value}
                   />
