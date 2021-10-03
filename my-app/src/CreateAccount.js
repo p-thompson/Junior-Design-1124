@@ -64,7 +64,7 @@ function CreateAccount() {
         </Helmet>
         <MuiThemeProvider>
         <Grid>
-            <Paper elevation={5} style={{padding: 50, height: '500px', width:300, margin: "100px auto", overflow: "auto"}}>
+            <Paper elevation={5} style={{padding: 50, height: '500px', width:300, margin: "100px auto", overflow: "auto", backgroundColor: '#E1EBEE'}}>
                 <Grid align='center'>
                 <h1>Create Account</h1>
                 </Grid>
@@ -96,7 +96,7 @@ function CreateAccount() {
                     <option value={"admin"}>Admin</option>
                 </Select>
                 </FormControl>
-                <RaisedButton label="Create Account" primary={true} variant="contained" fullWidth style={{margin: '20px 0'}} onClick={ValidateCredentials}/>
+                <RaisedButton label="Create Account" labelColor="white" backgroundColor='#0077c0' variant="contained" fullWidth style={{margin: '20px 0'}} onClick={ValidateCredentials}/>
                 <Button 
                 disableFocusRipple disableRipple style={{ textTransform: "none" }} 
                 variant="text"

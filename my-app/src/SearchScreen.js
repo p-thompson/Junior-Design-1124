@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: 24, // keep right padding when drawer closed
     },
     appBar: {
-      background: '#6EC77A',
+      background: "#0077c0",
       zIndex: theme.zIndex.drawer + 1,
       transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
@@ -63,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       overflow: 'auto',
       flexDirection: 'column',
+      backgroundColor: '#E8E8E8'
     },
     table: {
       minWidth: 200,
@@ -102,7 +103,7 @@ function SearchScreen() {
         </Toolbar>
       </AppBar>
       <Grid>
-            <Paper elevation={5} style={{padding: 30, height: '600px', width:350, margin: "100px auto"}}>
+            <Paper elevation={5} style={{padding: 30, height: '600px', width:350, margin: "100px auto", backgroundColor: '#E1EBEE'}}>
                   <center><h2>What Help is Needed?</h2></center>
                   <FormControl style={{ minWidth: 80 }} align="center" fullWidth>
                     <InputLabel id="demo-simple-select-label">Position</InputLabel>
@@ -130,9 +131,9 @@ function SearchScreen() {
                   onChange={onChange} 
                  /></center>
                   <TableCell></TableCell>
-                  <RaisedButton label="Enter" align="center" variant="contained" primary={true} fullWidth style={{margin: '15px 0'}} onClick={goToProfileView}>
+                  <RaisedButton label="Enter" align="center" variant="contained" backgroundColor='#0077c0' labelColor="white"  fullWidth style={{margin: '15px 0'}} onClick={goToProfileView}>
                   </RaisedButton>
-                    <RaisedButton label="Automatic Match" align="center" variant="contained" primary={true} fullWidth style={{margin: '15px 0'}} onClick={goToProfileView}>
+                    <RaisedButton label="Automatic Match" align="center" variant="contained" backgroundColor='#0077c0' labelColor="white" fullWidth style={{margin: '15px 0'}} onClick={goToProfileView}>
                     </RaisedButton>
             </Paper>
         </Grid>

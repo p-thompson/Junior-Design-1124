@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     },
     appBar: {
       position:"fixed",
-      background: '#6EC77A',
+      background: '#0077c0',
       zIndex: theme.zIndex.drawer + 1,
       transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       overflow: 'auto',
       flexDirection: 'column',
+      backgroundColor: "#E1EBEE"
     },
     fixedHeight: {
       height: 240,
@@ -103,7 +104,7 @@ function AccountPersonalization() {
           <TableCell class="account" className={classes.account}>
             <Grid container style={{width: 600}} className={classes.container}>
               <Grid item xs={8} className={classes.grid}>
-                  <Paper className={classes.paper}>
+                  <Paper className={classes.paper} elevation={5}>
                     <center><h2>Account Personalization</h2></center>
                     <left><Typography>Choose a Role:</Typography></left>
                     <Button>Parent</Button>
@@ -167,9 +168,9 @@ function AccountPersonalization() {
           <TableCell class="profile">
             <Grid container style={{width: 600}} className={classes.container}>
               <Grid item xs={8} className={classes.grid}>
-                <Paper className={classes.paper}>
+                <Paper className={classes.paper} elevation={5}>
                   <Grid className={classes.elems} align='center'>
-                    <Avatar style={{backgroundColor: 'green'}}>
+                    <Avatar style={{backgroundColor: '#0077c0'}}>
 
                     </Avatar>
                     <th class="space">Change Profile Picture</th>

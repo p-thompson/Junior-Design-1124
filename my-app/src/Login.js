@@ -50,9 +50,9 @@ function Login() {
         </Helmet>
         <MuiThemeProvider>
         <Grid>
-            <Paper elevation={5} style={{padding: 50, height: '400px', width:280, margin: "100px auto", backgroundColor: '#E0E0E0'}}>
+            <Paper elevation={5} style={{padding: 50, height: '400px', width:280, margin: "100px auto", backgroundColor: '#E1EBEE'}}>
                 <Grid align='center'>
-                    <Avatar style={{backgroundColor: 'green'}}>
+                    <Avatar style={{backgroundColor: '#0077c0'}}>
                         <LockedOutlinedIcon>
 
                         </LockedOutlinedIcon>
@@ -61,8 +61,8 @@ function Login() {
                 </Grid>
                 <TextField id='Username' value={usernameValue} onChange={(e) => setUsernameValue(e.target.value)} label='Username' hintText='Enter Username' required fullWidth/>
                 <TextField id='Password' type="password" value={passwordValue} onChange={(e) => setPasswordValue(e.target.value)} label='Password' hintText='Enter Password' required fullWidth/>
-                <RaisedButton label="Login" primary={true} variant="contained" fullWidth style={{margin: '15px 0'}} onClick={ValidateCredentials}/>
-                <RaisedButton label="Create Account" primary={true} onClick={goToCreateAccount} variant="contained" fullWidth style={{margin: '15px 0'}}/>
+                <RaisedButton label="Login" backgroundColor='#0077c0' labelColor='white' variant="contained" fullWidth style={{margin: '15px 0'}} onClick={ValidateCredentials}/>
+                <RaisedButton label="Create Account" backgroundColor='#0077c0' labelColor='white' onClick={goToCreateAccount} variant="contained" fullWidth style={{margin: '15px 0', color: '#00538C'}}/>
                 <Button disableFocusRipple disableRipple style={{ textTransform: "none" }} variant="text" 
                 style={{justifyContent:'center'}}
                 fullWidth
