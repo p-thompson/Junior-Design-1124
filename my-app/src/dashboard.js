@@ -9,6 +9,7 @@ import React from "react";
 import { useState } from 'react';
 import VillageNavBar from './VillageNavBar';
 import { useHistory } from "react-router-dom";
+import './dashboard.css';
 
 const useStyles = makeStyles((theme) => ({
     root: {
