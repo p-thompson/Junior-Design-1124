@@ -6,7 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {Grid, Paper, Select, Avatar, Button, FormControl, InputLabel} from "@material-ui/core";
-import './CreateAccount.css';
+import './Login.css';
 import { useHistory} from "react-router-dom";
 import {Helmet} from 'react-helmet'
 import { positions } from '@material-ui/system';
