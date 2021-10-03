@@ -33,57 +33,73 @@ import data from "./mock-data.json";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-      display: 'flex',
-      background: 'white',
-      height:'550px',
-      width: "1800px",
-    },
-  toolbar: {
-      paddingRight: 24, // keep right padding when drawer closed
-    },
-    appBar: {
-      position:"fixed",
-      background: '#0077c0',
-      zIndex: theme.zIndex.drawer + 1,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-    },
-  title: {
-      flexgrow: 1
+    display: 'flex',
+    background: 'white',
+    height:'550px',
+    width: "1800px",
   },
-  container: {
+toolbar: {
+    paddingRight: 24, // keep right padding when drawer closed
+  },
+  appBar: {
+    position:"fixed",
+    background: '#0077c0',
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+title: {
+    flexgrow: 1
+},
+container: {
+  
+    paddingTop: '80px',
+    paddingLeft: "0px"
+},
+  grid: {
+    padding: theme.spacing(1),
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
+    backgroundColor: "#E1EBEE"
+  },
+  fixedHeight: {
+    height: 240,
+  },
+  logout: {
+    marginLeft: "auto",
+    marginRight: -12,
+  },
+  account: {
+  },
+  times: {
     
-      paddingTop: '80px',
-      paddingLeft: "30px"
+    
   },
-    grid: {
-      padding: theme.spacing(1),
-    },
-    paper: {
-      padding: theme.spacing(2),
-      display: 'flex',
-      overflow: 'auto',
-      flexDirection: 'column',
-      backgroundColor: "#E1EBEE"
-    },
-    fixedHeight: {
-      height: 240,
-    },
-    logout: {
-      marginLeft: "auto",
-      marginRight: -12
-    },
-    account: {
-      paddingLeft: "180px",
-      
-    },
-    pageelems: {
-      
-    },
-}));
+  profile: {
+    paddingRight: 0,
 
+  },
+  myGrid: {
+    
+  },
+  avail: {
+    paddingTop: "10px",
+  },
+  mytimes: {
+    marginLeft: "25px",
+
+  },
+  myavail: {
+    paddingTop: "60px",
+  },
+
+}));
 function AccountPersonalization() {
   const classes = useStyles();
   const history = useHistory();
@@ -218,7 +234,7 @@ function AccountPersonalization() {
         <Helmet>
           <title>ItTakesAVillage</title>
         </Helmet>
-        <TableRow className={classes.pageelems}>
+        <TableRow align="center" style={{paddingLeft:140, paddingRight: 0}} className={classes.myGrid}>
           <TableCell style={{paddingRight: 35}}>
             <Grid style={{paddingTop:85}}>
               <Grid>
@@ -257,7 +273,7 @@ function AccountPersonalization() {
               </Grid>
             </Grid>
           </TableCell>
-                    <TableCell align="center" className={classes.myavail} style={{paddingLeft: 0, paddingTop: 85}}>
+          <TableCell align="center" className={classes.myavail} style={{paddingLeft: 0, paddingTop: 85}}>
             <Grid style={{paddingRight: 0, paddingLeft: 0}}>
               <Paper style={{width: 390, height: 540, paddingLeft: 0}} className={classes.times}>
                 <center><h3 className={classes.avail}>Your Availability</h3></center>
@@ -337,45 +353,43 @@ function AccountPersonalization() {
               </Paper>
             </Grid>
           </TableCell>
-          <TableCell class="profile">
-            <Grid container style={{width: 600}} className={classes.container}>
+          <TableCell class="account" className={classes.account}>
+            <Grid container style={{width: 600, paddingRight: 80, paddingTop: 85}} className={classes.container}>
               <Grid item xs={8} className={classes.grid}>
-                <Paper className={classes.paper} elevation={5}>
-                  <Grid className={classes.elems} align='center'>
-                    <Avatar style={{backgroundColor: '#0077c0'}}>
 
-                    </Avatar>
-                    <th class="space">Change Profile Picture</th>
-                    <h1>It Takes a Village</h1>
-                    <th class="hello">Hello, Jeff</th>
-                    
-                    <Paper className={classes.paper}>
-                        <Typography align="left">Name: Jeff Smith</Typography>
-                        <Typography align="left">Bio: Loves Dogs, Cooking</Typography>
-                        <Typography align="left">Rating: 4.96/5</Typography>
-                        <Grid>
-                          <th><br></br></th>
-                        </Grid>
-                        <Grid>
-                          <th><br></br></th>
-                        </Grid>
-                        <Button>Change Name</Button>
-                        <Button>Change Bio</Button>
-                        <Button>Change Contact Information</Button>
-                        <Button>Change Username/Password</Button>
-                        <Grid>
-                          <th><br></br></th>
-                        </Grid>
-                        <Grid>
-                          <th><br></br></th>
-                        </Grid>
-                    </Paper>
-                  </Grid>
-                </Paper>
-              </Grid>            
-            </Grid>
+                  <Paper style={{height: 508}} className={classes.paper}>
+             
 
+                    <center><h2>Account Personalization</h2></center>
+                    <left><Typography>Choose a Role:</Typography></left>
+                    <Button>Parent</Button>
+                    <Button>Volunteer</Button>
+                    <TableRow>
+                      <TableCell>
+                        <TableCell align="center" >
+                          <FormControl style={{ minWidth: 105 }}>
+                            <leftCenter><Typography class="services">Childcare</Typography></leftCenter>
+                            <leftCenter><Typography class="services">Looking for Work</Typography></leftCenter>
+                            <leftCenter><Typography class="services">Carpooling</Typography></leftCenter>
+                            <leftCenter><Typography class="services">Food Providers</Typography></leftCenter>
+                          
+                          </FormControl>
+                        </TableCell>
+                        <TableCell align="center">
+                          <FormControl style={{ minWidth: 105, paddingBottom: 0, minHeight: 100 }}>
+                            <Checkbox style={{paddingBottom: 20}}>Childcare</Checkbox>
+                            <Checkbox style={{paddingBottom: 20}}>Childcare</Checkbox>
+                            <Checkbox style={{paddingBottom: 20}}>Childcare</Checkbox>
+                            <Checkbox style={{paddingBottom: 20}}>Childcare</Checkbox>
+                          </FormControl>
+                        </TableCell>
+                      </TableCell>  
+                    </TableRow>
+                  </Paper>
+              </Grid>         
+            </Grid>      
           </TableCell>
+          
         </TableRow>
         <VillageNavBar page="account"/>
         
