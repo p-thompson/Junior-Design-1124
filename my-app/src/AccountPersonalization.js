@@ -240,12 +240,11 @@ function AccountPersonalization() {
               <Grid>
                 <Paper style={{width: 350, height: 510}} className={classes.paper} >
                   <Grid className={classes.elems} align='center'>
-                    <Avatar style={{backgroundColor: 'green'}}>
+                    <Avatar style={{backgroundColor: '#0077c0'}}>
 
                     </Avatar>
                     <Button>Change Profile Picture</Button>
                     <h1>It Takes a Village</h1>
-                    <th class="hello">Hello, Jeff</th>
                     
                     <Paper className={classes.paper}>
                       <Typography align="left">Name: Jeff Smith</Typography>
@@ -275,9 +274,9 @@ function AccountPersonalization() {
           </TableCell>
           <TableCell align="center" className={classes.myavail} style={{paddingLeft: 0, paddingTop: 85}}>
             <Grid style={{paddingRight: 0, paddingLeft: 0}}>
-              <Paper style={{width: 390, height: 540, paddingLeft: 0}} className={classes.times}>
-                <center><h3 className={classes.avail}>Your Availability</h3></center>
-                <Paper className={classes.mytimes} style={{width: 347, height: 362, right: 10}}>
+              <Paper style={{width: 390, height: 540, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
+                <center><h3 className={classes.avail}>Availability</h3></center>
+                <Paper className={classes.mytimes} style={{width: 347, height: 362, right: 10, backgroundColor: '#E1EBEE'}}>
                   <table style={{borderCollapse: 'separate', borderSpacing: '25px 15px'}}>
                     <thead>
                         <tr> 
@@ -343,10 +342,11 @@ function AccountPersonalization() {
                     </FormControl>
                   </TableCell>
                   <TableCell>
-                    <Button variant="contained" color="secondary" align="center" style={{ maxWidth: '100px', maxHeight: '50px', minWidth: '30px', minHeight: '30px', right: 10 }} 
+                  <MuiThemeProvider>
+                    <RaisedButton label="Add Time" variant="contained" backgroundColor='#0077c0' labelColor='white' align="center" style={{ maxWidth: '100px', maxHeight: '50px', minWidth: '30px', minHeight: '30px', right: 10 }} 
                       onClick={handleAddTime}
-                    >
-                    Add Time</Button>
+                    ></RaisedButton>
+                    </MuiThemeProvider>
                   </TableCell>
                 </TableRow>
               </Paper>
@@ -359,14 +359,11 @@ function AccountPersonalization() {
                   <Paper style={{height: 508}} className={classes.paper}>
              
 
-                    <center><h2>Account Personalization</h2></center>
-                    <left><Typography>Choose a Role:</Typography></left>
-                    <Button>Parent</Button>
-                    <Button>Volunteer</Button>
+                    <center><h1>Services</h1></center>
                     <TableRow>
                       <TableCell>
                         <TableCell align="center" >
-                          <FormControl style={{ minWidth: 105 }}>
+                          <FormControl style={{ minWidth: 110}}>
                             <leftCenter><Typography class="services">Childcare</Typography></leftCenter>
                             <leftCenter><Typography class="services">Looking for Work</Typography></leftCenter>
                             <leftCenter><Typography class="services">Carpooling</Typography></leftCenter>
@@ -376,10 +373,10 @@ function AccountPersonalization() {
                         </TableCell>
                         <TableCell align="center">
                           <FormControl style={{ minWidth: 105, paddingBottom: 0, minHeight: 100 }}>
-                            <Checkbox style={{paddingBottom: 20}}>Childcare</Checkbox>
-                            <Checkbox style={{paddingBottom: 20}}>Childcare</Checkbox>
-                            <Checkbox style={{paddingBottom: 20}}>Childcare</Checkbox>
-                            <Checkbox style={{paddingBottom: 20}}>Childcare</Checkbox>
+                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
+                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
+                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
+                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
                           </FormControl>
                         </TableCell>
                       </TableCell>  
