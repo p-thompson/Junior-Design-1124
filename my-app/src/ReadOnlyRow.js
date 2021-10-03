@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     button: {
  
         width: 5,
-        right: 34,
+        right: 24,
     },
     row: {
         paddingRight: 0,

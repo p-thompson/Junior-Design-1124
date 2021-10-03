@@ -183,11 +183,11 @@ function AccountPersonalization() {
   const history = useHistory();
   const goToLogin = () => history.push('/');
   const options = ['Option 1', 'Option 2'];
+  const index = 3;
   const [value, setValue] = useState([new Date(), new Date()]);
-  const [times, setUsers] = useState([
-    { row: 1, day: 'Tuesday', start: '1:00pm', end: '4:00pm'},
-    { row: 2, day: 'Monday', start: '2:00pm', end: '5:00pm'}
-  ]);
+  var obj = {
+    table: []
+  };
   const [contacts, setContacts] = useState(data);
   const [addFormData, setAddFormData] = useState({
     Row: "",
@@ -283,6 +283,18 @@ function AccountPersonalization() {
 
     setContacts(newContacts);
   };
+  const handleAddTime = () => {
+    const newContact = {
+      row: index,
+      day: document.getElementById("weekday").value,
+      start: "1:00pm",
+      end: "3:00pm",
+    };
+    const newContacts = [...contacts, newContact];
+    setContacts(newContacts);
+   
+  };
+  
 
   
 
@@ -314,8 +326,8 @@ function AccountPersonalization() {
         <Helmet>
           <title>ItTakesAVillage</title>
         </Helmet>
-        <TableRow align="center" style={{paddingLeft:155, paddingRight: 0}} className={classes.myGrid}>
-          <TableCell style={{paddingRight: 40}}>
+        <TableRow align="center" style={{paddingLeft:220, paddingRight: 0}} className={classes.myGrid}>
+          <TableCell style={{paddingRight: 35}}>
             <Grid style={{paddingTop:85}}>
               <Grid>
                 <Paper style={{width: 350, height: 510}} className={classes.paper} >
@@ -402,7 +414,7 @@ function AccountPersonalization() {
                         fullWidth
                         inputProps={{
                         name: 'name',
-                        id: 'name'
+                        id: 'weekday'
                         }}
                     >
                         <option value={"Sunday"}>Sunday</option>
@@ -414,7 +426,8 @@ function AccountPersonalization() {
                         <option value={"Saturday"}>Saturday</option>
                     </Select>
                     </FormControl>    
-                      <TimeRangePicker
+                      <TimeRangePicker 
+                        id= "addtime"
                         disableClock= {true}
                         onChange={(newValue)=>setValue(value)}
                         value={value}
@@ -423,7 +436,10 @@ function AccountPersonalization() {
                     </FormControl>
                   </TableCell>
                   <TableCell>
-                    <Button variant="contained" color="secondary" align="center" style={{ maxWidth: '100px', maxHeight: '50px', minWidth: '30px', minHeight: '30px', right: 10 }}>Add Time</Button>
+                    <Button variant="contained" color="secondary" align="center" style={{ maxWidth: '100px', maxHeight: '50px', minWidth: '30px', minHeight: '30px', right: 10 }} 
+                      onClick={handleAddTime}
+                    >
+                    Add Time</Button>
                   </TableCell>
                 </TableRow>
               </Paper>
@@ -449,11 +465,11 @@ function AccountPersonalization() {
                           </FormControl>
                         </TableCell>
                         <TableCell align="center">
-                          <FormControl style={{ minWidth: 105 }}>
-                            <Checkbox>Childcare</Checkbox>
-                            <Checkbox>Childcare</Checkbox>
-                            <Checkbox>Childcare</Checkbox>
-                            <Checkbox>Childcare</Checkbox>
+                          <FormControl style={{ minWidth: 105, paddingBottom: 0, minHeight: 100 }}>
+                            <Checkbox style={{paddingBottom: 20}}>Childcare</Checkbox>
+                            <Checkbox style={{paddingBottom: 20}}>Childcare</Checkbox>
+                            <Checkbox style={{paddingBottom: 20}}>Childcare</Checkbox>
+                            <Checkbox style={{paddingBottom: 20}}>Childcare</Checkbox>
                           </FormControl>
                         </TableCell>
                       </TableCell>  
