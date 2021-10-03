@@ -281,7 +281,6 @@ function AccountPersonalization() {
                   <table style={{borderCollapse: 'separate', borderSpacing: '25px 15px'}}>
                     <thead>
                         <tr> 
-                            <th>Row</th>
                             <th>Day</th>
                             <th>Start Time</th>
                             <th>End Time</th>

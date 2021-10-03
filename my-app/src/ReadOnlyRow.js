@@ -26,11 +26,11 @@ const ReadOnlyRow = ({ contact, handleEditClick, handleDeleteClick }) => {
     const classes = useStyles();
     return (
     <TableRow style={{}}>
-      <td>{contact.row}</td>
+  
       <td>{contact.day}</td>
       <td>{contact.start}</td>
       <td className={classes.row}>{contact.end}</td>
-      <Button className={classes.button} style={{width: 6}} type="button" onClick={() => handleDeleteClick(contact.id)}>
+      <Button className={classes.button} style={{width: 6, paddingLeft: 85}} type="button" onClick={() => handleDeleteClick(contact.id)}>
         x
       </Button>
     </TableRow>
