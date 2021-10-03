@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.village.UserDaoTest" time="0.003" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.village.UserDaoTest" time="0.001" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="16"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-16.0.2\bin"/>
-    <property name="sun.java.command" value="C:\Users\agbeh\AppData\Local\Temp\surefire12096895963855794715\surefirebooter16457745092825201807.jar C:\Users\agbeh\AppData\Local\Temp\surefire12096895963855794715 2021-10-01T14-06-08_581-jvmRun1 surefire7320840932088447132tmp surefire_010055144263703867435tmp"/>
+    <property name="sun.java.command" value="C:\Users\agbeh\AppData\Local\Temp\surefire15462085820521280209\surefirebooter7899195042172816925.jar C:\Users\agbeh\AppData\Local\Temp\surefire15462085820521280209 2021-10-02T13-06-27_321-jvmRun1 surefire12485155102926873660tmp surefire_017696343510419083310tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\agbeh\jd2\Junior-Design-1124\server\target\test-classes;C:\Users\agbeh\jd2\Junior-Design-1124\server\target\classes;C:\Users\agbeh\.m2\repository\javax\ws\rs\javax.ws.rs-api\2.0-m02\javax.ws.rs-api-2.0-m02.jar;C:\Users\agbeh\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\agbeh\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\agbeh\.m2\repository\mysql\mysql-connector-java\8.0.19\mysql-connector-java-8.0.19.jar;C:\Users\agbeh\.m2\repository\com\google\protobuf\protobuf-java\3.6.1\protobuf-java-3.6.1.jar;C:\Users\agbeh\.m2\repository\javax\javaee-api\8.0.1\javaee-api-8.0.1.jar;C:\Users\agbeh\.m2\repository\com\sun\mail\javax.mail\1.6.2\javax.mail-1.6.2.jar;C:\Users\agbeh\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\agbeh\AppData\Local\Temp\surefire12096895963855794715\surefirebooter16457745092825201807.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\agbeh\AppData\Local\Temp\surefire15462085820521280209\surefirebooter7899195042172816925.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="16.0.2+7-67"/>
@@ -55,5 +55,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="60.0"/>
   </properties>
-  <testcase name="testCreateUser" classname="com.village.UserDaoTest" time="0.001"/>
+  <testcase name="testCreateUser" classname="com.village.UserDaoTest" time="0"/>
 </testsuite>

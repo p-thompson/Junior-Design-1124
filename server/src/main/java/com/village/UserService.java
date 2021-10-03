@@ -2,8 +2,6 @@ package com.village;
 
 import java.sql.SQLException;
 
-import javax.json.bind.JsonbBuilder;
-
 public class UserService {
     private UserDao userDao;
 
@@ -11,7 +9,15 @@ public class UserService {
         userDao.createUser(user);
     }
 
-    public String toJson(String message) {
-        return JsonbBuilder.create().toJson(message);
+    public void modifyUser(User user) throws SQLException {
+        userDao.modifyUser(user);
+    }
+
+    public User findParentByUsername(String username) throws SQLException {
+        return userDao.findParentByUsername(username);
+    }
+
+    public User findVolunteerByUsername(String username) throws SQLException {
+        return userDao.findParentByUsername(username);
     }
 }

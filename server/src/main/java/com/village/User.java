@@ -1,6 +1,7 @@
 package com.village;
 
 public class User {
+    private int id;
     private String username;
     private String password;
     private String firstName;
@@ -11,9 +12,11 @@ public class User {
     private String street;
     private String cell;
     private String email;
+    private String bio;
     private UserType userType;
 
     public User(
+        int id,
         String username, 
         String password,
         String firstName,
@@ -24,8 +27,10 @@ public class User {
         String street,
         String cell,
         String email,
+        String bio,
         UserType userType
     ) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -36,7 +41,12 @@ public class User {
         this.street = street;
         this.cell = cell;
         this.email = email;
+        this.bio = bio;
         this.userType = userType;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public String getUsername() {
@@ -117,6 +127,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getBio() {
+        return this.bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public UserType getUserType() {
