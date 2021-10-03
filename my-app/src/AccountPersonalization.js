@@ -243,7 +243,7 @@ function AccountPersonalization() {
                     <Avatar style={{backgroundColor: 'green'}}>
 
                     </Avatar>
-                    <th class="space">Change Profile Picture</th>
+                    <Button>Change Profile Picture</Button>
                     <h1>It Takes a Village</h1>
                     <th class="hello">Hello, Jeff</th>
                     
