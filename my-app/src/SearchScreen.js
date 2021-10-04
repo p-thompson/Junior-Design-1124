@@ -141,5 +141,4 @@ function SearchScreen() {
         <VillageNavBar page="search"/>
     </div>
   )}
-
 export default SearchScreen;

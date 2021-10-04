@@ -53,15 +53,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Dashboard() {
-    const classes = useStyles();
-    const [isOpen, setIsOpen] = useState(false);
-
+  const classes = useStyles();
  
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  }
   const history = useHistory();
   const goToLogin = () => history.push('/');
+  const fname = history.location.state.get("fname");
 
 
     return (
@@ -82,7 +78,7 @@ function Dashboard() {
                 <Grid container className={classes.container}>
                     <Grid item xs={8} className={classes.grid}>
                         <Paper className={classes.paper}>
-                            <Typography>These users want to connect with you.</Typography>
+                            <Typography>Hello {fname}! These users want to connect with you.</Typography>
                         </Paper>
                     </Grid>
                     <Grid item xs={8} className={classes.grid}>

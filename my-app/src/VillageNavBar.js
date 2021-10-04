@@ -26,9 +26,9 @@ export default function VillageNavBar(props) {
         setValue(newValue);
     };
     const history = useHistory();
-    const goToDashboard = () => history.push('/dashboard');
-    const goToSearch = () => history.push('/searchscreen');
-    const goToAccountPersonalization = () => history.push('/accountpersonalization');
+    const goToDashboard = () => history.push('/dashboard', history.location.state);
+    const goToSearch = () => history.push('/searchscreen', history.location.state);
+    const goToAccountPersonalization = () => history.push('/accountpersonalization', history.location.state);
     
     return(
         <BottomNavigation value={value} onChange={handleChange} className={classes.root}>

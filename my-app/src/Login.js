@@ -19,11 +19,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Login() {
-
+    const [userInfo, setUserInfo] = useState(new Map());
     const history = useHistory();
     const goToCreateAccount = () => history.push('/createaccount');
     const goToForgotPassword = () => history.push('/forgotpassword');
-    const goToDashboard = () => history.push('/dashboard');
+    const goToDashboard = () => history.push('/dashboard', userInfo);
+
     const classes = useStyles();
 
     const [usernameValue, setUsernameValue] = useState("")
@@ -42,6 +43,8 @@ function Login() {
         }
     }
 
+    // const {fname, lname} = userInfo;
+    // onClick={() => setUserInfo({fname: "Meg", lname: "K"}
     return (
         <div className="Login">
         {errorValue && <Alert severity="error">{errorValue}</Alert>}
