@@ -251,9 +251,9 @@ function AccountPersonalization() {
                     <h1>It Takes a Village</h1>
                     
                     <Paper className={classes.paper}>
-                      <Typography align="left">Name: Jeff Smith</Typography>
-                      <Typography align="left">Bio: Loves Dogs, Cooking</Typography>
-                      <Typography align="left">Rating: 4.96/5</Typography>
+                      <Typography align="left">Name: {fname} {lname}</Typography>
+                      <Typography align="left">Bio: {bio}</Typography>
+                      <Typography align="left">Rating: {rating}</Typography>
                       <Grid>
                         <th><br></br></th>
                       </Grid>
