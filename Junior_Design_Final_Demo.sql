@@ -10,7 +10,8 @@ USE demo_app;
 -- Table Creation for an Application User
 DROP TABLE IF EXISTS app_user;
 CREATE TABLE app_user (
-	username varchar(20) NOT NULL,
+	id int NOT NULL AUTO_INCREMENT,
+    username varchar(20) NOT NULL,
 	pass varchar(50) NOT NULL,
     first_name char(30) NOT NULL,
 	last_name char(30) NOT NULL,
@@ -20,7 +21,8 @@ CREATE TABLE app_user (
 	street char(30),
     cell varchar(15),
     email varchar(30),
-	PRIMARY KEY (username)
+    unique(username),
+	PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
 -- Table Creation for a Single Parent
@@ -31,6 +33,7 @@ CREATE TABLE parent (
     num_children decimal(2,0),
     PRIMARY KEY (username),
 	CONSTRAINT parent_username_constraint FOREIGN KEY (username) REFERENCES app_user (username)
+    ON UPDATE cascade
 ) ENGINE=InnoDB;
 
 -- Table Creation for a Volunteer
@@ -40,6 +43,7 @@ CREATE TABLE volunteer (
     bio text,
     PRIMARY KEY (username),
 	CONSTRAINT volunteer_username_constraint FOREIGN KEY (username) REFERENCES app_user (username)
+    on update cascade
 ) ENGINE=InnoDB;
 
 -- Table Creation for Multivalued Attribute Parent Days Available
@@ -51,6 +55,7 @@ CREATE TABLE parent_days_available (
     time_end time NOT NULL,
     PRIMARY KEY (username, day_avail, time_begin, time_end),
 	CONSTRAINT parent_days_available_username_constraint FOREIGN KEY (username) REFERENCES parent (username)
+	on update cascade
 ) ENGINE=InnoDB;
 
 -- Table Creation for Multivalued Attribute Volunteer Days Available
@@ -62,6 +67,7 @@ CREATE TABLE volunteer_days_available (
     time_end time NOT NULL,
     PRIMARY KEY (username, day_avail, time_begin, time_end),
 	CONSTRAINT volunteer_days_available_username_constraint FOREIGN KEY (username) REFERENCES volunteer (username)
+	on update cascade
 ) ENGINE=InnoDB;
 
 -- Table Creation for Multivalued Attribute Volunteer Services Provided
@@ -73,6 +79,7 @@ CREATE TABLE volunteer_services_provided (
     transportation boolean default false,
     PRIMARY KEY (username),
 	CONSTRAINT services_provided_username_constraint FOREIGN KEY (username) REFERENCES volunteer (username)
+	on update cascade
 ) ENGINE=InnoDB;
 
 -- Table Creation for Multivalued Attribute Volunteer Services Needed
@@ -84,15 +91,16 @@ CREATE TABLE parent_services_needed (
     transportation boolean default false,
     PRIMARY KEY (username),
 	CONSTRAINT services_needed_username_constraint FOREIGN KEY (username) REFERENCES parent (username)
+	on update cascade
 ) ENGINE=InnoDB;
 
 
 -- ------------------------------------------------------ Inserting User Data to Database ------------------------------------------------
 -- Insert into App Users
-INSERT INTO app_user VALUES ('janedoe34','mypassword','Jane','Doe','30308','GA','Atlanta','15 Tech Lane', '404-444-4444', 'janedoe@gatech.edu');
-INSERT INTO app_user VALUES ('bobwilson88','mypassword2','Bob','Wilson','30308','GA','Atlanta','10 Buzz Drive', '404-888-8888', 'bobwilson@gatech.edu');
-INSERT INTO app_user VALUES ('annasmith20','mypassword3','Anna','Smith','30308','GA','Atlanta','101 Jacket Way', '404-555-5555', 'asmith@gatech.edu');
-INSERT INTO app_user VALUES ('joebrown56','mypassword4','Joe','Brown','30308','GA','Atlanta','77 Ferst Drive', '404-999-9999', 'joebrown@gatech.edu');
+INSERT INTO app_user VALUES (1,'janedoe34','mypassword','Jane','Doe','30308','GA','Atlanta','15 Tech Lane', '404-444-4444', 'janedoe@gatech.edu');
+INSERT INTO app_user VALUES (2,'bobwilson88','mypassword2','Bob','Wilson','30308','GA','Atlanta','10 Buzz Drive', '404-888-8888', 'bobwilson@gatech.edu');
+INSERT INTO app_user VALUES (3,'annasmith20','mypassword3','Anna','Smith','30308','GA','Atlanta','101 Jacket Way', '404-555-5555', 'asmith@gatech.edu');
+INSERT INTO app_user VALUES (4,'joebrown56','mypassword4','Joe','Brown','30308','GA','Atlanta','77 Ferst Drive', '404-999-9999', 'joebrown@gatech.edu');
 
 -- Insert into Volunteer
 INSERT INTO parent VALUES ('janedoe34', 'My name is Jane. I have two children aged 8 and 9. I am looking for a tutor in math for both of them', 2);

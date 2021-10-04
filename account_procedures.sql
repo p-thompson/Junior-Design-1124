@@ -75,7 +75,7 @@ where i_username = username);
 DROP PROCEDURE IF EXISTS alter_info;
 DELIMITER //
 CREATE PROCEDURE alter_info(
-	   IN old_username VARCHAR(20),
+	   IN i_id int,
 	   IN i_username VARCHAR(20),
        IN i_password VARCHAR(50),
 	   IN i_fname VARCHAR(30),
@@ -90,7 +90,7 @@ CREATE PROCEDURE alter_info(
 BEGIN
 UPDATE app_user 
 SET username=i_username, pass=Md5(i_password), first_name=i_fname, last_name=i_lname, zip=i_zip, state=i_state, city=i_city, street=i_street, cell=i_cell, email=i_email
-where username=old_username;
+where id=i_id;
 END //
 DELIMITER ;
 
@@ -98,14 +98,13 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS alter_info_volunteer;
 DELIMITER //
 CREATE PROCEDURE alter_info_volunteer(
-	   IN old_username VARCHAR(20),
-	   IN i_username VARCHAR(20),
+	   in i_username varchar(20),
        IN i_bio text
 )
 BEGIN
 UPDATE volunteer 
-SET username=i_username, bio=i_bio
-where username=old_username;
+SET bio=i_bio
+where username=i_username;
 END //
 DELIMITER ;
 
@@ -114,14 +113,13 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS alter_info_parent;
 DELIMITER //
 CREATE PROCEDURE alter_info_parent(
-	   IN old_username VARCHAR(20),
-	   IN i_username VARCHAR(20),
+	   IN i_username varchar(20),
        IN i_bio text
 )
 BEGIN
 UPDATE parent 
-SET username=i_username, bio=i_bio
-where username=old_username;
+SET bio=i_bio
+where username=i_username;
 END //
 DELIMITER ;
 
