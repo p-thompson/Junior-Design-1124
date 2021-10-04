@@ -9,6 +9,7 @@ import React from "react";
 import { useState } from 'react';
 import VillageNavBar from './VillageNavBar';
 import { useHistory } from "react-router-dom";
+import './dashboard.css';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         paddingRight: 24, // keep right padding when drawer closed
       },
       appBar: {
-        background: '#6EC77A',
+        background: "#0077c0",
         zIndex: theme.zIndex.drawer + 1,
         transition: theme.transitions.create(['width', 'margin'], {
           easing: theme.transitions.easing.sharp,

@@ -25,7 +25,7 @@ function CreateListing() {
                 </Paper>
             </Grid>
             <Grid item xs={4}>
-                <RaisedButton label="Request Contact Information" primary={true} variant="contained" align="center" width="30vh" style={{margin: '15% 25%'}} onClick={goToSpecificView}/>
+                <RaisedButton label="View Profile" labelColor="white" backgroundColor='#0077c0' variant="contained" align="center" width="30vh" style={{margin: '15% 25%'}} onClick={goToSpecificView}/>
             </Grid>
             <Grid item>
                 <VillageNavBar page="search"/>

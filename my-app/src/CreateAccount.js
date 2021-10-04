@@ -6,6 +6,7 @@ import TextField from 'material-ui/TextField';
 import {Grid, Paper, Select, Button, FormControl, InputLabel} from "@material-ui/core";
 import './CreateAccount.css';
 import { useHistory} from "react-router-dom";
+import {Alert} from '@mui/material';
 import {Helmet} from 'react-helmet'
 
 function CreateAccount() {
@@ -18,14 +19,45 @@ function CreateAccount() {
         history.push('/dashboard', userInfo);
     }
 
+    const [errorValue, setErrorValue] = useState("")
+
+    function ValidateCredentials() {
+        if (usernameValue.length === 0) {
+            setErrorValue("Invalid Username.")
+        } else if (passwordValue.length === 0) {
+            setErrorValue("Invalid Password.")
+        } else if (confirmPassValue != passwordValue) {
+            setErrorValue("Password and confirm password do not match.")
+        } else if (firstNameValue.length === 0) {
+            setErrorValue("No first name has been entered.")
+        } else if (lastNameValue.length === 0) {
+            setErrorValue("No last name has been entered.")
+        } else if (emailValue.length === 0) {
+            setErrorValue("Invalid email.")
+        } else if (cellValue.length === 0) {
+            setErrorValue("Invalid cell number.")
+        } else if (streetValue.length === 0) {
+            setErrorValue("Invalid street.")
+        } else if (cityValue.length === 0) {
+            setErrorValue("Invalid city.")
+        } else if (stateValue.length === 0) {
+            setErrorValue("Invalid state.")
+        } else if (zipValue.length === 0) {
+            setErrorValue("Invalid zip code.")
+        } else {
+            goToDashboard()
+        }
+    }
+
     return (
         <div className="CreateAccount">
+        {errorValue && <Alert severity="error">{errorValue}</Alert>}
         <Helmet>
         <title>ItTakesAVillage</title>
         </Helmet>
         <MuiThemeProvider>
         <Grid>
-            <Paper elevation={5} style={{padding: 50, height: '500px', width:300, margin: "100px auto", overflow: "auto"}}>
+            <Paper elevation={5} style={{padding: 50, height: '500px', width:300, margin: "100px auto", overflow: "auto", backgroundColor: '#E1EBEE'}}>
                 <Grid align='center'>
                 <h1>Create Account</h1>
                 </Grid>
@@ -57,7 +89,7 @@ function CreateAccount() {
                     <option value={"admin"}>Admin</option>
                 </Select>
                 </FormControl>
-                <RaisedButton label="Create Account" primary={true} variant="contained" fullWidth style={{margin: '20px 0'}} onClick={goToDashboard}/>
+                <RaisedButton label="Create Account" labelColor="white" backgroundColor='#0077c0' variant="contained" fullWidth style={{margin: '20px 0'}} onClick={ValidateCredentials}/>
                 <Button 
                 disableFocusRipple disableRipple style={{ textTransform: "none" }} 
                 variant="text"

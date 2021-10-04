@@ -22,9 +22,8 @@ const useStyles = makeStyles({
 export default function VillageNavBar(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState(props.page);
-  
     const handleChange = (event, newValue) => {
-      setValue(newValue);
+        setValue(newValue);
     };
     const history = useHistory();
     const goToDashboard = () => history.push('/dashboard', history.location.state);
