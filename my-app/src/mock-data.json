@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "row": 1,
+        "day": "Monday",
+        "start": "1:00pm",
+        "end": "2:00pm"
+    },
+    {
+        "id": 2,
+        "row": 2,
+        "day": "Tuesday",
+        "start": "3:30pm",
+        "end": "8:00pm"
+    }
+]

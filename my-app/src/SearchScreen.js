@@ -20,6 +20,9 @@ import TimePicker from 'react-time-picker'
 import moment from 'moment';
 import {$,jQuery} from 'jquery';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: 24, // keep right padding when drawer closed
     },
     appBar: {
-      background: '#6EC77A',
+      background: "#0077c0",
       zIndex: theme.zIndex.drawer + 1,
       transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
@@ -56,10 +59,11 @@ const useStyles = makeStyles((theme) => ({
       marginRight: -12
     },
     paper: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(30),
       display: 'flex',
       overflow: 'auto',
       flexDirection: 'column',
+      backgroundColor: '#E8E8E8'
     },
     table: {
       minWidth: 200,
@@ -83,7 +87,8 @@ function SearchScreen() {
 
 
   return (
-    <div className={classes.root}>
+    <div>
+      <MuiThemeProvider>
       <AppBar position="absolute" color='primary' className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title} className={classes.title}>It Takes a Village</Typography>
@@ -97,57 +102,43 @@ function SearchScreen() {
           </section>
         </Toolbar>
       </AppBar>
-        <TableRow className={classes.pageelems}>
-          <TableCell class="account" className={classes.account}>
-            <Grid container style={{width: 900}} className={classes.container}>
-              <Grid item xs={8} className={classes.grid}>
-                <Paper className={classes.paper} style={{marginLeft: 175}}>
-                  <center><h2>Search</h2></center>
-                  <left>Select Who You Need</left>
-                  <FormControl style={{ minWidth: 80 }} align="center">
+      <Grid>
+            <Paper elevation={5} style={{padding: 30, height: '600px', width:350, margin: "100px auto", backgroundColor: '#E1EBEE'}}>
+                  <center><h2>What Help is Needed?</h2></center>
+                  <FormControl style={{ minWidth: 80 }} align="center" fullWidth>
                     <InputLabel id="demo-simple-select-label">Position</InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
                       autoWidth
                     >
-                      <MenuItem value={10}>Volunteer</MenuItem>
-                      <MenuItem value={20}>Parent</MenuItem>
+                      <MenuItem value={10}>Tutoring</MenuItem>
+                      <MenuItem value={20}>Babysitting</MenuItem>
+                      <MenuItem value={30}>Transportation</MenuItem>
                     </Select>
                   </FormControl>
                   <TableCell></TableCell>
-                  <left>Select Time Range</left>
-                  <TimeRangePicker
+                  <center><h2>Select Time Range</h2></center>
+                  <center><TimeRangePicker
                     disableClock= {true}
                     onChange={(newValue) => setValue(value)}
                     value={value}
-                  />
+                  /></center>
                   <TableCell></TableCell>
-                  <left> Select Date</left>
-                 <DatePicker 
+                  <center><h2>Select Date</h2></center>
+                  <center><DatePicker 
                   value={startDate} 
                   onChange={onChange} 
-                 />
+                 /></center>
                   <TableCell></TableCell>
-                 <TableRow style={{ height: 150 }} align="center">
-                  <TableCell align="center">
-                    <Button onClick={goToProfileView}>
-                     Enter
-                    </Button>
-                  </TableCell>
-                  <TableCell align="center">
-                    <Button align="center" style={{ maxWidth: '100px', maxHeight: '50px', minWidth: '30px', minHeight: '30px' }} onClick={goToProfileView}>
-                     Automatic Matches
-                    </Button>
-                 </TableCell>
-                </TableRow>
-                </Paper>
-              </Grid>
-            </Grid>
-          </TableCell>
-        </TableRow>
-      <VillageNavBar></VillageNavBar>
+                  <RaisedButton label="Enter" align="center" variant="contained" backgroundColor='#0077c0' labelColor="white"  fullWidth style={{margin: '15px 0'}} onClick={goToProfileView}>
+                  </RaisedButton>
+                    <RaisedButton label="Automatic Match" align="center" variant="contained" backgroundColor='#0077c0' labelColor="white" fullWidth style={{margin: '15px 0'}} onClick={goToProfileView}>
+                    </RaisedButton>
+            </Paper>
+        </Grid>
+        </MuiThemeProvider>
+        <VillageNavBar page="search"/>
     </div>
   )}
-
 export default SearchScreen;
