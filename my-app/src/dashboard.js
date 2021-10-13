@@ -9,6 +9,7 @@ import React from "react";
 import { useState } from 'react';
 import VillageNavBar from './VillageNavBar';
 import { useHistory } from "react-router-dom";
+import './dashboard.css';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         paddingRight: 24, // keep right padding when drawer closed
       },
       appBar: {
-        background: '#6EC77A',
+        background: "#0077c0",
         zIndex: theme.zIndex.drawer + 1,
         transition: theme.transitions.create(['width', 'margin'], {
           easing: theme.transitions.easing.sharp,
@@ -52,15 +53,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Dashboard() {
-    const classes = useStyles();
-    const [isOpen, setIsOpen] = useState(false);
-
+  const classes = useStyles();
  
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  }
   const history = useHistory();
   const goToLogin = () => history.push('/');
+  const fname = history.location.state.get("fname");
 
 
     return (
@@ -81,7 +78,7 @@ function Dashboard() {
                 <Grid container className={classes.container}>
                     <Grid item xs={8} className={classes.grid}>
                         <Paper className={classes.paper}>
-                            <Typography>These users want to connect with you.</Typography>
+                            <Typography>Hello {fname}! These users want to connect with you.</Typography>
                         </Paper>
                     </Grid>
                     <Grid item xs={8} className={classes.grid}>

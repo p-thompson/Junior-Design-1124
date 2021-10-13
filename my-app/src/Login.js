@@ -6,18 +6,26 @@ import TextField from 'material-ui/TextField';
 import {Grid, Paper, Avatar, Button} from "@material-ui/core";
 import {Alert} from '@mui/material';
 import LockedOutlinedIcon from '@material-ui/icons/LockOutlined';
-import './Login.css';
+import './CreateAccount.css';
 import { useHistory,  BrowserRouter as Router, Route } from "react-router-dom";
 import ReactDOM from 'react-dom';
 import ForgotPassword from "./ForgotPassword";
 import CreateAccount from "./CreateAccount";
-import {Helmet} from 'react-helmet'
+import {Helmet} from 'react-helmet';
+import { green } from '@material-ui/core/colors';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+}));
 
 function Login() {
+    const [userInfo, setUserInfo] = useState(new Map());
     const history = useHistory();
     const goToCreateAccount = () => history.push('/createaccount');
     const goToForgotPassword = () => history.push('/forgotpassword');
-    const goToDashboard = () => history.push('/dashboard');
+    const goToDashboard = () => history.push('/dashboard', userInfo);
+
+    const classes = useStyles();
 
     const [usernameValue, setUsernameValue] = useState("")
     const [passwordValue, setPasswordValue] = useState("")
@@ -35,6 +43,8 @@ function Login() {
         }
     }
 
+    // const {fname, lname} = userInfo;
+    // onClick={() => setUserInfo({fname: "Meg", lname: "K"}
     return (
         <div className="Login">
         {errorValue && <Alert severity="error">{errorValue}</Alert>}
@@ -43,9 +53,9 @@ function Login() {
         </Helmet>
         <MuiThemeProvider>
         <Grid>
-            <Paper elevation={5} style={{padding: 50, height: '400px', width:280, margin: "100px auto"}}>
+            <Paper elevation={5} style={{padding: 50, height: '400px', width:280, margin: "100px auto", backgroundColor: '#E1EBEE'}}>
                 <Grid align='center'>
-                    <Avatar style={{backgroundColor: 'green'}}>
+                    <Avatar style={{backgroundColor: '#0077c0'}}>
                         <LockedOutlinedIcon>
 
                         </LockedOutlinedIcon>
@@ -54,8 +64,8 @@ function Login() {
                 </Grid>
                 <TextField id='Username' value={usernameValue} onChange={(e) => setUsernameValue(e.target.value)} label='Username' hintText='Enter Username' required fullWidth/>
                 <TextField id='Password' type="password" value={passwordValue} onChange={(e) => setPasswordValue(e.target.value)} label='Password' hintText='Enter Password' required fullWidth/>
-                <RaisedButton label="Login" primary={true} variant="contained" fullWidth style={{margin: '15px 0'}} onClick={ValidateCredentials}/>
-                <RaisedButton label="Create Account" primary={true} onClick={goToCreateAccount} variant="contained" fullWidth style={{margin: '15px 0'}}/>
+                <RaisedButton label="Login" backgroundColor='#0077c0' labelColor='white' variant="contained" fullWidth style={{margin: '15px 0'}} onClick={ValidateCredentials}/>
+                <RaisedButton label="Create Account" backgroundColor='#0077c0' labelColor='white' onClick={goToCreateAccount} variant="contained" fullWidth style={{margin: '15px 0', color: '#00538C'}}/>
                 <Button disableFocusRipple disableRipple style={{ textTransform: "none" }} variant="text" 
                 style={{justifyContent:'center'}}
                 fullWidth
