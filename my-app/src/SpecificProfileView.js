@@ -51,7 +51,7 @@ function SpecificProfileView() {
     }));
 
     const history = useHistory();
-    const returnToProfiles = () => history.push('/profiles');
+    const returnToProfiles = () => history.goBack();
     const classes = useStyles();
     return (
         <div className={classes.root}>
