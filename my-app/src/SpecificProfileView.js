@@ -25,7 +25,7 @@ function SpecificProfileView() {
             paddingRight: 24, // keep right padding when drawer closed
           },
           appBar: {
-            background: '#6EC77A',
+            background: '#0077c0',
             zIndex: theme.zIndex.drawer + 1,
             transition: theme.transitions.create(['width', 'margin'], {
               easing: theme.transitions.easing.sharp,
@@ -76,7 +76,7 @@ function SpecificProfileView() {
                         <h1>Profile View</h1>
                         <img src="https://pbs.twimg.com/profile_images/1357505418/stickman_prof_pic.png"/>
                         <h1></h1>
-                        <RaisedButton label="Request Contact Information" primary={true} variant="contained" style={{margin: '15px 0'}}/>
+                        <RaisedButton label="Request Contact Information" labelColor="white" backgroundColor='#0077c0' variant="contained" style={{margin: '15px 0'}}/>
                     </Grid>
                     <Grid item xs={6}>
                         <Paper style={{border: "1px solid black", height: '35vh'}}>
