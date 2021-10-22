@@ -33,4 +33,10 @@ public class UserWebService {
     public User findVolunteerByUsername(String username) throws SQLException {
         return userService.findVolunteerByUsername(username);
     }
+
+    @GET
+    @Path("/test")
+    public int getTest() {
+        return 45;
+    }
 }

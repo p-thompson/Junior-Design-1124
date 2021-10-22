@@ -10,7 +10,7 @@ public class UserDaoTest {
     public static UserDao userDao;
     private static User testParent;
     private static User testVolunteer;
-
+    /*
     @BeforeClass
     public static void testSetup() {
       userDao = new UserDao(new DbConnection(), new UserRowMapper());
@@ -39,8 +39,9 @@ public class UserDaoTest {
 
     @Test
     public void testFindVolunteerByUsername() throws SQLException {
-      // userDao.createUser(testVolunteer);
+      userDao.createUser(testVolunteer);
       User user = userDao.findVolunteerByUsername("ff8");
       System.out.println(user.getStreet());
     }
+    */
 }

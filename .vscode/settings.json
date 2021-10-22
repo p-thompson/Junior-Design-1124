@@ -3,6 +3,11 @@
         "lib/**/*.jar",
         "libs/mysql-connector-java-8.0.26.jar",
         "libs/junit-4.10.jar",
-        "libs/javax.ws.rs-api-2.1.1"
+        "libs/javax.ws.rs-api-2.1.1",
+        "libs/javax.ws.rs-api-2.1.1.jar"
+    ],
+    "java.project.sourcePaths": [
+        "backend/src/main/java",
+        "libs"
     ]
 }
