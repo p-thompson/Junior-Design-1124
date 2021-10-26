@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 
 function CreateListing() {
     const history = useHistory();
-    const goToSpecificView = () => history.push('/profileselection');
+    const goToSpecificView = () => history.push('/profileselection', history.location.state);
 
     return(
         <Grid container spacing={24} align='left'>

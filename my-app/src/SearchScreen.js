@@ -80,7 +80,7 @@ function SearchScreen() {
 
   const classes = useStyles();
   const history = useHistory();
-  const goToProfileView = () => history.push('/profiles');
+  const goToProfileView = () => history.push('/profiles', history.location.state);
   const goToLogin = () => history.push('/');
   const [startDate, onChange] = useState(new Date());
   const [value, setValue] = useState([new Date(), new Date()]);
