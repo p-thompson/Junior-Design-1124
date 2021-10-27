@@ -9,5 +9,6 @@
     "java.project.sourcePaths": [
         "backend/src/main/java",
         "libs"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"
 }
