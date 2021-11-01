@@ -1,15 +1,17 @@
 import { Typography } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
-import React from "react";
-import { useState } from 'react';
 import VillageNavBar from './VillageNavBar';
 import { useHistory } from "react-router-dom";
 import './dashboard.css';
+import React, { useEffect, useState } from 'react'
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+import NoteCard from './UserCard'
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -53,8 +55,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Dashboard() {
+
+  const handleDelete = async (id) => {
+    await fetch('http://localhost:3000/dashboard/' + id, {
+      method: 'DELETE'
+    })
+    const newNotes = notes.filter(note => note.id != id)
+    setNotes(newNotes)
+  }  
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/dashboard')
+      .then(res => res.json())
+      .then(data => setNotes(data))
+  }, [])
+
   const classes = useStyles();
- 
   const history = useHistory();
   const goToLogin = () => history.push('/');
   const fname = history.location.state.get("fname");
@@ -81,6 +98,17 @@ function Dashboard() {
                             <Typography>Hello {fname}! These users want to connect with you.</Typography>
                         </Paper>
                     </Grid>
+
+                    <Container>
+                      <Grid container spacing={3}>
+                        {notes.map(note => (
+                          <Grid item xs={12} md={6} lg={4} key={note.id}>
+                            <NoteCard note={note} handleDelete={handleDelete} />
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </Container>
+
                     <Grid item xs={8} className={classes.grid}>
                         <Paper className={classes.paper}>
                             <Typography>Users you've connected with.</Typography>
