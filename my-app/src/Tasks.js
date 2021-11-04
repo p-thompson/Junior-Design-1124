@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import TaskItems from "./TaskItems";
+import "./Tasks.css";
+import FlipMove from "react-flip-move";
  
 class Tasks extends Component {
   constructor(props) {
@@ -10,6 +12,7 @@ class Tasks extends Component {
     };
     
     this.addItem = this.addItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
   addItem(e) {
     if (this._inputElement.value !== "") {
@@ -31,6 +34,16 @@ class Tasks extends Component {
        
     e.preventDefault();
   }
+  
+  deleteItem(key) {
+    var filteredItems = this.state.items.filter(function (item) {
+      return (item.key !== key);
+    });
+   
+    this.setState({
+      items: filteredItems
+    });
+  }
   render() {
     return (
       <div className="todoListMain">
@@ -42,7 +55,7 @@ class Tasks extends Component {
             <button type="submit">add</button>
           </form>
         </div>
-        <TaskItems entries={this.state.items}/>
+        <TaskItems entries={this.state.items} delete={this.deleteItem}/>
       </div>
     );
   }
