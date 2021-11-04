@@ -28,6 +28,8 @@ import TimeRangePicker from '@wojtekmaj/react-timerange-picker'
 import ReadOnlyRow from "./ReadOnlyRow";
 import EditableRow from "./EditableRow";
 import data from "./mock-data.json";
+import Tasks from "./Tasks"
+import TaskItems from "./TaskItems";
 
 
 
@@ -278,38 +280,13 @@ function AccountPersonalization() {
           </TableCell>
           <TableCell align="center" className={classes.myavail} style={{paddingLeft: 0, paddingTop: 85}}>
             <Grid style={{paddingRight: 0, paddingLeft: 0}}>
-              <Paper style={{width: 390, height: 540, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
+              <Paper style={{width: 590, height: 540, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
                 <center><h3 className={classes.avail}>Availability</h3></center>
-                <Paper className={classes.mytimes} style={{width: 347, height: 362, right: 10, backgroundColor: '#E1EBEE'}}>
-                  <table style={{borderCollapse: 'separate', borderSpacing: '25px 15px'}}>
-                    <thead>
-                        <tr> 
-                            <th>Day</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                        </tr>
-                    </thead>
-                    <tbody style={{width:350}}>
-                    
-                      {contacts.map((contact) => (
-                        <Fragment>
-                          {editContactId === contact.id ? (
-                            <EditableRow
-                              editFormData={editFormData}
-                              handleEditFormChange={handleEditFormChange}
-                              handleCancelClick={handleCancelClick}
-                            />
-                          ) : (
-                            <ReadOnlyRow
-                              contact={contact}
-                              handleEditClick={handleEditClick}
-                              handleDeleteClick={handleDeleteClick}
-                            />
-                          )}
-                        </Fragment>
-                      ))}
-                    </tbody>
-                  </table>
+                <Paper className={classes.mytimes} style={{width: 530, height: 362, right: 10, backgroundColor: '#E1EBEE'}}>
+                  <div id="taskcontainer">
+                    <Tasks/>
+
+                  </div>
                   <tr></tr>
                 </Paper>
                 <TableRow>
@@ -355,39 +332,6 @@ function AccountPersonalization() {
                 </TableRow>
               </Paper>
             </Grid>
-          </TableCell>
-          <TableCell class="account" className={classes.account}>
-            <Grid container style={{width: 600, paddingRight: 80, paddingTop: 85}} className={classes.container}>
-              <Grid item xs={8} className={classes.grid}>
-
-                  <Paper style={{height: 508}} className={classes.paper}>
-             
-
-                    <center><h1>Services</h1></center>
-                    <TableRow>
-                      <TableCell>
-                        <TableCell align="center" >
-                          <FormControl style={{ minWidth: 110}}>
-                            <leftCenter><Typography class="services">Childcare</Typography></leftCenter>
-                            <leftCenter><Typography class="services">Looking for Work</Typography></leftCenter>
-                            <leftCenter><Typography class="services">Carpooling</Typography></leftCenter>
-                            <leftCenter><Typography class="services">Food Providers</Typography></leftCenter>
-                          
-                          </FormControl>
-                        </TableCell>
-                        <TableCell align="center">
-                          <FormControl style={{ minWidth: 105, paddingBottom: 0, minHeight: 100 }}>
-                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                          </FormControl>
-                        </TableCell>
-                      </TableCell>  
-                    </TableRow>
-                  </Paper>
-              </Grid>         
-            </Grid>      
           </TableCell>
         </TableRow>
         <VillageNavBar page="account"/>
