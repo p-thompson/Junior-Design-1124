@@ -104,10 +104,11 @@ function AccountPersonalization() {
   const classes = useStyles();
   const history = useHistory();
   const goToLogin = () => history.push('/');
-  const fname = history.location.state.get("fname");
-  const lname = history.location.state.get("lname");
-  const rating = history.location.state.get("rating");
-  const bio = history.location.state.get("bio");
+  const fname = history.location.state.get("user").firstName;
+  const lname = history.location.state.get("user").lastName;
+  // const rating = history.location.state.get("user");
+  const rating = 5.0
+  const bio = history.location.state.get("user").bio;
   const index = 3;
   const [value, setValue] = useState([new Date(), new Date()]);
   var obj = {

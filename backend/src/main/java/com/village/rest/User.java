@@ -1,5 +1,7 @@
 package com.village.rest;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class User {
     private int id;
     private String username;
@@ -14,6 +16,10 @@ public class User {
     private String email;
     private String bio;
     private UserType userType;
+
+    public User() {
+        
+    }
 
     public User(
         int id,

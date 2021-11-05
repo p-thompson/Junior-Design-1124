@@ -18,6 +18,6 @@ public class UserService {
     }
 
     public User findVolunteerByUsername(String username) throws SQLException {
-        return userDao.findParentByUsername(username);
+        return userDao.findVolunteerByUsername(username);
     }
 }
