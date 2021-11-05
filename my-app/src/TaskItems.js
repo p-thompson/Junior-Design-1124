@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import FlipMove from "react-flip-move";
+import {start} from "./AccountPersonalization";
  
 class TodoItems extends Component {
   
   createTasks(item) {
     return <li onClick={() => this.delete(item.key)} 
-      key={item.key}>{item.text}</li>
+      key={item.key}>{item.text} at {item.starty}</li>
   }
   constructor(props) {
     super(props);

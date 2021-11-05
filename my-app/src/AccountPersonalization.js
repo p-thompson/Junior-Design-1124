@@ -31,6 +31,8 @@ import data from "./mock-data.json";
 import Tasks from "./Tasks"
 import TaskItems from "./TaskItems";
 
+export var start = "";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -212,13 +214,14 @@ function AccountPersonalization() {
     setContacts(newContacts);
   };
   const handleAddTime = () => {
-    if (timeRange.get('start').length != 0 && timeRange.get('end').length != 0) {
+    if (timeRange.get("start") != null || timeRange.get('start').length != 0 && timeRange.get('end').length != 0) {
       const newContact = {
         row: index,
         day: document.getElementById("weekday").value,
         start: timeRange.get("start"),
         end: timeRange.get("end"),
       };
+      start = timeRange.get("start");
       const newContacts = [...contacts, newContact];
       setContacts(newContacts);
     }

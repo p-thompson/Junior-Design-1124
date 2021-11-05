@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import TaskItems from "./TaskItems";
 import "./Tasks.css";
 import FlipMove from "react-flip-move";
+import {start} from "./AccountPersonalization";
  
 class Tasks extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class Tasks extends Component {
     if (this._inputElement.value !== "") {
       var newItem = {
         text: this._inputElement.value,
+        starty: start,
         key: Date.now()
       };
    
