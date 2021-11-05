@@ -28,7 +28,8 @@ import TimeRangePicker from '@wojtekmaj/react-timerange-picker'
 import ReadOnlyRow from "./ReadOnlyRow";
 import EditableRow from "./EditableRow";
 import data from "./mock-data.json";
-
+import Tasks from "./Tasks"
+import TaskItems from "./TaskItems";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -104,12 +105,14 @@ function AccountPersonalization() {
   const classes = useStyles();
   const history = useHistory();
   const goToLogin = () => history.push('/');
-  const fname = history.location.state.get("fname");
-  const lname = history.location.state.get("lname");
-  const rating = history.location.state.get("rating");
-  const bio = history.location.state.get("bio");
+  const goToCreateTask = () => history.push('/createtask');
+  const goToUpdateAccount = () => history.push('/updateaccount');
+  // const fname = history.location.state.get("fname");
+  // const lname = history.location.state.get("lname");
+  // const rating = history.location.state.get("rating");
+  // const bio = history.location.state.get("bio");
   const index = 3;
-  const [value, setValue] = useState([new Date(), new Date()]);
+  const [timeRange, setTimeRange] = useState(new Map([["start", ""], ["end", ""]]));
   var obj = {
     table: []
   };
@@ -209,15 +212,16 @@ function AccountPersonalization() {
     setContacts(newContacts);
   };
   const handleAddTime = () => {
-    const newContact = {
-      row: index,
-      day: document.getElementById("weekday").value,
-      start: "1:00pm",
-      end: "3:00pm",
-    };
-    const newContacts = [...contacts, newContact];
-    setContacts(newContacts);
-   
+    if (timeRange.get('start').length != 0 && timeRange.get('end').length != 0) {
+      const newContact = {
+        row: index,
+        day: document.getElementById("weekday").value,
+        start: timeRange.get("start"),
+        end: timeRange.get("end"),
+      };
+      const newContacts = [...contacts, newContact];
+      setContacts(newContacts);
+    }
   };
 
   return (
@@ -251,19 +255,17 @@ function AccountPersonalization() {
                     <h1>It Takes a Village</h1>
                     
                     <Paper className={classes.paper}>
-                      <Typography align="left">Name: {fname} {lname}</Typography>
+                      {/* <Typography align="left">Name: {fname} {lname}</Typography>
                       <Typography align="left">Bio: {bio}</Typography>
-                      <Typography align="left">Rating: {rating}</Typography>
+                      <Typography align="left">Rating: {rating}</Typography> */}
                       <Grid>
                         <th><br></br></th>
                       </Grid>
                       <Grid>
                         <th><br></br></th>
                       </Grid>
-                      <Button>Change Name</Button>
-                      <Button>Change Bio</Button>
-                      <Button>Change Contact Information</Button>
-                      <Button>Change Username/Password</Button>
+                      <Button onClick={goToUpdateAccount}>Edit Account</Button>
+                      <Button>Delete Account</Button>
                       <Grid>
                         <th><br></br></th>
                       </Grid>
@@ -278,38 +280,13 @@ function AccountPersonalization() {
           </TableCell>
           <TableCell align="center" className={classes.myavail} style={{paddingLeft: 0, paddingTop: 85}}>
             <Grid style={{paddingRight: 0, paddingLeft: 0}}>
-              <Paper style={{width: 390, height: 540, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
-                <center><h3 className={classes.avail}>Availability</h3></center>
-                <Paper className={classes.mytimes} style={{width: 347, height: 362, right: 10, backgroundColor: '#E1EBEE'}}>
-                  <table style={{borderCollapse: 'separate', borderSpacing: '25px 15px'}}>
-                    <thead>
-                        <tr> 
-                            <th>Day</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                        </tr>
-                    </thead>
-                    <tbody style={{width:350}}>
-                    
-                      {contacts.map((contact) => (
-                        <Fragment>
-                          {editContactId === contact.id ? (
-                            <EditableRow
-                              editFormData={editFormData}
-                              handleEditFormChange={handleEditFormChange}
-                              handleCancelClick={handleCancelClick}
-                            />
-                          ) : (
-                            <ReadOnlyRow
-                              contact={contact}
-                              handleEditClick={handleEditClick}
-                              handleDeleteClick={handleDeleteClick}
-                            />
-                          )}
-                        </Fragment>
-                      ))}
-                    </tbody>
-                  </table>
+              <Paper style={{width: 590, height: 540, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
+                <center><h3 className={classes.avail}>Open Tasks</h3></center>
+                <Paper className={classes.mytimes} style={{width: 530, height: 362, right: 10, backgroundColor: '#E1EBEE'}}>
+                  <div id="taskcontainer">
+                    <Tasks/>
+
+                  </div>
                   <tr></tr>
                 </Paper>
                 <TableRow>
@@ -339,9 +316,15 @@ function AccountPersonalization() {
                       <TimeRangePicker 
                         id= "addtime"
                         disableClock= {true}
-                        onChange={(newValue)=>setValue(value)}
-                        value={value}
-                        disableClock={true}
+                        onChange={(e) => {
+                          if (e != null) {
+                            if (typeof e[0] === 'string') {
+                              timeRange.set("start", e[0]);
+                            } else {
+                              timeRange.set("end", e[1]);
+                            }
+                          }
+                        }}
                       />
                     </FormControl>
                   </TableCell>
@@ -356,39 +339,7 @@ function AccountPersonalization() {
               </Paper>
             </Grid>
           </TableCell>
-          <TableCell class="account" className={classes.account}>
-            <Grid container style={{width: 600, paddingRight: 80, paddingTop: 85}} className={classes.container}>
-              <Grid item xs={8} className={classes.grid}>
-
-                  <Paper style={{height: 508}} className={classes.paper}>
-             
-
-                    <center><h1>Services</h1></center>
-                    <TableRow>
-                      <TableCell>
-                        <TableCell align="center" >
-                          <FormControl style={{ minWidth: 110}}>
-                            <leftCenter><Typography class="services">Childcare</Typography></leftCenter>
-                            <leftCenter><Typography class="services">Looking for Work</Typography></leftCenter>
-                            <leftCenter><Typography class="services">Carpooling</Typography></leftCenter>
-                            <leftCenter><Typography class="services">Food Providers</Typography></leftCenter>
-                          
-                          </FormControl>
-                        </TableCell>
-                        <TableCell align="center">
-                          <FormControl style={{ minWidth: 105, paddingBottom: 0, minHeight: 100 }}>
-                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                          </FormControl>
-                        </TableCell>
-                      </TableCell>  
-                    </TableRow>
-                  </Paper>
-              </Grid>         
-            </Grid>      
-          </TableCell>
+         
         </TableRow>
         <VillageNavBar page="account"/>
         
@@ -398,20 +349,6 @@ function AccountPersonalization() {
   );
 }
 
-/*
-<Grid className={classes.elems} align='center'>
-                      <Avatar style={{backgroundColor: 'green'}}>
 
-                      </Avatar>
-                      <th class="space">Change Profile Picture</th>
-                      <h1>It Takes a Village</h1>
-                      <th class="hello">Hello, Jeff</th>
-                      
-                      <Paper className={classes.paper}>
-                          <Typography align="left">Name: Jeff Smith</Typography>
-                          <Typography align="left">Bio: Loves Dogs, Cooking</Typography>
-                      </Paper>
-                  </Grid>
-*/
 
 export default AccountPersonalization;

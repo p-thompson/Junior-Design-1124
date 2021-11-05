@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@wojtekmaj/react-timerange-picker": "^3.4.1"
+    "@wojtekmaj/react-timerange-picker": "^3.4.1",
+    "react-flip-move": "^3.0.4"
   }
 }
