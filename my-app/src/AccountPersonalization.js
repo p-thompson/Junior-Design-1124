@@ -32,6 +32,7 @@ import Tasks from "./Tasks"
 import TaskItems from "./TaskItems";
 
 export var start = "";
+export var chooseday = "";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -222,6 +223,7 @@ function AccountPersonalization() {
         end: timeRange.get("end"),
       };
       start = timeRange.get("start");
+      chooseday = document.getElementById("weekday").value;
       const newContacts = [...contacts, newContact];
       setContacts(newContacts);
     }
