@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserRowMapper {
-    public User mapRow(ResultSet rs, UserType userType) throws SQLException {
+    public User mapRow(ResultSet rs) throws SQLException {
         int id;
         String username;
         String password;
@@ -17,6 +17,7 @@ public class UserRowMapper {
         String cell;
         String email;
         String bio;
+        UserType userType;
 
         if (rs.next()) {
             id = rs.getInt("id");
@@ -31,6 +32,11 @@ public class UserRowMapper {
             cell = rs.getString("cell");
             email = rs.getString("email");
             bio = rs.getString("bio");
+            if (rs.getString("user_type").equals(UserType.PARENT.name())) {
+                userType = UserType.PARENT;
+            } else {
+                userType = UserType.VOLUNTEER;
+            }
             return new User(id, username, password, firstName, lastName, zipcode, state, city, street, cell, email, bio, userType);
         }
         return null;

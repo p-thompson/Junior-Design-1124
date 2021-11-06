@@ -21,11 +21,14 @@ CREATE TABLE app_user (
 	street char(30),
     cell varchar(15),
     email varchar(30),
+    bio text,
+    user_type ENUM('parent', 'volunteer'),
     unique(username),
 	PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
 -- Table Creation for a Single Parent
+/*
 DROP TABLE IF EXISTS parent;
 CREATE TABLE parent (
 	username char(15) NOT NULL,
@@ -36,6 +39,7 @@ CREATE TABLE parent (
     ON UPDATE cascade
 ) ENGINE=InnoDB;
 
+
 -- Table Creation for a Volunteer
 DROP TABLE IF EXISTS volunteer;
 CREATE TABLE volunteer (
@@ -45,7 +49,7 @@ CREATE TABLE volunteer (
 	CONSTRAINT volunteer_username_constraint FOREIGN KEY (username) REFERENCES app_user (username)
     on update cascade
 ) ENGINE=InnoDB;
-
+*/
 -- Table Creation for Multivalued Attribute Parent Days Available
 DROP TABLE IF EXISTS parent_days_available;
 CREATE TABLE parent_days_available (
@@ -54,7 +58,7 @@ CREATE TABLE parent_days_available (
     time_begin time NOT NULL,
     time_end time NOT NULL,
     PRIMARY KEY (username, day_avail, time_begin, time_end),
-	CONSTRAINT parent_days_available_username_constraint FOREIGN KEY (username) REFERENCES parent (username)
+	CONSTRAINT parent_days_available_username_constraint FOREIGN KEY (username) REFERENCES app_user (username)
 	on update cascade
 ) ENGINE=InnoDB;
 
@@ -66,7 +70,7 @@ CREATE TABLE volunteer_days_available (
     time_begin time NOT NULL,
     time_end time NOT NULL,
     PRIMARY KEY (username, day_avail, time_begin, time_end),
-	CONSTRAINT volunteer_days_available_username_constraint FOREIGN KEY (username) REFERENCES volunteer (username)
+	CONSTRAINT volunteer_days_available_username_constraint FOREIGN KEY (username) REFERENCES app_user (username)
 	on update cascade
 ) ENGINE=InnoDB;
 
@@ -78,7 +82,7 @@ CREATE TABLE volunteer_services_provided (
     babysit boolean default false,
     transportation boolean default false,
     PRIMARY KEY (username),
-	CONSTRAINT services_provided_username_constraint FOREIGN KEY (username) REFERENCES volunteer (username)
+	CONSTRAINT services_provided_username_constraint FOREIGN KEY (username) REFERENCES app_user (username)
 	on update cascade
 ) ENGINE=InnoDB;
 
@@ -90,18 +94,19 @@ CREATE TABLE parent_services_needed (
     babysit boolean default false,
     transportation boolean default false,
     PRIMARY KEY (username),
-	CONSTRAINT services_needed_username_constraint FOREIGN KEY (username) REFERENCES parent (username)
+	CONSTRAINT services_needed_username_constraint FOREIGN KEY (username) REFERENCES app_user (username)
 	on update cascade
 ) ENGINE=InnoDB;
 
 
 -- ------------------------------------------------------ Inserting User Data to Database ------------------------------------------------
 -- Insert into App Users
-INSERT INTO app_user VALUES (1,'janedoe34','mypassword','Jane','Doe','30308','GA','Atlanta','15 Tech Lane', '404-444-4444', 'janedoe@gatech.edu');
-INSERT INTO app_user VALUES (2,'bobwilson88','mypassword2','Bob','Wilson','30308','GA','Atlanta','10 Buzz Drive', '404-888-8888', 'bobwilson@gatech.edu');
-INSERT INTO app_user VALUES (3,'annasmith20','mypassword3','Anna','Smith','30308','GA','Atlanta','101 Jacket Way', '404-555-5555', 'asmith@gatech.edu');
-INSERT INTO app_user VALUES (4,'joebrown56','mypassword4','Joe','Brown','30308','GA','Atlanta','77 Ferst Drive', '404-999-9999', 'joebrown@gatech.edu');
-
+INSERT INTO app_user VALUES (1,'janedoe34','mypassword','Jane','Doe','30308','GA','Atlanta','15 Tech Lane', '404-444-4444', 'janedoe@gatech.edu', 'My name is Jane. I have two children aged 8 and 9. I am looking for a tutor in math for both of them', 'parent');
+INSERT INTO app_user VALUES (2,'bobwilson88','mypassword2','Bob','Wilson','30308','GA','Atlanta','10 Buzz Drive', '404-888-8888', 'bobwilson@gatech.edu', 'My name is Bob. I am a volunteer who can tutor in math and science.', 'volunteer');
+INSERT INTO app_user VALUES (3,'annasmith20','mypassword3','Anna','Smith','30308','GA','Atlanta','101 Jacket Way', '404-555-5555', 'asmith@gatech.edu', 'My name is Anna. I can tutor in english and I can also babysit and do housework.', 'volunteer');
+INSERT INTO app_user VALUES (4,'joebrown56','mypassword4','Joe','Brown','30308','GA','Atlanta','77 Ferst Drive', '404-999-9999', 'joebrown@gatech.edu', 'My name is Joe Brown. I have one child aged 5 and am looking for someone to watch her while I am at work. 
+							I am also looking for someone to tutor her in english', 'parent');
+/*
 -- Insert into Volunteer
 INSERT INTO parent VALUES ('janedoe34', 'My name is Jane. I have two children aged 8 and 9. I am looking for a tutor in math for both of them', 2);
 INSERT INTO parent VALUES ('joebrown56', 'My name is Joe Brown. I have one child aged 5 and am looking for someone to watch her while I am at work. 
@@ -110,7 +115,7 @@ I am also looking for someone to tutor her in english', 1);
 -- Insert into Parent
 INSERT INTO volunteer VALUES ('bobwilson88', 'My name is Bob. I am a volunteer who can tutor in math and science.');
 INSERT INTO volunteer VALUES ('annasmith20', 'My name is Anna. I can tutor in english and I can also babysit and do housework.');
-
+*/
 -- Insert into Parent Services Needed and Days Available
 INSERT INTO parent_services_needed VALUES ('janedoe34', true, true, false);
 INSERT INTO parent_days_available VALUES ('janedoe34', 'Monday', '11:30', '15:00');

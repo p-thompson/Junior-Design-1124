@@ -15,13 +15,7 @@ public class UserDao {
     }
 
     public void createUser(User user) throws SQLException{
-        String procedureCall;
-        if (user.getUserType() == UserType.PARENT) {
-            procedureCall = "CALL register_parent(";
-        } else {
-            procedureCall = "CALL register_volunteer(";
-        }
-        procedureCall = procedureCall +
+        String procedureCall = "CALL register_user(" +
                 "?, " +     // 1. username
                 "?, " +     // 2. password
                 "?, " +     // 3. first_name
@@ -31,7 +25,8 @@ public class UserDao {
                 "?, " +     // 7. city
                 "?, " +     // 8. street
                 "?, " +     // 9. cell
-                "?) ";      //10. email
+                "?, " +     //10. email
+                "?)";       //11. user_type
         Connection connection = dbConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(procedureCall);
         statement.setString(1, user.getUsername());
@@ -44,13 +39,14 @@ public class UserDao {
         statement.setString(8, user.getStreet());
         statement.setString(9, user.getCell());
         statement.setString(10, user.getEmail());
+        statement.setString(11, user.getUserType().name());
 
         statement.execute();
         statement.close();
         connection.close();
     }
 
-    public void modifyUser(User user) throws SQLException{
+    public void modifyUserBasicInfo(User user) throws SQLException{
         Connection connection = dbConnection.getConnection();  
         String procedureCall = 
         "CALL alter_info(" +
@@ -80,32 +76,38 @@ public class UserDao {
 
         statement.execute();
         statement.close();
-
-        if (user.getUserType() == UserType.PARENT) {
-            String parentCall = 
-            "CALL alter_info_parent(" +
-            "?, " + //1.username
-            "?)";   //2.bio
-            PreparedStatement parentStatement = connection.prepareStatement(parentCall);
-            parentStatement.setString(1, user.getUsername());
-            parentStatement.setString(2, user.getBio());
-            parentStatement.execute();
-            parentStatement.close();
-        } else if (user.getUserType() == UserType.VOLUNTEER) {
-            String volunteerCall = 
-            "CALL alter_info_volunteer(" +
-            "?, " + //1.username
-            "?)";   //2.bio
-
-            PreparedStatement volunteerStatement = connection.prepareStatement(volunteerCall);
-            volunteerStatement.setString(1, user.getUsername());
-            volunteerStatement.setString(2, user.getBio());
-            volunteerStatement.execute();
-            volunteerStatement.close();
-        }
         connection.close();
     }
 
+    public void modifyBio(String username, String bio) throws SQLException {
+        Connection connection = dbConnection.getConnection();
+        String procedureCall = "CALL alter_bio (" +
+            "?, " + // 1.username
+            "?)";   // 2.bio
+        PreparedStatement statement = connection.prepareStatement(procedureCall);
+        statement.setString(1, username);
+        statement.setString(2, bio);
+        statement.execute();
+        statement.close();
+        connection.close();
+
+
+    }
+
+    public User findUserByUsername(String username) throws SQLException {
+        Connection connection = dbConnection.getConnection();
+        String query = getGeneralUserQuery();
+        query = query + "WHERE app_user.username = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, username);
+        ResultSet rs = statement.executeQuery();
+        User user = rowMapper.mapRow(rs);
+        statement.close();
+        connection.close();
+        return user;
+    }
+
+    /* commenting these out for now bc idk if they will be useful for the search results --will still need to remove joins
     public User findParentByUsername(String username) throws SQLException {
         Connection connection = dbConnection.getConnection();
         String query = getGeneralUserQuery();
@@ -139,11 +141,13 @@ public class UserDao {
         connection.close();
         return user;
     }
+    */
+
 
     private String getGeneralUserQuery() {
         String query = 
             "SELECT id," +
-            "       app_user.username, " +
+            "       username, " +
             "       pass, " +
             "       first_name, " +
             "       last_name, " +
@@ -153,7 +157,8 @@ public class UserDao {
             "       street, " +
             "       cell, " +
             "       email, " +
-            "       bio" +
+            "       bio," +
+            "       user_type" +
             "  FROM app_user ";
         return query;
     }

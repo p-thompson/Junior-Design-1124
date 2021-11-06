@@ -26,16 +26,26 @@ public class UserWebService {
 
     @PUT
     public void modifyUser(User user) throws SQLException {
-        userService.modifyUser(user);
+        userService.modifyUserBasicInfo(user);
     }
 
+    @PUT
+    @Path("/bio")
+    public void modifyBio(String username, String bio) throws SQLException {
+        userService.modifyBio(username, bio);
+    }
+
+    @GET
+    @Path("/{username}")
+    public User findUserByUsername(@PathParam("username") String username) throws SQLException {
+        return userService.findUserByUsername(username);
+    }
+
+    /*
     @GET
     @Path("/parent/{username}")
     public User findParentByUsername(@PathParam("username") String username) throws SQLException {
         return userService.findParentByUsername(username);
-        
-        
-        
     }
 
     @GET
@@ -43,5 +53,5 @@ public class UserWebService {
     public User findVolunteerByUsername(@PathParam("username") String username) throws SQLException {
         return userService.findVolunteerByUsername(username);
     }
-
+    */
 }

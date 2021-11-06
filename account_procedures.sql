@@ -1,8 +1,8 @@
 USE demo_app;
--- ------------------- Create Parent Procedure ----------
-DROP PROCEDURE IF EXISTS register_parent;
+-- ------------------- Create User Procedure ----------
+DROP PROCEDURE IF EXISTS register_user;
 DELIMITER //
-CREATE PROCEDURE register_parent(
+CREATE PROCEDURE register_user(
 	   IN i_username VARCHAR(20),
        IN i_password VARCHAR(50),
 	   IN i_fname VARCHAR(30),
@@ -12,21 +12,16 @@ CREATE PROCEDURE register_parent(
 	   in i_city char(30),
 	   in i_street char(30),
        IN i_cell varchar(15),
-       in i_email VARCHAR(30)
+       in i_email VARCHAR(30), 
+       in i_user_type ENUM('parent', 'volunteer')
 )
 BEGIN
-INSERT INTO app_user (username, pass, first_name, last_name, zip, state, city, street, cell, email)
-select i_username, Md5(i_password), i_fname, i_lname, i_zip, i_state, i_city, i_street, i_cell, i_email;
-
-INSERT INTO Parent (Username)
-select i_username;
-
-INSERT INTO parent_services_needed (username)
-select i_username;
+INSERT INTO app_user (username, pass, first_name, last_name, zip, state, city, street, cell, email, user_type)
+select i_username, Md5(i_password), i_fname, i_lname, i_zip, i_state, i_city, i_street, i_cell, i_email, i_user_type;
 
 END //
 DELIMITER ;
-
+/*
 -- ------------------- Create Volunteer Procedure ----------
 DROP PROCEDURE IF EXISTS register_volunteer;
 DELIMITER //
@@ -53,7 +48,7 @@ INSERT INTO volunteer_services_provided (username)
 select i_username;
 END //
 DELIMITER ;
-
+*/
 -- --------------------------- Validate Login Func ----------------------------------
 DROP FUNCTION IF EXISTS validate_login;
 CREATE FUNCTION validate_login (i_username varchar(20), i_password varchar(50))
@@ -94,21 +89,21 @@ where id=i_id;
 END //
 DELIMITER ;
 
--- -------------------------------- Alter Volunteer ------------------------------------
-DROP PROCEDURE IF EXISTS alter_info_volunteer;
+-- -------------------------------- Alter Bio ------------------------------------
+DROP PROCEDURE IF EXISTS alter_bio;
 DELIMITER //
-CREATE PROCEDURE alter_info_volunteer(
+CREATE PROCEDURE alter_bio(
 	   in i_username varchar(20),
        IN i_bio text
 )
 BEGIN
-UPDATE volunteer 
+UPDATE app_user 
 SET bio=i_bio
 where username=i_username;
 END //
 DELIMITER ;
 
-
+/*
 -- -------------------------------- Alter Parent ------------------------------------
 DROP PROCEDURE IF EXISTS alter_info_parent;
 DELIMITER //
@@ -122,7 +117,7 @@ SET bio=i_bio
 where username=i_username;
 END //
 DELIMITER ;
-
+*/
 -- -------------------------------- Add Parent Availability ------------------------------------
 DROP PROCEDURE IF EXISTS add_parent_availability;
 DELIMITER //
