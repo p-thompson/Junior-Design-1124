@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TaskItems from "./TaskItems";
 import "./Tasks.css";
 import FlipMove from "react-flip-move";
-import {chooseday, start} from "./AccountPersonalization";
+import {title, start, end} from "./Form";
 
  
 class Tasks extends Component {
@@ -19,8 +19,8 @@ class Tasks extends Component {
   addItem(e) {
     if (this._inputElement.value !== "") {
       var newItem = {
-        text: this._inputElement.value,
-        day: chooseday,
+        text: title,
+        day: "",
         starty: start,
         key: Date.now()
       };

@@ -29,8 +29,11 @@ import data from "./mock-data.json";
 import Tasks from "./Tasks"
 import TaskItems from "./TaskItems";
 import { Container } from './Container';
+import { myDate } from "./Form";
 export var start = "";
 export var chooseday = "";
+export var date = "";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -150,8 +153,13 @@ function AccountPersonalization() {
   const triggerText = 'Open form';
   const onSubmit = (event) => {
     event.preventDefault(event);
+    console.log(myDate);
+    
+    /*
+    event.preventDefault(event);
     console.log(event.target.name.value);
     console.log(event.target.mydate.value);
+    */
   };
 
   return (
