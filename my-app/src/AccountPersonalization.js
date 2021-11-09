@@ -25,8 +25,6 @@ import TableRow from "@material-ui/core/TableRow";
 import MenuItem from '@material-ui/core/MenuItem';
 import { Checkbox } from '@material-ui/core';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker'
-import ReadOnlyRow from "./ReadOnlyRow";
-import EditableRow from "./EditableRow";
 import data from "./mock-data.json";
 import Tasks from "./Tasks"
 import TaskItems from "./TaskItems";
@@ -153,7 +151,7 @@ function AccountPersonalization() {
   const onSubmit = (event) => {
     event.preventDefault(event);
     console.log(event.target.name.value);
-    console.log(event.target.email.value);
+    console.log(event.target.mydate.value);
   };
 
   return (

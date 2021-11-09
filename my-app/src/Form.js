@@ -1,24 +1,27 @@
 import React, { useState }  from 'react';
 import Button from "@material-ui/core/Button";
-import DatePicker from 'react-date-picker';
+import DatePicker from "react-datepicker";
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker'
 import {FormControl} from "@material-ui/core";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import { Checkbox } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 export const Form = ({ onSubmit }) => {
-  const [value, onChange] = useState(new Date());
+  //              <p>Your time is: {moment(startDate).format("LL")}</p>
+  const [startDate, setStartDate] = useState(new Date());
   const [timeRange, setTimeRange] = useState(new Map([["start", ""], ["end", ""]]));
   return (
     <form style={{}} onSubmit={onSubmit}>
       
       <center><h2 style={{}}>Create New Task</h2></center>
-      <TableRow style={{paddingRight: 50}}>
+      <TableRow style={{width: 100, paddingRight: 50}}>
         <TableCell style={{}}>
           <div  className="form-group">
             <tr>
-              <label htmlFor="name">Title </label>
+              <label htmlFor="name">Title: </label>
               <th style={{paddingLeft: 10}}>
                 <input className="form-control" id="name" />
               </th>
@@ -26,19 +29,21 @@ export const Form = ({ onSubmit }) => {
           </div>
           <div style={{paddingTop: 10}} className="datepick">
             <tr>
-              <label >Choose Date   </label>
+              <label >Date:   </label>
               <th style={{paddingLeft: 10}}>
-                <DatePicker
-                  onChange={onChange}
-                  value={value}
-                />
+                <FormControl>
+                  <DatePicker 
+                    selected={startDate} 
+                    onChange={date => setStartDate(date)} 
+                  />
+                </FormControl>
               </th>
             </tr>
           </div>
           <div style={{paddingTop: 10}} className="timepick">
             <tr>
-              <label >Choose Time   </label>
-              <th style={{paddingLeft: 10}}>        
+              <label >Time:</label>
+              <th style={{paddingLeft: 25}}>        
                 <FormControl>    
                   <TimeRangePicker 
                     id= "addtime"
@@ -54,6 +59,7 @@ export const Form = ({ onSubmit }) => {
                     }}
                   />
               </FormControl></th>
+
             </tr>
           </div>
         </TableCell>
