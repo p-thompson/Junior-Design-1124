@@ -212,9 +212,9 @@ function AccountPersonalization() {
           </TableCell>
           <TableCell align="center" className={classes.myavail} style={{paddingLeft: 0, paddingTop: 85}}>
             <Grid style={{paddingRight: 0, paddingLeft: 0}}>
-              <Paper style={{width: 590, height: 540, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
+              <Paper style={{width: 590, height: 510, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
                 <center><h3 className={classes.avail}>Open Tasks</h3></center>
-                <Paper className={classes.mytimes} style={{width: 530, height: 362, right: 10, backgroundColor: '#E1EBEE'}}>
+                <Paper className={classes.mytimes} style={{width: 530, height: 412, right: 10, backgroundColor: '#E1EBEE'}}>
                   <Container triggerText={triggerText} onSubmit={onSubmit} />
                   <div id="taskcontainer">
                     <Tasks/>
@@ -222,53 +222,6 @@ function AccountPersonalization() {
                   </div>
                   <tr></tr>
                 </Paper>
-                <TableRow>
-                  <TableCell>
-                    <FormControl style={{ paddingBottom: 10, minWidth: 85, paddingLeft: 14, paddingTop: 5, fontSize: 12 }}>          
-                    <FormControl>
-                    <InputLabel>Day</InputLabel>
-                    <Select
-                        native
-                        required
-                        displayEmpty
-                        fullWidth
-                        inputProps={{
-                        name: 'name',
-                        id: 'weekday'
-                        }}
-                    >
-                        <option value={"Sunday"}>Sunday</option>
-                        <option value={"Monday"}>Monday</option>
-                        <option value={"Tuesday"}>Tuesday</option>
-                        <option value={"Wednesday"}>Wednesday</option>
-                        <option value={"Thursday"}>Thursday</option>
-                        <option value={"Friday"}>Friday</option>
-                        <option value={"Saturday"}>Saturday</option>
-                    </Select>
-                    </FormControl>    
-                      <TimeRangePicker 
-                        id= "addtime"
-                        disableClock= {true}
-                        onChange={(e) => {
-                          if (e != null) {
-                            if (typeof e[0] === 'string') {
-                              timeRange.set("start", e[0]);
-                            } else {
-                              timeRange.set("end", e[1]);
-                            }
-                          }
-                        }}
-                      />
-                    </FormControl>
-                  </TableCell>
-                  <TableCell>
-                  <MuiThemeProvider>
-                    <RaisedButton label="Add Time" variant="contained" backgroundColor='#0077c0' labelColor='white' align="center" style={{ maxWidth: '100px', maxHeight: '50px', minWidth: '30px', minHeight: '30px', right: 10 }} 
-                      onClick={handleAddTime}
-                    ></RaisedButton>
-                    </MuiThemeProvider>
-                  </TableCell>
-                </TableRow>
               </Paper>
             </Grid>
           </TableCell>
