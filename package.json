@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@wojtekmaj/react-timerange-picker": "^3.4.1",
-    "react-flip-move": "^3.0.4"
+    "react-flip-move": "^3.0.4",
+    "react-popup": "^0.10.0"
   }
 }

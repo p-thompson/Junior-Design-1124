@@ -30,7 +30,7 @@ import EditableRow from "./EditableRow";
 import data from "./mock-data.json";
 import Tasks from "./Tasks"
 import TaskItems from "./TaskItems";
-
+import { Container } from './Container';
 export var start = "";
 export var chooseday = "";
 
@@ -134,86 +134,7 @@ function AccountPersonalization() {
   });
   const [editContactId, setEditContactId] = useState(null);
 
-  const handleAddFormChange = (event) => {
-    event.preventDefault();
-
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newFormData = { ...addFormData };
-    newFormData[fieldName] = fieldValue;
-
-    setAddFormData(newFormData);
-  };
-  const handleEditFormChange = (event) => {
-    event.preventDefault();
-
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newFormData = { ...editFormData };
-    newFormData[fieldName] = fieldValue;
-
-    setEditFormData(newFormData);
-  };
-  const handleAddFormSubmit = (event) => {
-    event.preventDefault();
-
-    const newContact = {
-      id: nanoid(),
-      row: addFormData.row,
-      day: addFormData.day,
-      start: addFormData.start,
-      end: addFormData.end,
-    };
-    const newContacts = [...contacts, newContact];
-    setContacts(newContacts);
-  };
-  const handleEditFormSubmit = (event) => {
-    event.preventDefault();
-
-    const editedContact = {
-      id: editContactId,
-      row: editFormData.row,
-      day: editFormData.day,
-      start: editFormData.start,
-      end: editFormData.end,
-    };
-
-    const newContacts = [...contacts];
-
-    const index = contacts.findIndex((contact) => contact.id === editContactId);
-
-    newContacts[index] = editedContact;
-
-    setContacts(newContacts);
-    setEditContactId(null);
-  };
-  const handleEditClick = (event, contact) => {
-    event.preventDefault();
-    setEditContactId(contact.id);
-
-    const formValues = {
-      row: contact.row,
-      day: contact.day,
-      start: contact.start,
-      end: contact.end,
-    };
-    setEditFormData(formValues);
-  };
-  const handleCancelClick = () => {
-    setEditContactId(null);
-  };
-
-  const handleDeleteClick = (contactId) => {
-    const newContacts = [...contacts];
-
-    const index = contacts.findIndex((contact) => contact.id === contactId);
-
-    newContacts.splice(index, 1);
-
-    setContacts(newContacts);
-  };
+ 
   const handleAddTime = () => {
     if (timeRange.get("start") != null || timeRange.get('start').length != 0 && timeRange.get('end').length != 0) {
       const newContact = {
@@ -227,6 +148,12 @@ function AccountPersonalization() {
       const newContacts = [...contacts, newContact];
       setContacts(newContacts);
     }
+  };
+  const triggerText = 'Open form';
+  const onSubmit = (event) => {
+    event.preventDefault(event);
+    console.log(event.target.name.value);
+    console.log(event.target.email.value);
   };
 
   return (
@@ -288,6 +215,7 @@ function AccountPersonalization() {
               <Paper style={{width: 590, height: 540, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
                 <center><h3 className={classes.avail}>Open Tasks</h3></center>
                 <Paper className={classes.mytimes} style={{width: 530, height: 362, right: 10, backgroundColor: '#E1EBEE'}}>
+                  <Container triggerText={triggerText} onSubmit={onSubmit} />
                   <div id="taskcontainer">
                     <Tasks/>
 
