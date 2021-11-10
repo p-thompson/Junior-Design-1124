@@ -30,9 +30,7 @@ import Tasks from "./Tasks"
 import TaskItems from "./TaskItems";
 import { Container } from './Container';
 import { myDate } from "./Form";
-export var start = "";
-export var chooseday = "";
-export var date = "";
+
 
 
 
@@ -144,8 +142,7 @@ function AccountPersonalization() {
         start: timeRange.get("start"),
         end: timeRange.get("end"),
       };
-      start = timeRange.get("start");
-      chooseday = document.getElementById("weekday").value;
+  
       const newContacts = [...contacts, newContact];
       setContacts(newContacts);
     }
@@ -220,8 +217,9 @@ function AccountPersonalization() {
             <Grid style={{paddingRight: 0, paddingLeft: 0}}>
               <Paper style={{width: 590, height: 510, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
                 <center><h3 className={classes.avail}>Open Tasks</h3></center>
+                
                 <Paper className={classes.mytimes} style={{width: 530, height: 412, right: 10, backgroundColor: '#E1EBEE'}}>
-                  <Container triggerText={triggerText} onSubmit={onSubmit} />
+                 
                   <div id="taskcontainer">
                     <Tasks/>
 

@@ -4,7 +4,7 @@ import "./Tasks.css";
 import FlipMove from "react-flip-move";
 import {title, start, end, day} from "./Form";
 import moment from "moment";
- 
+import { Container } from './Container';
 class Tasks extends Component {
   constructor(props) {
     super(props);
@@ -16,23 +16,29 @@ class Tasks extends Component {
     this.addItem = this.addItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
   }
-  addItem(e) {
-    if (this._inputElement.value !== "") {
-      var newItem = {
-        text: title,
-        day: moment(day).format("LL"),
-        starty: start,
-        key: Date.now()
-      };
+  onSubmit = (event) => {
+    event.preventDefault(event);
    
-      this.setState((prevState) => {
-        return { 
-          items: prevState.items.concat(newItem) 
-        };
-      });
-     
-      this._inputElement.value = "";
-    }
+    
+    /*
+    event.preventDefault(event);
+    console.log(event.target.name.value);
+    console.log(event.target.mydate.value);
+    */
+  };
+  addItem(e) {
+    var newItem = {
+      text: title,
+      day: moment(day).format("LL"),
+      starty: start,
+      key: Date.now()
+    };
+ 
+    this.setState((prevState) => {
+      return { 
+        items: prevState.items.concat(newItem) 
+      };
+    });
      
     console.log(this.state.items);
        
@@ -53,10 +59,7 @@ class Tasks extends Component {
       <div className="todoListMain">
         <div className="header">
           <form onSubmit={this.addItem}>
-            <input ref={(a) => this._inputElement = a} 
-                    placeholder="enter task">
-            </input>
-            <button type="submit">add</button>
+            <Container triggerText={"Add Task"} onSubmit={this.addItem} />
           </form>
         </div>
         <TaskItems entries={this.state.items} delete={this.deleteItem}/>
