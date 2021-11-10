@@ -8,7 +8,8 @@ import TableCell from "@material-ui/core/TableCell";
 import { Checkbox } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import "react-datepicker/dist/react-datepicker.css";
-
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 import date from "./AccountPersonalization";
 import moment from "moment";
 export var title = "";
@@ -17,19 +18,20 @@ export var end= "";
 export var myDate = "";
 export var day= new Date();
 
-
+const options = [
+  'one', 'two', 'three'
+];
+const defaultOption = options[0];
 export class Form extends Component {
   //              <p>Your time is: {moment(startDate).format("LL")}</p>
   constructor(props) {
     super(props);
 
     this.state = {
-      start: "",
       day: new Date(),
-      title: "",
+      value: "",
       start: "",
       end: "",
-      date: "",
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -40,10 +42,10 @@ export class Form extends Component {
     this.setState({day: date});
   } 
   handleChange(event) {
-    this.setState({title: event.target.value});
+    this.setState({value: event.target.value});  
   }
   handleSubmit(event) {
-    title = this.state.title;
+    title = this.state.value;
     start = this.state.start;
     end = this.state.end;
     day = this.state.day;
@@ -67,7 +69,13 @@ export class Form extends Component {
               <tr>
                 <label htmlFor="name">Title: </label>
                 <th style={{paddingLeft: 10}}>
-                  <input value={this.state.title} onChange={this.handleChange} style={{width: 245}} className="form-control" id="name" />
+                  <select value={this.state.value} onChange={this.handleChange}> 
+                    <option value="Choose">Choose...</option>    
+                    <option value="Childcare">Childcare</option>
+                    <option value="Tutoring">Tutoring</option>
+                    <option value="Housework">Housework</option>
+                    <option value="Carpooling">Carpooling</option>
+                  </select>
                 </th>
               </tr>
             </div>
@@ -119,27 +127,7 @@ export class Form extends Component {
               </th>
             </div>
           </TableCell>
-          <TableCell style={{paddingLeft: 60}}>
-            <TableRow>
-              <TableCell>
-                <FormControl style={{ minWidth: 110}}>
-                  <leftCenter style={{paddingBottom: 13}}><Typography class="services">Childcare</Typography></leftCenter>
-                  <leftCenter><Typography class="services">Looking for Work</Typography></leftCenter>
-                  <leftCenter><Typography class="services">Carpooling</Typography></leftCenter>
-                  <leftCenter><Typography class="services">Food Providers</Typography></leftCenter>
-                
-                </FormControl>
-              </TableCell>
-              <TableCell>
-                <FormControl style={{ minWidth: 105, paddingBottom: 0, minHeight: 100 }}>
-                  <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                  <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                  <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                  <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                </FormControl>
-              </TableCell>
-            </TableRow>
-          </TableCell>
+          
         </TableRow>
         <div className="form-group">
           <Button className="form-control btn btn-primary" onSubmit={this.onTaskSubmit} type="submit">

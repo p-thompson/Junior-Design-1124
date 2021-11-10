@@ -41,6 +41,7 @@ class Tasks extends Component {
     });
      
     console.log(this.state.items);
+    console.log(title);
        
     e.preventDefault();
   }
