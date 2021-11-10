@@ -36,8 +36,8 @@ export class Form extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     
   }
-  addDate(e) {
-    this.setState({day: e.target.value});
+  addDate(date) {
+    this.setState({day: date});
   } 
   handleChange(event) {
     this.setState({title: event.target.value});
@@ -79,7 +79,7 @@ export class Form extends Component {
                     <DatePicker 
                       selected={ this.state.day }
                       dateFormat="MM/dd/yyyy"
-                      onChange={(e) => {this.addDate(e)}}
+                      onChange={(e) => this.addDate(e)}
                     />
                   </FormControl>
                 </th>
