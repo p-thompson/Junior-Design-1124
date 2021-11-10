@@ -7,7 +7,7 @@ class TodoItems extends Component {
   
   createTasks(item) {
     return <li onClick={() => this.delete(item.key)} 
-      key={item.key}>{item.text} on {myDate} at {item.starty}</li>
+      key={item.key}>{item.text} on {item.day} at {item.starty}</li>
   }
   constructor(props) {
     super(props);

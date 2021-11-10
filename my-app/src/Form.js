@@ -15,6 +15,7 @@ export var title = "";
 export var start = "";
 export var end= "";
 export var myDate = "";
+export var day= new Date();
 
 
 export class Form extends Component {
@@ -24,16 +25,20 @@ export class Form extends Component {
 
     this.state = {
       start: "",
-      day: "",
+      day: new Date(),
       title: "",
       start: "",
       end: "",
+      date: "",
     };
     
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     
   }
+  addDate(date) {
+    this.setState({day: date});
+  } 
   handleChange(event) {
     this.setState({title: event.target.value});
   }
@@ -41,6 +46,8 @@ export class Form extends Component {
     title = this.state.title;
     start = this.state.start;
     end = this.state.end;
+    day = this.state.day;
+    console.log({day});
     event.preventDefault();
   }
 
@@ -69,7 +76,11 @@ export class Form extends Component {
                 <label >Date:   </label>
                 <th style={{paddingLeft: 10}}>
                   <FormControl>
-                 
+                    <DatePicker 
+                      selected={ this.state.day }
+                      dateFormat="MM/dd/yyyy"
+                      onChange={(e) => this.addDate(e)}
+                    />
                   </FormControl>
                 </th>
               </tr>

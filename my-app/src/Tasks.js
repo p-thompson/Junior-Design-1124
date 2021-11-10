@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import TaskItems from "./TaskItems";
 import "./Tasks.css";
 import FlipMove from "react-flip-move";
-import {title, start, end} from "./Form";
-
+import {title, start, end, day} from "./Form";
+import moment from "moment";
  
 class Tasks extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class Tasks extends Component {
     if (this._inputElement.value !== "") {
       var newItem = {
         text: title,
-        day: "",
+        day: moment(day).format("LL"),
         starty: start,
         key: Date.now()
       };
