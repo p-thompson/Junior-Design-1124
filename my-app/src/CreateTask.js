@@ -76,11 +76,11 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function SearchScreen() {
+function CreateTask() {
 
   const classes = useStyles();
   const history = useHistory();
-  const goToProfileView = () => history.push('/profiles', history.location.state);
+  const goToAccountPersonalization = () => history.push('/accountpersonalization', history.location.state);
   const goToLogin = () => history.push('/');
   const [startDate, onChange] = useState(new Date());
   const [value, setValue] = useState([new Date(), new Date()]);
@@ -95,9 +95,9 @@ function SearchScreen() {
           <section className={classes.logout}>
             <Button
               color='inherit'
-              onClick={goToLogin}
+              onClick={goToAccountPersonalization}
             >
-              logout
+              Back
             </Button>
           </section>
         </Toolbar>
@@ -131,15 +131,14 @@ function SearchScreen() {
                   onChange={onChange} 
                  /></center>
                   <TableCell></TableCell>
-                  {/* // TODO change these buttons to be different based on profile type (different names and functionality) */}
-                  <RaisedButton label="Enter" align="center" variant="contained" backgroundColor='#0077c0' labelColor="white"  fullWidth style={{margin: '15px 0'}} onClick={goToProfileView}>
+                  <RaisedButton label="Create Task" align="center" variant="contained" backgroundColor='#0077c0' labelColor="white"  fullWidth style={{margin: '15px 0'}} onClick={goToAccountPersonalization}>
                   </RaisedButton>
-                    <RaisedButton label="Automatic Match" align="center" variant="contained" backgroundColor='#0077c0' labelColor="white" fullWidth style={{margin: '15px 0'}} onClick={goToProfileView}>
-                    </RaisedButton>
+                    
             </Paper>
         </Grid>
         </MuiThemeProvider>
-        <VillageNavBar page="search"/>
+        <VillageNavBar page="account"/>
     </div>
   )}
-export default SearchScreen;
+
+export default CreateTask;
