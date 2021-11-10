@@ -109,10 +109,14 @@ function AccountPersonalization() {
   const goToLogin = () => history.push('/');
   const goToCreateTask = () => history.push('/createtask');
   const goToUpdateAccount = () => history.push('/updateaccount');
-  // const fname = history.location.state.get("fname");
-  // const lname = history.location.state.get("lname");
-  // const rating = history.location.state.get("rating");
-  // const bio = history.location.state.get("bio");
+
+  
+  // pull these four fields from the backend
+  const fname = "fname";
+  const lname = "lname";
+  const bio = "bio";
+
+
   const index = 3;
   const [timeRange, setTimeRange] = useState(new Map([["start", ""], ["end", ""]]));
   var obj = {
@@ -135,7 +139,9 @@ function AccountPersonalization() {
 
  
   const handleAddTime = () => {
-    if (timeRange.get("start") != null || timeRange.get('start').length != 0 && timeRange.get('end').length != 0) {
+
+
+    if (timeRange.get('start').length != 0 && timeRange.get('end').length != 0) {
       const newContact = {
         row: index,
         day: document.getElementById("weekday").value,
@@ -157,6 +163,7 @@ function AccountPersonalization() {
     console.log(event.target.name.value);
     console.log(event.target.mydate.value);
     */
+
   };
 
   return (
@@ -215,6 +222,7 @@ function AccountPersonalization() {
           </TableCell>
           <TableCell align="center" className={classes.myavail} style={{paddingLeft: 0, paddingTop: 85}}>
             <Grid style={{paddingRight: 0, paddingLeft: 0}}>
+
               <Paper style={{width: 590, height: 510, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
                 <center><h3 className={classes.avail}>Open Tasks</h3></center>
                 
@@ -230,6 +238,8 @@ function AccountPersonalization() {
             </Grid>
           </TableCell>
          
+
+            
         </TableRow>
         <VillageNavBar page="account"/>
         
