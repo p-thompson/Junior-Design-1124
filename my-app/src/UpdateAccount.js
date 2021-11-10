@@ -101,23 +101,6 @@ function UpdateAccount() {
                 <TextField defaultValue = {defaultValues.get("state")} label='State' hintText='State' onChange={(e) => setUserInfo(new Map(userInfo.set("state",e.target.value)))} required fullWidth/>
                 <TextField defaultValue = {defaultValues.get("zip")} label='Zip' hintText='Zip' onChange={(e) => setUserInfo(new Map(userInfo.set("zip",e.target.value)))} required fullWidth/>
                 <TextField defaultValue = {defaultValues.get("bio")} label='Bio' hintText='Bio' onChange={(e) => setUserInfo(new Map(userInfo.set("bio",e.target.value)))} required fullWidth/>
-                <FormControl>
-                <InputLabel>Type</InputLabel>
-                <Select
-                    native
-                    required
-                    displayEmpty
-                    fullWidth
-                    inputProps={{
-                    name: 'name',
-                    id: 'name'
-                    }}
-                >
-                    <option value={"volunteer"}>Volunteer</option>
-                    <option value={"parent"}>Parent</option>
-                    <option value={"admin"}>Admin</option>
-                </Select>
-                </FormControl>
                 <RaisedButton label="Update Account" labelColor="white" backgroundColor='#0077c0' variant="contained" fullWidth style={{margin: '20px 0'}} onClick={applyUpdates}/>
                 <Button 
                 disableFocusRipple disableRipple style={{ textTransform: "none" }} 
