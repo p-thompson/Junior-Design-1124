@@ -104,6 +104,11 @@ function AccountPersonalization() {
   const classes = useStyles();
   const history = useHistory();
   const goToLogin = () => history.push('/');
+
+  const fname1 = history.location.state.get("user").firstName;
+  const lname1 = history.location.state.get("user").lastName;
+  const rating = "5.0";
+  const bio1 = history.location.state.get("user").bio;
   const goToCreateTask = () => history.push('/createtask');
   const goToUpdateAccount = () => history.push('/updateaccount');
   

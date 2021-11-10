@@ -57,7 +57,7 @@ function Dashboard() {
  
   const history = useHistory();
   const goToLogin = () => history.push('/');
-  const fname = history.location.state.get("fname");
+  const fname = history.location.state.get("user").firstName;
 
 
     return (
