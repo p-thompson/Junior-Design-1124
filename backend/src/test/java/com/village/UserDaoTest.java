@@ -41,7 +41,7 @@ public class UserDaoTest {
     @Test 
     public void testModifyBio() throws SQLException {
       testParent.setBio("I am a cool guy.");
-      userDao.modifyBio(testParent.getUsername(), testParent.getBio());
+      userDao.modifyUserBasicInfo(testParent);
     }
 
     @Test

@@ -21,34 +21,6 @@ select i_username, Md5(i_password), i_fname, i_lname, i_zip, i_state, i_city, i_
 
 END //
 DELIMITER ;
-/*
--- ------------------- Create Volunteer Procedure ----------
-DROP PROCEDURE IF EXISTS register_volunteer;
-DELIMITER //
-CREATE PROCEDURE register_volunteer(
-	   IN i_username VARCHAR(20),
-       IN i_password VARCHAR(50),
-	   IN i_fname VARCHAR(30),
-       IN i_lname VARCHAR(30),
-       in i_zip char(5),
-	   in i_state char(2),
-	   in i_city char(30),
-	   in i_street char(30),
-       IN i_cell varchar(15),
-       in i_email VARCHAR(30)
-)
-BEGIN
-INSERT INTO app_user (username, pass, first_name, last_name, zip, state, city, street, cell, email)
-select i_username, Md5(i_password), i_fname, i_lname, i_zip, i_state, i_city, i_street, i_cell, i_email;
-
-INSERT INTO Volunteer (Username)
-select i_username;
-
-INSERT INTO volunteer_services_provided (username)
-select i_username;
-END //
-DELIMITER ;
-*/
 -- --------------------------- Validate Login Func ----------------------------------
 DROP FUNCTION IF EXISTS validate_login;
 CREATE FUNCTION validate_login (i_username varchar(20), i_password varchar(50))
@@ -80,44 +52,16 @@ CREATE PROCEDURE alter_info(
 	   in i_city char(30),
 	   in i_street char(30),
        IN i_cell varchar(15),
-       in i_email VARCHAR(30)
+       in i_email VARCHAR(30),
+       in i_bio text
 )
 BEGIN
 UPDATE app_user 
-SET username=i_username, pass=Md5(i_password), first_name=i_fname, last_name=i_lname, zip=i_zip, state=i_state, city=i_city, street=i_street, cell=i_cell, email=i_email
+SET username=i_username, pass=Md5(i_password), first_name=i_fname, last_name=i_lname, zip=i_zip, state=i_state, city=i_city, street=i_street, cell=i_cell, email=i_email, bio=i_bio
 where id=i_id;
 END //
 DELIMITER ;
 
--- -------------------------------- Alter Bio ------------------------------------
-DROP PROCEDURE IF EXISTS alter_bio;
-DELIMITER //
-CREATE PROCEDURE alter_bio(
-	   in i_username varchar(20),
-       IN i_bio text
-)
-BEGIN
-UPDATE app_user 
-SET bio=i_bio
-where username=i_username;
-END //
-DELIMITER ;
-
-/*
--- -------------------------------- Alter Parent ------------------------------------
-DROP PROCEDURE IF EXISTS alter_info_parent;
-DELIMITER //
-CREATE PROCEDURE alter_info_parent(
-	   IN i_username varchar(20),
-       IN i_bio text
-)
-BEGIN
-UPDATE parent 
-SET bio=i_bio
-where username=i_username;
-END //
-DELIMITER ;
-*/
 -- -------------------------------- Add Parent Availability ------------------------------------
 DROP PROCEDURE IF EXISTS add_parent_availability;
 DELIMITER //
