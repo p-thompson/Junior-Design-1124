@@ -60,7 +60,7 @@ class Tasks extends Component {
       <div className="todoListMain">
         <div className="header">
           <form onSubmit={this.addItem}>
-            <Container triggerText={"Add Task"} onSubmit={this.addItem} />
+            <Container triggerText={"Add Task"}  />
           </form>
         </div>
         <TaskItems entries={this.state.items} delete={this.deleteItem}/>

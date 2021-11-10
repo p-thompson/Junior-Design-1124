@@ -26,7 +26,10 @@ export class Form extends Component {
   //              <p>Your time is: {moment(startDate).format("LL")}</p>
   constructor(props) {
     super(props);
-
+    day = new Date();
+    end = "";
+    start = "";
+    title = "";
     this.state = {
       day: new Date(),
       value: "",
@@ -60,7 +63,7 @@ export class Form extends Component {
   render() {
     
     return (
-      <form style={{}} onSubmit={this.handleSubmit}>
+      <form style={{paddingLeft: 30}} onSubmit={this.handleSubmit}>
         
         <center><h2 style={{}}>Create New Task</h2></center>
         <TableRow style={{width: 100, paddingRight: 0}}>
@@ -116,15 +119,6 @@ export class Form extends Component {
                     />  
                 </FormControl></th>
               </tr>
-            </div>
-            <div>
-              <th style={{paddingTop: 15}}>
-                <input 
-                style={{height: 70, width: 300}} 
-                className="form-control" id="name"
-                placeholder=" Add a Description"
-                />
-              </th>
             </div>
           </TableCell>
           
