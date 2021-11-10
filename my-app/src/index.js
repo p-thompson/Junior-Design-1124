@@ -11,6 +11,8 @@ import AccountPersonalization from './AccountPersonalization';
 import SearchScreen from './SearchScreen';
 import ProfileView from './ProfileView';
 import SpecificProfileView from './SpecificProfileView';
+import CreateTask from './CreateTask';
+import UpdateAccount from './UpdateAccount';
 ReactDOM.render(
   <BrowserRouter>
     <Route exact path="/" component={Login} />
@@ -18,8 +20,10 @@ ReactDOM.render(
     <Route path="/forgotpassword" component={ForgotPassword}/>
     <Route path="/searchscreen" component={SearchScreen}/>
     <Route path='/dashboard' component={Dashboard}/>
+    <Route path="/createtask" component={CreateTask}/>
 
     <Route path = '/accountpersonalization' component={AccountPersonalization}/>
+    <Route path = '/updateaccount' component={UpdateAccount}/>
 
     <Route path='/profiles' component={ProfileView}/>
     <Route path='/profileselection' component={SpecificProfileView}/>
