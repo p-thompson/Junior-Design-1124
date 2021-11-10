@@ -27,14 +27,9 @@ public class UserWebService {
     }
 
     @PUT
+    @Path("/{username}")
     public void modifyUser(User user) throws SQLException {
         userService.modifyUserBasicInfo(user);
-    }
-
-    @PUT
-    @Path("/bio")
-    public void modifyBio(String username, String bio) throws SQLException {
-        userService.modifyBio(username, bio);
     }
 
     @GET
@@ -45,18 +40,4 @@ public class UserWebService {
         Response response = Response.status(200).entity(g.toJson(userService.findUserByUsername(username))).header("Access-Control-Allow-Origin", "*").build();
         return response;
     }
-
-    /*
-    @GET
-    @Path("/parent/{username}")
-    public User findParentByUsername(@PathParam("username") String username) throws SQLException {
-        return userService.findParentByUsername(username);
-    }
-
-    @GET
-    @Path("/volunteer/{username}")
-    public User findVolunteerByUsername(@PathParam("username") String username) throws SQLException {
-        return userService.findVolunteerByUsername(username);
-    }
-    */
 }

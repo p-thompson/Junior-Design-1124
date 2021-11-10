@@ -38,11 +38,11 @@
 //         userDao.modifyUserBasicInfo(testVolunteer);
 //     }
 
-//     @Test 
-//     public void testModifyBio() throws SQLException {
-//       testParent.setBio("I am a cool guy.");
-//       userDao.modifyBio(testParent.getUsername(), testParent.getBio());
-//     }
+    // @Test 
+    // public void testModifyBio() throws SQLException {
+    //   testParent.setBio("I am a cool guy.");
+    //   userDao.modifyUserBasicInfo(testParent);
+    // }
 
 //     @Test
 //     public void testFindUserByUsername() throws SQLException {

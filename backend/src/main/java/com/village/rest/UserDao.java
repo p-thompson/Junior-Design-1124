@@ -60,7 +60,8 @@ public class UserDao {
                 "?, " +     // 8. city
                 "?, " +     // 9. street
                 "?, " +     //10. cell
-                "?) ";      //11. email
+                "?, " +     //11. email
+                "?)";       //12. bio
         PreparedStatement statement = connection.prepareStatement(procedureCall);
         statement.setInt(1, user.getId());
         statement.setString(2, user.getUsername());
@@ -73,25 +74,11 @@ public class UserDao {
         statement.setString(9, user.getStreet());
         statement.setString(10, user.getCell());
         statement.setString(11, user.getEmail());
+        statement.setString(12, user.getBio());
 
         statement.execute();
         statement.close();
         connection.close();
-    }
-
-    public void modifyBio(String username, String bio) throws SQLException {
-        Connection connection = dbConnection.getConnection();
-        String procedureCall = "CALL alter_bio (" +
-            "?, " + // 1.username
-            "?)";   // 2.bio
-        PreparedStatement statement = connection.prepareStatement(procedureCall);
-        statement.setString(1, username);
-        statement.setString(2, bio);
-        statement.execute();
-        statement.close();
-        connection.close();
-
-
     }
 
     public User findUserByUsername(String username) throws SQLException {
@@ -106,42 +93,6 @@ public class UserDao {
         connection.close();
         return user;
     }
-
-    /* commenting these out for now bc idk if they will be useful for the search results --will still need to remove joins
-    public User findParentByUsername(String username) throws SQLException {
-        Connection connection = dbConnection.getConnection();
-        String query = getGeneralUserQuery();
-        query = query +
-            " JOIN parent" +
-            "   ON app_user.username = parent.username "+
-            "WHERE app_user.username = ?";
-        PreparedStatement statement = connection.prepareStatement(query);
-        
-        statement.setString(1, username);
-        ResultSet rs = statement.executeQuery();
-        User user = rowMapper.mapRow(rs, UserType.PARENT);
-        statement.close();
-        connection.close();
-        return user;
-    }
-
-    public User findVolunteerByUsername(String username) throws SQLException {
-        Connection connection = dbConnection.getConnection();
-        String query = getGeneralUserQuery();
-        query = query +
-            " JOIN volunteer" +
-            "   ON app_user.username = volunteer.username "+
-            "WHERE app_user.username = ?";
-        PreparedStatement statement = connection.prepareStatement(query);
-        
-        statement.setString(1, username);
-        ResultSet rs = statement.executeQuery();
-        User user = rowMapper.mapRow(rs, UserType.VOLUNTEER);
-        statement.close();
-        connection.close();
-        return user;
-    }
-    */
 
 
     private String getGeneralUserQuery() {
