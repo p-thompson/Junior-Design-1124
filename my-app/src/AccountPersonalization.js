@@ -199,9 +199,7 @@ function AccountPersonalization() {
                     <Paper className={classes.paper}>
                       {/* <Typography align="left">Name: {fname} {lname}</Typography>
                       <Typography align="left">Bio: {bio}</Typography>
-
-                      <Typography align="left">Rating: {rating}</Typography> */
-
+                      <Typography align="left">Rating: {rating}</Typography> */}
                       <Grid>
                         <th><br></br></th>
                       </Grid>
@@ -210,7 +208,6 @@ function AccountPersonalization() {
                       </Grid>
                       <Button onClick={goToUpdateAccount}>Edit Account</Button>
                       <Button>Delete Account</Button>
-
                       <Grid>
                         <th><br></br></th>
                       </Grid>
