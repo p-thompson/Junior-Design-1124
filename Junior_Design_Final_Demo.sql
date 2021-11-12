@@ -51,13 +51,15 @@ CREATE TABLE volunteer (
 ) ENGINE=InnoDB;
 */
 -- Table Creation for Multivalued Attribute Parent Days Available
-DROP TABLE IF EXISTS parent_days_available;
-CREATE TABLE parent_days_available (
+DROP TABLE IF EXISTS task;
+CREATE TABLE task (
+	id int not null auto_increment,
 	username char(15) NOT NULL,
     day_avail char(20) NOT NULL,
     time_begin time NOT NULL,
     time_end time NOT NULL,
-    PRIMARY KEY (username, day_avail, time_begin, time_end),
+    service ENUM('tutor', 'babysit', 'transportation'),
+    PRIMARY KEY (id),
 	CONSTRAINT parent_days_available_username_constraint FOREIGN KEY (username) REFERENCES app_user (username)
 	on update cascade
 ) ENGINE=InnoDB;
@@ -87,6 +89,7 @@ CREATE TABLE volunteer_services_provided (
 ) ENGINE=InnoDB;
 
 -- Table Creation for Multivalued Attribute Volunteer Services Needed
+/*
 DROP TABLE IF EXISTS parent_services_needed;
 CREATE TABLE parent_services_needed (
 	username char(15) NOT NULL,
@@ -97,7 +100,7 @@ CREATE TABLE parent_services_needed (
 	CONSTRAINT services_needed_username_constraint FOREIGN KEY (username) REFERENCES app_user (username)
 	on update cascade
 ) ENGINE=InnoDB;
-
+*/
 
 -- ------------------------------------------------------ Inserting User Data to Database ------------------------------------------------
 -- Insert into App Users
@@ -117,6 +120,7 @@ INSERT INTO volunteer VALUES ('bobwilson88', 'My name is Bob. I am a volunteer w
 INSERT INTO volunteer VALUES ('annasmith20', 'My name is Anna. I can tutor in english and I can also babysit and do housework.');
 */
 -- Insert into Parent Services Needed and Days Available
+/*
 INSERT INTO parent_services_needed VALUES ('janedoe34', true, true, false);
 INSERT INTO parent_days_available VALUES ('janedoe34', 'Monday', '11:30', '15:00');
 INSERT INTO parent_days_available VALUES ('janedoe34', 'Wednesday', '11:30', '15:00');
@@ -125,7 +129,8 @@ INSERT INTO parent_days_available VALUES ('janedoe34', 'Friday', '11:30', '15:00
 INSERT INTO parent_services_needed VALUES ('joebrown56', true, true, true);
 INSERT INTO parent_days_available VALUES ('joebrown56', 'Tuesday', '11:30', '15:00');
 INSERT INTO parent_days_available VALUES ('joebrown56', 'Tuesday', '8:00', '10:45');
-
+*/
+INSERT INTO task VALUES (1, 'janedoe34', 'Friday', '11:30', '15:00', 'babysit');
 -- Insert into Volunteer Services Provided and Days Available
 INSERT INTO volunteer_services_provided VALUES ('bobwilson88', true, true, false);
 INSERT INTO volunteer_days_available VALUES ('bobwilson88', 'Wednesday', '10:00', '17:00');
@@ -134,32 +139,3 @@ INSERT INTO volunteer_days_available VALUES ('bobwilson88', 'Friday', '10:00', '
 INSERT INTO volunteer_services_provided VALUES ('annasmith20', true, true, true);
 INSERT INTO volunteer_days_available VALUES ('annasmith20', 'Tuesday', '7:00', '13:00');
 INSERT INTO volunteer_days_available VALUES ('annasmith20', 'Friday', '10:00', '17:00');
-
--- ----------------------------------------------------- Automatic Match Algorithm -------------------------------------------------------
--- DROP PROCEDURE IF EXISTS parent_automatic_matching;
--- DELIMITER //
-
--- CREATE PROCEDURE parent_automatic_matching(
--- 	   IN i_username varchar(15)
--- )
--- BEGIN
--- SELECT concat(app_user.first_name, ' ', app_user.last_name) as volunteer, 
--- volunteer_services_provided.service as service,
--- volunteer_days_available.day_avail as day,
--- volunteer_days_available.time_begin as start_time, 
--- volunteer_days_available.time_end as end_time
--- from volunteer 
--- join app_user on app_user.username = volunteer.username
--- join volunteer_days_available on volunteer.username = volunteer_days_available.username
--- join parent_days_available on volunteer_days_available.day_avail = parent_days_available.day_avail 
--- join parent on parent.username = parent_days_available.username
--- join parent_services_needed on parent.username = parent_services_needed.username
--- join volunteer_services_provided on volunteer.username = volunteer_services_provided.username
--- where (volunteer_days_available.time_begin <= parent_days_available.time_begin 
--- and volunteer_days_available.time_end >= parent_days_available.time_end
--- and volunteer_services_provided.service = parent_services_needed.service
--- and parent.username = i_username);
--- END //
--- DELIMITER ;
-
--- CALL parent_automatic_matching('janedoe34');
