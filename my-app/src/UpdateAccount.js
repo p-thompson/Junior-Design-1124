@@ -32,9 +32,12 @@ function UpdateAccount() {
         ]
     );
 
+<<<<<<< HEAD
     function handleDeleteAccount() {
         console.log("testing delete account confirmation");
     }
+=======
+>>>>>>> 5ff288e (adding ability to modify profile)
     const [tempInfo, setInfo] = useState(new Map([["username", initialValues.get("username")], ["fname", initialValues.get("fname")], ["lname", initialValues.get("lname")], ["password", ""], ["conf_password", ""], ["cell", initialValues.get("cell")], ["email", initialValues.get("email")], ["city", initialValues.get("city")], ["street", initialValues.get("street")], ["state", initialValues.get("state")], ["zip", initialValues.get("zip")], ["bio", initialValues.get("bio")]]));
 
 

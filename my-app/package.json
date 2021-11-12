@@ -17,9 +17,12 @@
     "@testing-library/user-event": "^12.8.3",
     "@wojtekmaj/react-datetimerange-picker": "^3.4.0",
     "@wojtekmaj/react-timerange-picker": "^3.4.1",
+<<<<<<< HEAD
     "alert": "^5.0.10",
     "focus-trap": "^6.7.1",
     "focus-trap-react": "^8.8.2",
+=======
+>>>>>>> 5ff288e (adding ability to modify profile)
     "axios": "^0.24.0",
     "jquery": "^3.6.0",
     "material-ui": "^0.20.2",
