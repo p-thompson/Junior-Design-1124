@@ -62,36 +62,6 @@ where id=i_id;
 END //
 DELIMITER ;
 
--- -------------------------------- Add Parent Availability ------------------------------------
-DROP PROCEDURE IF EXISTS add_parent_availability;
-DELIMITER //
-CREATE PROCEDURE add_parent_availability(
-	   IN i_username VARCHAR(20),
-       IN i_day_avail char(20),
-       IN i_time_begin time,
-       IN i_time_end time
-)
-BEGIN
-INSERT INTO parent_days_available (username, day_avail, time_begin, time_end)
-select i_username, i_day_avail, i_time_begin, i_time_end;
-END //
-DELIMITER ;
-
--- -------------------------------- Remove Parent Availability ------------------------------------
-DROP PROCEDURE IF EXISTS remove_parent_availability;
-DELIMITER //
-CREATE PROCEDURE remove_parent_availability(
-	   IN i_username VARCHAR(20),
-       IN i_day_avail char(20),
-       IN i_time_begin time,
-       IN i_time_end time
-)
-BEGIN
-DELETE FROM parent_days_available 
-where username=i_username and day_avail=i_day_avail and time_begin=i_time_begin and time_end=i_time_end;
-END //
-DELIMITER ;
-
 -- -------------------------------- Add Volunteer Availability ------------------------------------
 DROP PROCEDURE IF EXISTS add_volunteer_availability;
 DELIMITER //
