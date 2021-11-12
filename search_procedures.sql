@@ -1,3 +1,36 @@
+use demo_app;
+
+-- -------------------------------- Add Parent Availability ------------------------------------
+DROP PROCEDURE IF EXISTS add_task;
+DELIMITER //
+CREATE PROCEDURE add_task(
+	   IN i_username VARCHAR(20),
+       IN i_day_avail char(20),
+       IN i_time_begin time,
+       IN i_time_end time,
+       IN i_service ENUM('tutor', 'babysit', 'transportation')
+)
+BEGIN
+INSERT INTO task (username, day_avail, time_begin, time_end, service)
+select i_username, i_day_avail, i_time_begin, i_time_end, i_service;
+END //
+DELIMITER ;
+
+-- Call add_task('janedoe34', 'Monday', '11:30', '15:00', 'babysit');
+
+-- -------------------------------- Remove Task  ------------------------------------
+DROP PROCEDURE IF EXISTS remove_task;
+DELIMITER //
+CREATE PROCEDURE remove_task(
+	   IN i_id int
+)
+BEGIN
+DELETE FROM task
+where id=i_id;
+END //
+DELIMITER ;
+
+
 -- ----------------------------------------------------- Automatic Match Algorithm -------------------------------------------------------
 DROP PROCEDURE IF EXISTS parent_automatic_matching;
 DELIMITER //
