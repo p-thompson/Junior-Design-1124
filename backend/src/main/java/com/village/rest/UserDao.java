@@ -6,13 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDao {
-    private DbConnection dbConnection;
-    private UserRowMapper rowMapper;
-
-    public UserDao(DbConnection dbConnection, UserRowMapper rowMapper) {
-        this.dbConnection = dbConnection;
-        this.rowMapper = rowMapper;
-    }
+    private DbConnection dbConnection = new DbConnection();
+    private UserRowMapper rowMapper = new UserRowMapper();
 
     public void createUser(User user) throws SQLException{
         String procedureCall = "CALL register_user(" +
