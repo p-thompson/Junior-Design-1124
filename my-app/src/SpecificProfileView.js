@@ -74,7 +74,7 @@ function SpecificProfileView() {
             <Paper elevation={5} style={{padding: 50, height: '100vh', width:'90%', margin: "20px auto"}}>
                 <Grid container spacing={24} align='left'>
                     <Grid item xs={6}>
-                        <h1>Ani Warden</h1>
+                        <h1>Paige Thompson</h1>
                         {<Avatar alt="User Profile Image" img src="https://pbs.twimg.com/profile_images/1357505418/stickman_prof_pic.png" style={{height: 350, width: 350, marginLeft: 75, marginTop: 25}}/>}
                         <h1></h1>
                     </Grid>
