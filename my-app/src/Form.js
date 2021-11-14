@@ -114,11 +114,27 @@ export class Form extends Component {
                       
                       onChange={(e) => {
                         if (e != null) {
+                          var newtime  = "";
                           if (typeof e[0] === 'string') {
-                            this.state.start = e[0];
+                            newtime = e[0];       
                           } else {
-                            this.state.end = e[1];
+                            newtime = e[1];
                           }
+                          const hour = parseInt(newtime + "");
+                          if (hour < 12) {
+                            newtime += " AM";
+                          } else {
+                            newtime += " PM";
+                          }
+                          if (hour < 10 && hour > 1) {
+                            newtime = newtime.substring(1, newtime.length);;
+                          } else if (hour < 1 && hour >= 0) {
+                            newtime = "12" + newtime.substring(2, newtime.length);
+                          } else if (hour > 12) {
+                            const newhour = (parseInt(newtime.substring(0,2))) - 12;
+                            newtime = (newhour + "") + newtime.substring(2, newtime.length);
+                          }
+                          this.state.start = newtime;
                         }
                         
                       }}
