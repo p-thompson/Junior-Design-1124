@@ -115,10 +115,7 @@ function AccountPersonalization() {
   const goToCreateTask = () => history.push('/createtask');
   const goToUpdateAccount = () => history.push('/updateaccount', history.location.state);
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 5ff288e (adding ability to modify profile)
 
   const index = 3;
   const [timeRange, setTimeRange] = useState(new Map([["start", ""], ["end", ""]]));

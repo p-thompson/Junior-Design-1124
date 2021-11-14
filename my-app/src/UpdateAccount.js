@@ -32,12 +32,9 @@ function UpdateAccount() {
         ]
     );
 
-<<<<<<< HEAD
     function handleDeleteAccount() {
         console.log("testing delete account confirmation");
     }
-=======
->>>>>>> 5ff288e (adding ability to modify profile)
     const [tempInfo, setInfo] = useState(new Map([["username", initialValues.get("username")], ["fname", initialValues.get("fname")], ["lname", initialValues.get("lname")], ["password", ""], ["conf_password", ""], ["cell", initialValues.get("cell")], ["email", initialValues.get("email")], ["city", initialValues.get("city")], ["street", initialValues.get("street")], ["state", initialValues.get("state")], ["zip", initialValues.get("zip")], ["bio", initialValues.get("bio")]]));
 
 
@@ -57,6 +54,7 @@ function UpdateAccount() {
     const [successValue, setSuccessValue] = useState("")
 
     function ValidateCredentials() {
+        var changed = true;
         if (tempInfo.get("username").length === 0) {
             setErrorValue("Invalid Username.")
         } else if (tempInfo.get("fname").length === 0) {
@@ -77,11 +75,15 @@ function UpdateAccount() {
             setErrorValue("Invalid zip code.")
         } else if (tempInfo.get("bio").length === 0) {
             setErrorValue("Invalid Bio.")
+        } else {
+            changed = false;
+            setErrorValue("");
         }
+        return changed;
     }
     function applyUpdates() {
         // apply account updates here
-        ValidateCredentials();
+        var changed = ValidateCredentials();
         // const defaultValues = {
         //     "id": history.location.state.get("user").id,
         //     "username": tempInfo.get("username"),
@@ -119,7 +121,8 @@ function UpdateAccount() {
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(defaultValues)
         };
-        fetch("http://localhost:8080/backend/rest/account/modify/" + initialValues.get("username"), requestOptions)
+        if (!changed) {
+            fetch("http://localhost:8080/backend/rest/account/modify/" + initialValues.get("username"), requestOptions)
             .then(res => res.json())
             .then((data) => {
                 setUser2Info(new Map(user2Info.set("user", data)))
@@ -127,7 +130,8 @@ function UpdateAccount() {
             .catch(err => {
                 throw new Error(err)
             })
-        setSuccessValue("Account Information Changed!")
+            setSuccessValue("Account Information Changed!")
+        }
         // goToAccountPersonalizationChanged();
     }
     return (
