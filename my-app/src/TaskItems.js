@@ -7,6 +7,7 @@ class TodoItems extends Component {
   
   createTasks(item) {
     if (item.text != "") {
+      
       return <li onClick={() => this.delete(item.key)} 
       key={item.key}>{item.text} on {item.day} at {item.starty}</li>
     }

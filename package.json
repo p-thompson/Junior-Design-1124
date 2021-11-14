@@ -2,6 +2,7 @@
   "dependencies": {
     "@wojtekmaj/react-timerange-picker": "^3.4.1",
     "react-flip-move": "^3.0.4",
+    "react-js-banner": "^0.6.0-beta3",
     "react-popup": "^0.10.0"
   }
 }

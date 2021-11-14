@@ -10,18 +10,19 @@ import { Typography } from '@material-ui/core';
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import RaisedButton from 'material-ui/RaisedButton';
 import date from "./AccountPersonalization";
 import moment from "moment";
+import Banner from 'react-js-banner';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 export var title = "";
 export var start = "";
 export var end= "";
 export var myDate = "";
 export var day= new Date();
 
-const options = [
-  'one', 'two', 'three'
-];
-const defaultOption = options[0];
+
+
 export class Form extends Component {
   //              <p>Your time is: {moment(startDate).format("LL")}</p>
   constructor(props) {
@@ -48,15 +49,21 @@ export class Form extends Component {
     this.setState({value: event.target.value});  
   }
   handleSubmit(event) {
-    title = this.state.value;
-    start = this.state.start;
-    end = this.state.end;
-    day = this.state.day;
-    console.log({day});
-    event.preventDefault();
+    if (title.value != "Choose") {
+      title = this.state.value;
+      start = this.state.start;
+      end = this.state.end;
+      day = this.state.day;
+      console.log(this.state.title);
+      event.preventDefault();
+      window.alert("Task Added.");
+    }
+
   }
 
   onTaskSubmit = () => {
+    window.alert('New Task Added.');
+   
     //date = moment(startDate).format("LL");
     //console.log(date);
   }
@@ -124,10 +131,14 @@ export class Form extends Component {
           
         </TableRow>
         <div className="form-group">
-          <Button className="form-control btn btn-primary" onSubmit={this.onTaskSubmit} type="submit">
-            Submit
-          </Button>
+          <MuiThemeProvider>
+            <RaisedButton  backgroundColor='#0077c0' labelColor='white' variant="contained" fullWidth style={{margin: '15px 0'}} className="form-control btn btn-primary" onSubmit={this.onTaskSubmit} type="submit">
+              Submit
+            </RaisedButton>
+          </MuiThemeProvider>
+
         </div>
+        
       </form>
     );
 
