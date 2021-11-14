@@ -1,0 +1,8 @@
+com\village\rest\UserWebService.class
+com\village\rest\UserDao.class
+com\village\rest\DbConnection.class
+com\village\rest\HelloWorldService.class
+com\village\rest\UserService.class
+com\village\rest\UserType.class
+com\village\rest\User.class
+com\village\rest\UserRowMapper.class

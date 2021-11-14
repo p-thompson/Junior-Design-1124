@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Login() {
-    const [userInfo, setUserInfo] = useState(new Map());
+    const [userInfo, setUserInfo] = useState(new Map([["user", ""], ["connections", ""], ["requests", ""]]));
     const history = useHistory();
     const goToCreateAccount = () => history.push('/createaccount');
     const goToForgotPassword = () => history.push('/forgotpassword');
@@ -33,13 +33,28 @@ function Login() {
 
     function ValidateCredentials() {
         if (usernameValue.length === 0) {
-            setErrorValue("Invalid Username.")
+            setErrorValue("Please input a username!")
         } else if (passwordValue.length === 0) {
-            setErrorValue("Invalid Password.")
-        } else if (usernameValue != passwordValue) {
-            setErrorValue("Username and Password do not match")
+            setErrorValue("Please input a password!")
         } else {
-            goToDashboard()
+            fetch("http://localhost:8080/backend/rest/account/" + usernameValue)
+            .then(res => res.json())
+            .then((data) => {
+                setUserInfo(new Map(userInfo.set("user",data)))
+            })
+            .catch(err => {
+                throw new Error(err)
+            })
+
+            if (userInfo.get("user") == null) {
+                setErrorValue("That username does not exist!")
+            } else if (userInfo.get("user") != "") {
+                if (passwordValue != userInfo.get("user").password) {
+                    setErrorValue("The password input is incorrect!")
+                } else {
+                    goToDashboard()
+                }
+            }
         }
     }
 

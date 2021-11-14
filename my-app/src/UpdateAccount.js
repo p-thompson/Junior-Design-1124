@@ -36,6 +36,9 @@ function UpdateAccount() {
         ]
     );
 
+    function handleDeleteAccount() {
+        console.log("testing delete account confirmation");
+    }
 
     const goToAccountPersonalization = () => {
         history.push('/accountpersonalization');
@@ -112,7 +115,15 @@ function UpdateAccount() {
                 disableFocusRipple disableRipple style={{ textTransform: "none"}}
                 variant="text"
                 fullWidth
-                color="primary">Delete Account</Button>
+                color="primary"
+                onClick={() => {
+                    const confirmWindow = window.confirm(
+                        "Do you really want to delete your account? This action cannot be undone."
+                    )
+                    if (confirmWindow === true) {
+                        handleDeleteAccount();
+                    }
+                }}>Delete Account</Button>
 
             </Paper>
         </Grid>
