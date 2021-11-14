@@ -25,9 +25,12 @@ import TableRow from "@material-ui/core/TableRow";
 import MenuItem from '@material-ui/core/MenuItem';
 import { Checkbox } from '@material-ui/core';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker'
-import ReadOnlyRow from "./ReadOnlyRow";
-import EditableRow from "./EditableRow";
 import data from "./mock-data.json";
+import Tasks from "./Tasks"
+import TaskItems from "./TaskItems";
+import { Container } from './Container';
+import { myDate } from "./Form";
+
 
 
 
@@ -36,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     background: 'white',
     height:'550px',
-    width: "1800px",
+    width: "900px",
   },
 toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
@@ -111,11 +114,13 @@ function AccountPersonalization() {
   const bio1 = history.location.state.get("user").bio;
   const goToCreateTask = () => history.push('/createtask');
   const goToUpdateAccount = () => history.push('/updateaccount');
+
   
   // pull these four fields from the backend
   const fname = "fname";
   const lname = "lname";
   const bio = "bio";
+
 
   const index = 3;
   const [timeRange, setTimeRange] = useState(new Map([["start", ""], ["end", ""]]));
@@ -137,87 +142,10 @@ function AccountPersonalization() {
   });
   const [editContactId, setEditContactId] = useState(null);
 
-  const handleAddFormChange = (event) => {
-    event.preventDefault();
-
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newFormData = { ...addFormData };
-    newFormData[fieldName] = fieldValue;
-
-    setAddFormData(newFormData);
-  };
-  const handleEditFormChange = (event) => {
-    event.preventDefault();
-
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newFormData = { ...editFormData };
-    newFormData[fieldName] = fieldValue;
-
-    setEditFormData(newFormData);
-  };
-  const handleAddFormSubmit = (event) => {
-    event.preventDefault();
-
-    const newContact = {
-      id: nanoid(),
-      row: addFormData.row,
-      day: addFormData.day,
-      start: addFormData.start,
-      end: addFormData.end,
-    };
-    const newContacts = [...contacts, newContact];
-    setContacts(newContacts);
-  };
-  const handleEditFormSubmit = (event) => {
-    event.preventDefault();
-
-    const editedContact = {
-      id: editContactId,
-      row: editFormData.row,
-      day: editFormData.day,
-      start: editFormData.start,
-      end: editFormData.end,
-    };
-
-    const newContacts = [...contacts];
-
-    const index = contacts.findIndex((contact) => contact.id === editContactId);
-
-    newContacts[index] = editedContact;
-
-    setContacts(newContacts);
-    setEditContactId(null);
-  };
-  const handleEditClick = (event, contact) => {
-    event.preventDefault();
-    setEditContactId(contact.id);
-
-    const formValues = {
-      row: contact.row,
-      day: contact.day,
-      start: contact.start,
-      end: contact.end,
-    };
-    setEditFormData(formValues);
-  };
-  const handleCancelClick = () => {
-    setEditContactId(null);
-  };
-
-  const handleDeleteClick = (contactId) => {
-    const newContacts = [...contacts];
-
-    const index = contacts.findIndex((contact) => contact.id === contactId);
-
-    newContacts.splice(index, 1);
-
-    setContacts(newContacts);
-  };
+ 
   const handleAddTime = () => {
+
+
     if (timeRange.get('start').length != 0 && timeRange.get('end').length != 0) {
       const newContact = {
         row: index,
@@ -225,9 +153,22 @@ function AccountPersonalization() {
         start: timeRange.get("start"),
         end: timeRange.get("end"),
       };
+  
       const newContacts = [...contacts, newContact];
       setContacts(newContacts);
     }
+  };
+  const triggerText = 'Open form';
+  const onSubmit = (event) => {
+    event.preventDefault(event);
+    console.log(myDate);
+    
+    /*
+    event.preventDefault(event);
+    console.log(event.target.name.value);
+    console.log(event.target.mydate.value);
+    */
+
   };
 
   return (
@@ -248,7 +189,7 @@ function AccountPersonalization() {
         <Helmet>
           <title>ItTakesAVillage</title>
         </Helmet>
-        <TableRow align="center" style={{paddingLeft:140, paddingRight: 0}} className={classes.myGrid}>
+        <TableRow align="center" style={{paddingLeft:245, paddingRight: 0}} className={classes.myGrid}>
           <TableCell style={{paddingRight: 35}}>
             <Grid style={{paddingTop:85}}>
               <Grid>
@@ -261,7 +202,7 @@ function AccountPersonalization() {
                     <h1>It Takes a Village</h1>
                     
                     <Paper className={classes.paper}>
-                      <Typography align="left">Name: {fname} {lname}</Typography>
+                    <Typography align="left">Name: {fname} {lname}</Typography>
                       <Typography align="left">Bio: {bio}</Typography>
                       <Grid>
                         <th><br></br></th>
@@ -284,129 +225,24 @@ function AccountPersonalization() {
           </TableCell>
           <TableCell align="center" className={classes.myavail} style={{paddingLeft: 0, paddingTop: 85}}>
             <Grid style={{paddingRight: 0, paddingLeft: 0}}>
-              <Paper style={{width: 390, height: 540, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
+
+              <Paper style={{width: 590, height: 510, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
                 <center><h3 className={classes.avail}>Open Tasks</h3></center>
-                <Paper className={classes.mytimes} style={{width: 347, height: 362, right: 10, backgroundColor: '#E1EBEE'}}>
-                  <table style={{borderCollapse: 'separate', borderSpacing: '25px 15px'}}>
-                    <thead>
-                        <tr> 
-                            <th>Day</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Task Type</th>
-                        </tr>
-                    </thead>
-                    <tbody style={{width:350}}>
-                    
-                      {contacts.map((contact) => (
-                        <Fragment>
-                          {editContactId === contact.id ? (
-                            <EditableRow
-                              editFormData={editFormData}
-                              handleEditFormChange={handleEditFormChange}
-                              handleCancelClick={handleCancelClick}
-                            />
-                          ) : (
-                            <ReadOnlyRow
-                              contact={contact}
-                              handleEditClick={handleEditClick}
-                              handleDeleteClick={handleDeleteClick}
-                            />
-                          )}
-                        </Fragment>
-                      ))}
-                    </tbody>
-                  </table>
+                
+                <Paper className={classes.mytimes} style={{width: 530, height: 412, right: 10, backgroundColor: '#E1EBEE'}}>
+                 
+                  <div id="taskcontainer">
+                    <Tasks/>
+
+                  </div>
                   <tr></tr>
                 </Paper>
-                <TableRow>
-                  <TableCell>
-                    <FormControl style={{ paddingBottom: 10, minWidth: 85, paddingLeft: 14, paddingTop: 5, fontSize: 12 }}>          
-                    <FormControl>
-                    <InputLabel>Day</InputLabel>
-                    <Select
-                        native
-                        required
-                        displayEmpty
-                        fullWidth
-                        inputProps={{
-                        name: 'name',
-                        id: 'weekday'
-                        }}
-                    >
-                        <option value={"Sunday"}>Sunday</option>
-                        <option value={"Monday"}>Monday</option>
-                        <option value={"Tuesday"}>Tuesday</option>
-                        <option value={"Wednesday"}>Wednesday</option>
-                        <option value={"Thursday"}>Thursday</option>
-                        <option value={"Friday"}>Friday</option>
-                        <option value={"Saturday"}>Saturday</option>
-                    </Select>
-                    </FormControl>    
-                      <TimeRangePicker 
-                        id= "addtime"
-                        disableClock= {true}
-                        onChange={(e) => {
-                          if (e != null) {
-                            if (typeof e[0] === 'string') {
-                              timeRange.set("start", e[0]);
-                            } else {
-                              timeRange.set("end", e[1]);
-                            }
-                          }
-                        }}
-                      />
-                    </FormControl>
-                  </TableCell>
-                  <TableCell>
-                  <MuiThemeProvider>
-                    <RaisedButton label="Add Time" variant="contained" backgroundColor='#0077c0' labelColor='white' align="center" style={{ maxWidth: '100px', maxHeight: '50px', minWidth: '30px', minHeight: '30px', right: 10 }} 
-                      onClick={handleAddTime}
-                    ></RaisedButton>
-                    </MuiThemeProvider>
-                  </TableCell>
-                </TableRow>
               </Paper>
             </Grid>
           </TableCell>
-          <TableCell class="account" className={classes.account}>
-            <Grid container style={{width: 600, paddingRight: 80, paddingTop: 85}} className={classes.container}>
-              <Grid item xs={8} className={classes.grid}>
+         
 
-                  <Paper style={{height: 508}} className={classes.paper}>
-             
-
-                    <center><h1>Services</h1></center>
-                    <TableRow>
-                      <TableCell>
-                        <TableCell align="center" >
-                          <FormControl style={{ minWidth: 110}}>
-                            <leftCenter><Typography class="services">Childcare</Typography></leftCenter>
-                            <leftCenter><Typography class="services">Looking for Work</Typography></leftCenter>
-                            <leftCenter><Typography class="services">Carpooling</Typography></leftCenter>
-                            <leftCenter><Typography class="services">Food Providers</Typography></leftCenter>
-                          
-                          </FormControl>
-                        </TableCell>
-                        <TableCell align="center">
-                          <FormControl style={{ minWidth: 105, paddingBottom: 0, minHeight: 100 }}>
-                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                            <Checkbox style={{paddingBottom: 20, color:"#0077c0"}}>Childcare</Checkbox>
-                          </FormControl>
-                        </TableCell>
-                      </TableCell>  
-                      <MuiThemeProvider align="center">
-                    <RaisedButton label="Add Task" variant="contained" backgroundColor='#0077c0' labelColor='white' align="center" style={{ maxWidth: '20000px', maxHeight: '50px', minWidth: '30px', minHeight: '30px', right: 10}}
-                    onClick={goToCreateTask}
-                    ></RaisedButton>
-                    </MuiThemeProvider>
-                    </TableRow>
-                  </Paper>
-              </Grid>         
-            </Grid>      
-          </TableCell>
+            
         </TableRow>
         <VillageNavBar page="account"/>
         
@@ -416,20 +252,6 @@ function AccountPersonalization() {
   );
 }
 
-/*
-<Grid className={classes.elems} align='center'>
-                      <Avatar style={{backgroundColor: 'green'}}>
 
-                      </Avatar>
-                      <th class="space">Change Profile Picture</th>
-                      <h1>It Takes a Village</h1>
-                      <th class="hello">Hello, Jeff</th>
-                      
-                      <Paper className={classes.paper}>
-                          <Typography align="left">Name: Jeff Smith</Typography>
-                          <Typography align="left">Bio: Loves Dogs, Cooking</Typography>
-                      </Paper>
-                  </Grid>
-*/
 
 export default AccountPersonalization;
