@@ -202,9 +202,8 @@ function AccountPersonalization() {
                     <h1>It Takes a Village</h1>
                     
                     <Paper className={classes.paper}>
-                      {/* <Typography align="left">Name: {fname} {lname}</Typography>
+                    <Typography align="left">Name: {fname} {lname}</Typography>
                       <Typography align="left">Bio: {bio}</Typography>
-                      <Typography align="left">Rating: {rating}</Typography> */}
                       <Grid>
                         <th><br></br></th>
                       </Grid>
@@ -212,7 +211,6 @@ function AccountPersonalization() {
                         <th><br></br></th>
                       </Grid>
                       <Button onClick={goToUpdateAccount}>Edit Account</Button>
-                      <Button>Delete Account</Button>
                       <Grid>
                         <th><br></br></th>
                       </Grid>
