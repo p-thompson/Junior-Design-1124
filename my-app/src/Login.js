@@ -53,7 +53,7 @@ function Login() {
         </Helmet>
         <MuiThemeProvider>
         <Grid>
-            <Paper elevation={5} style={{padding: 50, height: '400px', width:280, margin: "100px auto", backgroundColor: '#E1EBEE'}}>
+            <Paper elevation={5} style={{padding: 50, height: '550px', width:350, margin: "100px auto", backgroundColor: '#E1EBEE'}}>
                 <Grid align='center'>
                     <Avatar style={{backgroundColor: '#0077c0'}}>
                         <LockedOutlinedIcon>

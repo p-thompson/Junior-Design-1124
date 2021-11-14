@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     background: 'white',
     height:'550px',
-    width: "1800px",
+    width: "900px",
   },
 toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
@@ -184,7 +184,7 @@ function AccountPersonalization() {
         <Helmet>
           <title>ItTakesAVillage</title>
         </Helmet>
-        <TableRow align="center" style={{paddingLeft:140, paddingRight: 0}} className={classes.myGrid}>
+        <TableRow align="center" style={{paddingLeft:245, paddingRight: 0}} className={classes.myGrid}>
           <TableCell style={{paddingRight: 35}}>
             <Grid style={{paddingTop:85}}>
               <Grid>

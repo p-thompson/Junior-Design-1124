@@ -12,7 +12,7 @@ export class Container extends Component {
   };
   closeModal = () => {
     this.setState({ isShown: false });
-    this.TriggerButton.focus();
+    //this.TriggerButton.focus();
     this.toggleScrollLock();
   };
   onKeyDown = (event) => {

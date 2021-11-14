@@ -14,6 +14,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import date from "./AccountPersonalization";
 import moment from "moment";
 import Banner from 'react-js-banner';
+import alert from 'alert'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 export var title = "";
 export var start = "";
@@ -56,13 +57,13 @@ export class Form extends Component {
       day = this.state.day;
       console.log(this.state.title);
       event.preventDefault();
-      window.alert("Task Added.");
+      alert('Task Added');
     }
 
   }
 
   onTaskSubmit = () => {
-    window.alert('New Task Added.');
+    
    
     //date = moment(startDate).format("LL");
     //console.log(date);
@@ -70,16 +71,16 @@ export class Form extends Component {
   render() {
     
     return (
-      <form style={{paddingLeft: 30}} onSubmit={this.handleSubmit}>
+      <form style={{paddingLeft: 20}} onSubmit={this.handleSubmit}>
         
-        <center><h2 style={{}}>Create New Task</h2></center>
+        <center><h2 style={{paddingBottom: 20, paddingRight: 10}}>Create New Task</h2></center>
         <TableRow style={{width: 100, paddingRight: 0}}>
           <TableCell style={{paddingLeft: 20}}>
             <div  className="form-group">
               <tr>
-                <label htmlFor="name">Title: </label>
-                <th style={{paddingLeft: 10}}>
-                  <select value={this.state.value} onChange={this.handleChange}> 
+                <label style={{paddingLeft: 43}}htmlFor="name">Title: </label>
+                <th style={{paddingLeft: 16}}>
+                  <select style={{width: 170}} value={this.state.value} onChange={this.handleChange}> 
                     <option value="Choose">Choose...</option>    
                     <option value="Childcare">Childcare</option>
                     <option value="Tutoring">Tutoring</option>
@@ -90,11 +91,12 @@ export class Form extends Component {
               </tr>
             </div>
             <div style={{paddingTop: 10}} className="datepick">
-              <tr>
-                <label >Date:   </label>
-                <th style={{paddingLeft: 10}}>
+              <tr >
+                <label style={{paddingLeft: 40}} >Date:   </label>
+                <th style={{paddingLeft: 15, width: 220}}>
                   <FormControl>
                     <DatePicker 
+                      style={{width:220}}
                       selected={ this.state.day }
                       dateFormat="MM/dd/yyyy"
                       onChange={(e) => this.addDate(e)}
@@ -103,10 +105,10 @@ export class Form extends Component {
                 </th>
               </tr>
             </div>
-            <div style={{paddingTop: 10}} className="timepick">
+            <div style={{paddingTop: 10, paddingBottom: 45, paddingLeft: 40}} className="timepick">
               <tr>
                 <label >Time:</label>
-                <th style={{paddingLeft: 25}}>        
+                <th style={{paddingLeft: 15}}>        
                   <FormControl>   
                     <TimeRangePicker 
                       id= "addtime"
@@ -117,24 +119,26 @@ export class Form extends Component {
                           var newtime  = "";
                           if (typeof e[0] === 'string') {
                             newtime = e[0];       
-                          } else {
-                            newtime = e[1];
+                            const hour = parseInt(newtime + "");
+                            if (hour < 12) {
+                              newtime += " AM";
+                            } else {
+                              newtime += " PM";
+                            }
+                            if (hour < 10 && hour > 1) {
+                              newtime = newtime.substring(1, newtime.length);;
+                            } else if (hour < 1 && hour >= 0) {
+                              newtime = "12" + newtime.substring(2, newtime.length);
+                            } else if (hour > 12) {
+                              const newhour = (parseInt(newtime.substring(0,2))) - 12;
+                              newtime = (newhour + "") + newtime.substring(2, newtime.length);
+                            }
+                            this.state.start = newtime;
+                          } 
+                          if ( (typeof e[1] === 'string')) {
+                            this.state.end = e[1];
                           }
-                          const hour = parseInt(newtime + "");
-                          if (hour < 12) {
-                            newtime += " AM";
-                          } else {
-                            newtime += " PM";
-                          }
-                          if (hour < 10 && hour > 1) {
-                            newtime = newtime.substring(1, newtime.length);;
-                          } else if (hour < 1 && hour >= 0) {
-                            newtime = "12" + newtime.substring(2, newtime.length);
-                          } else if (hour > 12) {
-                            const newhour = (parseInt(newtime.substring(0,2))) - 12;
-                            newtime = (newhour + "") + newtime.substring(2, newtime.length);
-                          }
-                          this.state.start = newtime;
+
                         }
                         
                       }}

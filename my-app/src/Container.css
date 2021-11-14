@@ -42,7 +42,8 @@ p.lorem-text {
   width: 100%;
   height: 100%;
   padding: .5em 1.5em .5em 1.5em;
-  background-color: #ffffff;
+  background-Color: #E1EBEE;
+  
   box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -56,7 +57,7 @@ p.lorem-text {
     height: auto;
     transform: translate(-50%, -50%);
     max-width: 30em;
-    max-height: 30em;
+    max-height: 45em;
 
   }
 }
