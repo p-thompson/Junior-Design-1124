@@ -42,7 +42,11 @@ function UpdateAccount() {
 
 
     const goToAccountPersonalization = () => {
-        history.push('/accountpersonalization', history.location.state);
+        if (successValue != "") {
+            history.push('/accountpersonalization', user2Info);
+        } else {
+            history.push('/accountpersonalization', history.location.state);
+        }
     }
 
     const goToAccountPersonalizationChanged = () => {
@@ -50,14 +54,11 @@ function UpdateAccount() {
     }
 
     const [errorValue, setErrorValue] = useState("")
+    const [successValue, setSuccessValue] = useState("")
 
     function ValidateCredentials() {
         if (tempInfo.get("username").length === 0) {
             setErrorValue("Invalid Username.")
-        } else if (tempInfo.get("password").length === 0) {
-            setErrorValue("Invalid Password.")
-        } else if (tempInfo.get("password") != tempInfo.get("conf_password")) {
-            setErrorValue("Password and confirm password do not match.")
         } else if (tempInfo.get("fname").length === 0) {
             setErrorValue("No first name has been entered.")
         } else if (tempInfo.get("lname").length === 0) {
@@ -126,11 +127,13 @@ function UpdateAccount() {
             .catch(err => {
                 throw new Error(err)
             })
-        goToAccountPersonalizationChanged();
+        setSuccessValue("Account Information Changed!")
+        // goToAccountPersonalizationChanged();
     }
     return (
         <div className="CreateAccount">
         {errorValue && <Alert severity="error">{errorValue}</Alert>}
+        {successValue && <Alert severity="success">{successValue}</Alert>}
         <Helmet>
         <title>ItTakesAVillage</title>
         </Helmet>
