@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import './Login.css';
 
 
+
 function SpecificProfileView() {
 
 
@@ -25,7 +26,7 @@ function SpecificProfileView() {
             paddingRight: 24, // keep right padding when drawer closed
           },
           appBar: {
-            background: '#0077c0',
+            background: '#0077c0', 
             zIndex: theme.zIndex.drawer + 1,
             transition: theme.transitions.create(['width', 'margin'], {
               easing: theme.transitions.easing.sharp,
@@ -54,7 +55,7 @@ function SpecificProfileView() {
     const returnToProfiles = () => history.goBack();
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <div className={classes.root} style={{overflow: 'hidden'}}>
             <AppBar position="absolute" color='primary' className={classes.appBar}>
                 <Toolbar clasName={classes.toolbar}>
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}className={classes.title}>It Takes a Village</Typography>
@@ -73,23 +74,20 @@ function SpecificProfileView() {
             <Paper elevation={5} style={{padding: 50, height: '100vh', width:'90%', margin: "20px auto"}}>
                 <Grid container spacing={24} align='left'>
                     <Grid item xs={6}>
-                        <h1>Profile View</h1>
-                        <img src="https://pbs.twimg.com/profile_images/1357505418/stickman_prof_pic.png"/>
+                        <h1>Ani Warden</h1>
+                        {<Avatar alt="User Profile Image" img src="https://pbs.twimg.com/profile_images/1357505418/stickman_prof_pic.png" style={{height: 350, width: 350, marginLeft: 75, marginTop: 25}}/>}
                         <h1></h1>
-                        <RaisedButton label="Request Contact Information" labelColor="white" backgroundColor='#0077c0' variant="contained" style={{margin: '15px 0'}}/>
                     </Grid>
                     <Grid item xs={6}>
-                        <Paper style={{border: "1px solid black", height: '35vh'}}>
-                            <ul>
-                                <li>Laurence Williamson</li>
-                                <li>Tutor, Caregiver</li>
-                                <li>Available from 1:30pm to 4:30pm</li>
-                            </ul>
-                        </Paper>
                         <h1>Bio</h1>
-                        <Paper style={{border: "1px solid black", height: '35vh'}}>
+                        <Paper elevation = {5} style={{backgroundColor: '#E1EBEE', overflow: 'auto', height: 'auto', marginTop: 10, padding: 8}}>
+                            <li>Ani Warden</li>
+                            <li>Tutor, Caregiver</li>
+                            <li>Available from 1:30pm to 4:30pm</li>
                             <p>Bio information about a user</p>
                         </Paper>
+                        <RaisedButton label="Request Contact Information" labelColor="white" backgroundColor='#0077c0' variant="contained" style={{margin: '15px 0', marginLeft:297, marginTop: 20}}/>
+
                     </Grid>
                     <Grid item>
                         <VillageNavBar page="search"/>

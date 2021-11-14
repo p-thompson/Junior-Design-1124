@@ -7,11 +7,6 @@
     "@emotion/styled": "^11.3.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
-<<<<<<< HEAD
-=======
-    "@material-ui/lab": "^5.0.0-alpha.44",
-    "@mui/material": "^5.0.2",
->>>>>>> 1f73a3a07440ae6f36ec075a228fbe3dbf5b2bfc
     "@mui/styles": "^5.0.1",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",

@@ -10,7 +10,10 @@ import './dashboard.css';
 import React, { useEffect, useState } from 'react'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
-import NoteCard from './UserCard'
+import UserCard from './UserCard'
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import { width } from '@mui/system';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -74,11 +77,14 @@ function Dashboard() {
   const classes = useStyles();
   const history = useHistory();
   const goToLogin = () => history.push('/');
-  const fname = history.location.state.get("fname");
+  //need to define fname as the names which match the search/ want to match/ have already etc.
+  const fname = 'paige';
+
+  let notes2 = [{fname: "paige", lname: "thompson", note: "hi"}, {fname: "paige", lname: "thompson", note: "hi"}, {fname: "paige", lname: "thompson", note: "hi"}, {fname: "paige", lname: "thompson", note: "hi"}];
 
 
     return (
-        <div className={classes.root}>
+        <div className={classes.root} style = {{overflowY: 'scroll'}}>
             <AppBar position="absolute" color='primary' className={classes.appBar}>
                 <Toolbar clasName={classes.toolbar}>
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}className={classes.title}>It Takes a Village</Typography>
@@ -93,27 +99,37 @@ function Dashboard() {
                 </Toolbar>
             </AppBar>
                 <Grid container className={classes.container}>
-                    <Grid item xs={8} className={classes.grid}>
-                        <Paper className={classes.paper}>
-                            <Typography>Hello {fname}! These users want to connect with you.</Typography>
+                    <Grid item xs={6} className={classes.grid}>
+                        <Paper className={classes.paper} style= {{width: 375, marginLeft: 98, textAlign: 'center', backgroundColor: '#E1EBEE'}}>
+                            <Typography>Users who want to connect with you:</Typography>
                         </Paper>
                     </Grid>
 
-                    <Container>
-                      <Grid container spacing={3}>
-                        {notes.map(note => (
-                          <Grid item xs={12} md={6} lg={4} key={note.id}>
-                            <NoteCard note={note} handleDelete={handleDelete} />
-                          </Grid>
+                    <Grid item xs={6} className={classes.grid}>
+                        <Paper className={classes.paper} style= {{width: 375, marginLeft:98, textAlign: 'center', backgroundColor: '#E1EBEE'}}>
+                            <Typography>Users you've connected with:</Typography>
+                        </Paper>
+                    </Grid>
+
+                    <Paper elevation={5} style={{marginLeft: 80, padding: 6, width:450, backgroundColor: '#E1EBEE', maxHeight: 275, overflow: 'auto'}}>
+                      <GridList cols ={1} style={{justifyContent: 'center'}}>
+                        {notes2.map(note => (
+                          <GridListTile key={note.id} style={{padding: 8, width: 400, height: 'auto'}}>
+                            <UserCard note={note} handleDelete={handleDelete} />
+                          </GridListTile>
                         ))}
-                      </Grid>
-                    </Container>
+                      </GridList>
+                    </Paper>
 
-                    <Grid item xs={8} className={classes.grid}>
-                        <Paper className={classes.paper}>
-                            <Typography>Users you've connected with.</Typography>
-                        </Paper>
-                    </Grid>
+                    <Paper elevation={5} style={{marginLeft: 170, padding: 6, width:450, backgroundColor: '#E1EBEE', maxHeight: 275, overflow: 'auto'}}>
+                      <GridList cols ={1} style={{justifyContent: 'center'}}>
+                        {notes2.map(note => (
+                          <GridListTile key={note.id} style={{padding: 8, width: 400, height: 'auto'}}>
+                            <UserCard note={note} handleDelete={handleDelete} />
+                          </GridListTile>
+                        ))}
+                      </GridList>
+                    </Paper>
                     <Grid item>
                     <VillageNavBar page="home"/>
                     </Grid>
