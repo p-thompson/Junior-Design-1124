@@ -108,18 +108,13 @@ function AccountPersonalization() {
   const history = useHistory();
   const goToLogin = () => history.push('/');
 
-  const fname1 = history.location.state.get("user").firstName;
-  const lname1 = history.location.state.get("user").lastName;
+  const fname = history.location.state.get("user").firstName;
+  const lname = history.location.state.get("user").lastName;
   const rating = "5.0";
-  const bio1 = history.location.state.get("user").bio;
+  const bio = history.location.state.get("user").bio;
   const goToCreateTask = () => history.push('/createtask');
-  const goToUpdateAccount = () => history.push('/updateaccount');
+  const goToUpdateAccount = () => history.push('/updateaccount', history.location.state);
 
-  
-  // pull these four fields from the backend
-  const fname = "fname";
-  const lname = "lname";
-  const bio = "bio";
 
 
   const index = 3;

@@ -1,19 +1,27 @@
 package com.village.rest;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class User {
-    private int id;
-    private String username;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private Integer zipcode;
-    private String state;
-    private String city;
-    private String street;
-    private String cell;
-    private String email;
-    private String bio;
-    private UserType userType;
+    @XmlElement private Integer id;
+    @XmlElement private String username;
+    @XmlElement private String password;
+    @XmlElement private String firstName;
+    @XmlElement private String lastName;
+    @XmlElement private Integer zipcode;
+    @XmlElement private String state;
+    @XmlElement private String city;
+    @XmlElement private String street;
+    @XmlElement private String cell;
+    @XmlElement private String email;
+    @XmlElement private String bio;
+    @XmlElement private UserType userType;
+
+    public User() {
+
+    }
 
     public User(
         int id,

@@ -13,22 +13,42 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 @Path("/account")
 public class UserWebService {
     public static UserService userService = new UserService();
 
+    // @POST
+    // @Path("/create")
+    // @Consumes(MediaType.APPLICATION_JSON)
+    // @Produces(MediaType.APPLICATION_JSON)
+    // public void createUser(User user) throws SQLException{
+    //     userService.createUser(user);
+    // }
+
     @POST
     @Path("/create")
-    public void createUser(User user) throws SQLException{
-        userService.createUser(user);
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response testUser(String user) throws SQLException{
+        Gson g = new Gson();
+        User newUser = g.fromJson(user, User.class);
+        userService.createUser(newUser);
+        String username = newUser.getUsername();
+        Response response = Response.status(200).entity(g.toJson(userService.findUserByUsername(username))).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS").header("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token").build();
+        return response;
     }
 
     @PUT
-    @Path("/{username}")
-    public void modifyUser(User user) throws SQLException {
-        userService.modifyUserBasicInfo(user);
+    @Path("modify/{username}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response modifyUser(String user) throws SQLException {
+        Gson g = new Gson();
+        User newUser = g.fromJson(user, User.class);
+        userService.modifyUserBasicInfo(newUser);
+        String username = newUser.getUsername();
+        Response response = Response.status(200).entity(g.toJson(userService.findUserByUsername(username))).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "*").header("Access-Control-Allow-Headers", "*").build();
+        return response;
     }
 
     @GET
