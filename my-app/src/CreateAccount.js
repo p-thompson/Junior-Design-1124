@@ -52,7 +52,7 @@ function CreateAccount() {
         <div className="CreateAccount">
         {errorValue && <Alert severity="error">{errorValue}</Alert>}
         <Helmet>
-        <title>ItTakesAVillage</title>
+        <title>ItTakesAVillage2</title>
         </Helmet>
         <MuiThemeProvider>
         <Grid>
