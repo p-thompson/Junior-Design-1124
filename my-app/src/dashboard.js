@@ -112,7 +112,7 @@ function Dashboard() {
                         </Paper>
                     </Grid>
 
-                    <Paper elevation={5} style={{marginLeft: 80, padding: 6, width:450, backgroundColor: '#E1EBEE', maxHeight: 275, overflow: 'auto'}}>
+                    <Paper elevation={5} style={{marginLeft: 80, padding: 6, width:460, backgroundColor: '#E1EBEE', maxHeight: 275, overflow: 'auto'}}>
                       <GridList cols ={1} style={{justifyContent: 'center'}}>
                         {notes2.map(note => (
                           <GridListTile key={note.id} style={{padding: 8, width: 400, height: 'auto'}}>
@@ -122,7 +122,7 @@ function Dashboard() {
                       </GridList>
                     </Paper>
 
-                    <Paper elevation={5} style={{marginLeft: 170, padding: 6, width:450, backgroundColor: '#E1EBEE', maxHeight: 275, overflow: 'auto'}}>
+                    <Paper elevation={5} style={{marginLeft: 380, padding: 6, width:450, backgroundColor: '#E1EBEE', maxHeight: 275, overflow: 'auto'}}>
                       <GridList cols ={1} style={{justifyContent: 'center'}}>
                         {notes2.map(note => (
                           <GridListTile key={note.id} style={{padding: 8, width: 400, height: 'auto'}}>
