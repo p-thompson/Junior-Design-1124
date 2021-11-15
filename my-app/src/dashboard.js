@@ -10,7 +10,8 @@ import './dashboard.css';
 import React, { useEffect, useState } from 'react'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
-import UserCard from './UserCard'
+import UserCard from './UserCards'
+import UserCard2 from './UserCard2'
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import { width } from '@mui/system';
@@ -80,7 +81,7 @@ function Dashboard() {
   //need to define fname as the names which match the search/ want to match/ have already etc.
   const fname = 'paige';
 
-  let notes2 = [{fname: "paige", lname: "thompson", note: "hi"}, {fname: "paige", lname: "thompson", note: "hi"}, {fname: "paige", lname: "thompson", note: "hi"}, {fname: "paige", lname: "thompson", note: "hi"}];
+  let notes2 = [{fname: "Paige", lname: "Thompson", note: "hi"}, {fname: "Bob", lname: "Allen", note: "hi"}, {fname: "Sarah", lname: "Fisher", note: "hi"}, {fname: "Dan", lname: "Brown", note: "hi"}];
 
 
     return (
@@ -125,7 +126,7 @@ function Dashboard() {
                       <GridList cols ={1} style={{justifyContent: 'center'}}>
                         {notes2.map(note => (
                           <GridListTile key={note.id} style={{padding: 8, width: 400, height: 'auto'}}>
-                            <UserCard note={note} handleDelete={handleDelete} />
+                            <UserCard2 note={note} handleDelete={handleDelete} />
                           </GridListTile>
                         ))}
                       </GridList>

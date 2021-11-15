@@ -86,8 +86,8 @@ function SpecificProfileView() {
                             <li>Available from 1:30pm to 4:30pm</li>
                             <p>Hi my name is Paige! I am so excited to work with your children</p>
                         </Paper>
-                        <RaisedButton label="Accept Request" labelColor="black" backgroundColor='#AFE1AF' variant="contained" style={{margin: '15px 0', marginLeft:297, marginTop: 20}}/>
-                        <RaisedButton label="Deny Request" labelColor="black" backgroundColor='#FF7F7F' variant="contained" style={{margin: '20px 0', marginLeft:305, marginTop: 20}}/>
+                        <RaisedButton label="View Contact Information" labelColor="white" backgroundColor='#0077c0' variant="contained" style={{margin: '15px 0', marginLeft:297, marginTop: 20}}/>
+
                     </Grid>
                     <Grid item>
                         <VillageNavBar page="home"/>
