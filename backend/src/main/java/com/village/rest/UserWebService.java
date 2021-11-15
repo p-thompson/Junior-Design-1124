@@ -1,6 +1,7 @@
 package com.village.rest;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -37,6 +38,18 @@ public class UserWebService {
     public Response findUserByUsername(@PathParam("username") String username) throws SQLException {
         Gson g = new Gson();
         Response response = Response.status(200).entity(g.toJson(userService.findUserByUsername(username))).header("Access-Control-Allow-Origin", "*").build();
+        return response;
+    }
+
+    @GET
+    @Path("search/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response automaticSearchForParent(@PathParam("username") String username) throws SQLException {
+        Gson g = new Gson();
+        SearchService searchService = new SearchService();
+        List<User> volunteers = searchService.automaticSearchForParent(username);
+        Response response = Response.status(200).entity(g.toJson(volunteers))
+            .header("Access-Control-Allow-Origin", "*").build();
         return response;
     }
 }

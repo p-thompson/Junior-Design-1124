@@ -59,3 +59,4 @@ END //
  DELIMITER ;
 
  CALL parent_automatic_matching('janedoe34');
+ select * from app_user;
