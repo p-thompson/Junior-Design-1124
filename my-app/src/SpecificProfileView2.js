@@ -86,7 +86,11 @@ function SpecificProfileView() {
                             <li>Available from 1:30pm to 4:30pm</li>
                             <p>Hi my name is Paige! I am so excited to work with your children</p>
                         </Paper>
-                        <RaisedButton label="View Contact Information" labelColor="white" backgroundColor='#0077c0' variant="contained" style={{margin: '15px 0', marginLeft:297, marginTop: 20}}/>
+                        <h1>Contact Information</h1>
+                        <Paper elevation = {5} style={{backgroundColor: '#E1EBEE', overflow: 'auto', height: 'auto', marginTop: 10, padding: 8}}>
+                            <p>Cellphone Number:</p>
+                            <p>Email:</p>
+                        </Paper>
 
                     </Grid>
                     <Grid item>

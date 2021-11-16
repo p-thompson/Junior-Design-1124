@@ -10,7 +10,7 @@ import './dashboard.css';
 import React, { useEffect, useState } from 'react'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
-import UserCard from './UserCards'
+import UserCard from './UserCard'
 import UserCard2 from './UserCard2'
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
