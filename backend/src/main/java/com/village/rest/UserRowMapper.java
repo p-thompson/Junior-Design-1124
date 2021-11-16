@@ -39,6 +39,6 @@ public class UserRowMapper {
             }
             return new User(id, username, password, firstName, lastName, zipcode, state, city, street, cell, email, bio, userType);
         }
-        return null;
+      return null;
     } 
 }

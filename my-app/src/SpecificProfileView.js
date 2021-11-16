@@ -81,16 +81,16 @@ function SpecificProfileView() {
                     <Grid item xs={6}>
                         <h1>Bio</h1>
                         <Paper elevation = {5} style={{backgroundColor: '#E1EBEE', overflow: 'auto', height: 'auto', marginTop: 10, padding: 8}}>
-                            <li>Ani Warden</li>
+                            <li>Paige Thompson</li>
                             <li>Tutor, Caregiver</li>
                             <li>Available from 1:30pm to 4:30pm</li>
-                            <p>Bio information about a user</p>
+                            <p>Hi my name is Paige! I am so excited to work with your children</p>
                         </Paper>
-                        <RaisedButton label="Request Contact Information" labelColor="white" backgroundColor='#0077c0' variant="contained" style={{margin: '15px 0', marginLeft:297, marginTop: 20}}/>
-
+                        <RaisedButton label="Accept Request" labelColor="black" backgroundColor='#AFE1AF' variant="contained" style={{margin: '15px 0', marginLeft:297, marginTop: 20}}/>
+                        <RaisedButton label="Deny Request" labelColor="black" backgroundColor='#FF7F7F' variant="contained" style={{margin: '20px 0', marginLeft:305, marginTop: 20}}/>
                     </Grid>
                     <Grid item>
-                        <VillageNavBar page="search"/>
+                        <VillageNavBar page="home"/>
                     </Grid>
                 </Grid>
             </Paper>

@@ -11,77 +11,133 @@ import {Helmet} from 'react-helmet'
 
 function UpdateAccount() {
     const history = useHistory();
-    const [userInfo, setUserInfo] = useState(new Map([["username", ""], ["fname", ""], ["lname", ""], ["password", ""], ["conf_password", ""], ["cell", ""], ["email", ""], ["city", ""], ["street", ""], ["state", ""], ["zip", ""], ["bio", ""]]));
-    const goToDashboard = () => {
-        setUserInfo(new Map(userInfo.set("rating","5/5")));
-        setUserInfo(new Map(userInfo.set("bio","Add a Bio!")));
-        history.push('/dashboard', userInfo);
-    }
+    const [user2Info, setUser2Info] = useState(new Map([["user", ""], ["connections", ""], ["requests", ""]]));
 
     // set this map to values from the backend to populate the screen with current data
-    const defaultValues = new Map(
-        [
-            ["username", "username"],
-            ["fname", "fname"],
-            ["lname", "lname"],
-            ["password", "password"],
-            ["conf_password", "conf_password"],
-            ["cell", "cell"],
-            ["email", "email"],
-            ["city", "city"],
-            ["street", "street"],
-            ["state","state"],
-            ["zip","zip"],
-            ["bio","bio"]
+    const username = history.location.state.get("user").username;
+    const initialValues = new Map(
+        [   
+            ["id", history.location.state.get("user").id],
+            ["username", history.location.state.get("user").username],
+            ["fname", history.location.state.get("user").firstName],
+            ["lname", history.location.state.get("user").lastName],
+            ["cell", history.location.state.get("user").cell],
+            ["email", history.location.state.get("user").email],
+            ["city", history.location.state.get("user").city],
+            ["street", history.location.state.get("user").street],
+            ["state",history.location.state.get("user").state],
+            ["zip", history.location.state.get("user").zipcode],
+            ["bio",history.location.state.get("user").bio],
+            ["userType",history.location.state.get("user").userType]
         ]
     );
 
     function handleDeleteAccount() {
         console.log("testing delete account confirmation");
     }
+    const [tempInfo, setInfo] = useState(new Map([["username", initialValues.get("username")], ["fname", initialValues.get("fname")], ["lname", initialValues.get("lname")], ["password", ""], ["conf_password", ""], ["cell", initialValues.get("cell")], ["email", initialValues.get("email")], ["city", initialValues.get("city")], ["street", initialValues.get("street")], ["state", initialValues.get("state")], ["zip", initialValues.get("zip")], ["bio", initialValues.get("bio")]]));
+
 
     const goToAccountPersonalization = () => {
-        history.push('/accountpersonalization');
+        if (successValue != "") {
+            history.push('/accountpersonalization', user2Info);
+        } else {
+            history.push('/accountpersonalization', history.location.state);
+        }
+    }
+
+    const goToAccountPersonalizationChanged = () => {
+        history.push('/accountpersonalization', user2Info);
     }
 
     const [errorValue, setErrorValue] = useState("")
+    const [successValue, setSuccessValue] = useState("")
 
     function ValidateCredentials() {
-        if (userInfo.get("username").length === 0) {
+        var changed = true;
+        if (tempInfo.get("username").length === 0) {
             setErrorValue("Invalid Username.")
-        } else if (userInfo.get("password").length === 0) {
-            setErrorValue("Invalid Password.")
-        } else if (userInfo.get("password") != userInfo.get("conf_password")) {
-            setErrorValue("Password and confirm password do not match.")
-        } else if (userInfo.get("fname").length === 0) {
+        } else if (tempInfo.get("fname").length === 0) {
             setErrorValue("No first name has been entered.")
-        } else if (userInfo.get("lname").length === 0) {
+        } else if (tempInfo.get("lname").length === 0) {
             setErrorValue("No last name has been entered.")
-        } else if (userInfo.get("email").length === 0) {
+        } else if (tempInfo.get("email").length === 0) {
             setErrorValue("Invalid email.")
-        } else if (userInfo.get("cell").length === 0) {
+        } else if (tempInfo.get("cell").length === 0) {
             setErrorValue("Invalid cell number.")
-        } else if (userInfo.get("street").length === 0) {
+        } else if (tempInfo.get("street").length === 0) {
             setErrorValue("Invalid street.")
-        } else if (userInfo.get("city").length === 0) {
+        } else if (tempInfo.get("city").length === 0) {
             setErrorValue("Invalid city.")
-        } else if (userInfo.get("state").length === 0) {
+        } else if (tempInfo.get("state").length === 0) {
             setErrorValue("Invalid state.")
-        } else if (userInfo.get("zip").length === 0) {
+        } else if (tempInfo.get("zip").length === 0) {
             setErrorValue("Invalid zip code.")
-        } else if (userInfo.get("bio").length === 0) {
+        } else if (tempInfo.get("bio").length === 0) {
             setErrorValue("Invalid Bio.")
         } else {
-            goToDashboard()
+            changed = false;
+            setErrorValue("");
         }
+        return changed;
     }
     function applyUpdates() {
         // apply account updates here
-        goToAccountPersonalization();
+        var changed = ValidateCredentials();
+        // const defaultValues = {
+        //     "id": history.location.state.get("user").id,
+        //     "username": tempInfo.get("username"),
+        //     "password": "",
+        //     "firstName": tempInfo.get("fname"),
+        //     "lastName": tempInfo.get("lname"),
+        //     "zipcode": tempInfo.get("zip"),
+        //     "state": tempInfo.get("state"),
+        //     "city": tempInfo.get("city"),
+        //     "street": tempInfo.get("street"),
+        //     "cell": tempInfo.get("cell"),
+        //     "email": tempInfo.get("email"),
+        //     "bio": tempInfo.get("bio"),
+        //     "userType": history.location.state.get("user").userType
+        // };
+        const id =  history.location.state.get("user").id
+        const type =  history.location.state.get("user").userType
+        const defaultValues = {
+            "id":  id,
+            "username": tempInfo.get("username"),
+            "password": "",
+            "firstName": tempInfo.get("fname"),
+            "lastName": tempInfo.get("lname"),
+            "zipcode": tempInfo.get("zip"),
+            "state": tempInfo.get("state"),
+            "city": tempInfo.get("city"),
+            "street": tempInfo.get("street"),
+            "cell": tempInfo.get("cell"),
+            "email": tempInfo.get("email"),
+            "bio": tempInfo.get("bio"),
+            "userType": type
+        };
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify(defaultValues)
+        };
+        if (!changed) {
+            fetch("http://localhost:8080/backend/rest/account/modify/" + initialValues.get("username"), requestOptions)
+            .then(res => res.json())
+            .then((data) => {
+                setUser2Info(new Map(user2Info.set("user", data)))
+            })
+            .catch(err => {
+                throw new Error(err)
+            })
+            setSuccessValue("Account Information Changed!")
+        }
+        // goToAccountPersonalizationChanged();
     }
     return (
         <div className="CreateAccount">
         {errorValue && <Alert severity="error">{errorValue}</Alert>}
+        {successValue && <Alert severity="success">{successValue}</Alert>}
         <Helmet>
         <title>ItTakesAVillage</title>
         </Helmet>
@@ -92,18 +148,16 @@ function UpdateAccount() {
                 <h1>Edit Account</h1>
                 </Grid>
                 {/* here we can use the defaultValue prop to set a default value for the textFields */}
-                <TextField defaultValue = {defaultValues.get("username")} label='Username' hintText='Username' onChange={(e) => setUserInfo(new Map(userInfo.set("username",e.target.value)))} required fullWidth/>
-                <TextField defaultValue = {defaultValues.get("password")} label='Password' hintText='Password' onChange={(e) => setUserInfo(new Map(userInfo.set("password",e.target.value)))} required fullWidth/>
-                <TextField defaultValue = {defaultValues.get("conf_password")} label='Password' hintText='Confirm Password' onChange={(e) => setUserInfo(new Map(userInfo.set("conf_password",e.target.value)))} required fullWidth/>
-                <TextField defaultValue = {defaultValues.get("fname")} label='First Name' hintText='First Name' onChange={(e) => setUserInfo(new Map(userInfo.set("fname",e.target.value)))} required fullWidth/>
-                <TextField defaultValue = {defaultValues.get("lname")} label='Last Name' hintText='Last Name' onChange={(e) => setUserInfo(new Map(userInfo.set("lname",e.target.value)))} required fullWidth/>
-                <TextField defaultValue = {defaultValues.get("email")} label='Email' hintText='Email' onChange={(e) => setUserInfo(new Map(userInfo.set("email",e.target.value)))} required fullWidth/>
-                <TextField defaultValue = {defaultValues.get("cell")} label='Cell' hintText='Cell Number' onChange={(e) => setUserInfo(new Map(userInfo.set("cell",e.target.value)))} required fullWidth/>
-                <TextField defaultValue = {defaultValues.get("street")} label='Street' hintText='Street' onChange={(e) => setUserInfo(new Map(userInfo.set("street",e.target.value)))} required fullWidth/>
-                <TextField defaultValue = {defaultValues.get("city")} label='City' hintText='City' onChange={(e) => setUserInfo(new Map(userInfo.set("city",e.target.value)))} required fullWidth/>
-                <TextField defaultValue = {defaultValues.get("state")} label='State' hintText='State' onChange={(e) => setUserInfo(new Map(userInfo.set("state",e.target.value)))} required fullWidth/>
-                <TextField defaultValue = {defaultValues.get("zip")} label='Zip' hintText='Zip' onChange={(e) => setUserInfo(new Map(userInfo.set("zip",e.target.value)))} required fullWidth/>
-                <TextField defaultValue = {defaultValues.get("bio")} label='Bio' hintText='Bio' onChange={(e) => setUserInfo(new Map(userInfo.set("bio",e.target.value)))} required fullWidth/>
+                <TextField defaultValue = {initialValues.get("username")} label='Username' hintText='Username' onChange={(e) => setInfo(new Map(tempInfo.set("username",e.target.value)))} required fullWidth/>
+                <TextField defaultValue = {initialValues.get("fname")} label='First Name' hintText='First Name' onChange={(e) => setInfo(new Map(tempInfo.set("fname",e.target.value)))} required fullWidth/>
+                <TextField defaultValue = {initialValues.get("lname")} label='Last Name' hintText='Last Name' onChange={(e) => setInfo(new Map(tempInfo.set("lname",e.target.value)))} required fullWidth/>
+                <TextField defaultValue = {initialValues.get("email")} label='Email' hintText='Email' onChange={(e) => setInfo(new Map(tempInfo.set("email",e.target.value)))} required fullWidth/>
+                <TextField defaultValue = {initialValues.get("cell")} label='Cell' hintText='Cell Number' onChange={(e) => setInfo(new Map(tempInfo.set("cell",e.target.value)))} required fullWidth/>
+                <TextField defaultValue = {initialValues.get("street")} label='Street' hintText='Street' onChange={(e) => setInfo(new Map(tempInfo.set("street",e.target.value)))} required fullWidth/>
+                <TextField defaultValue = {initialValues.get("city")} label='City' hintText='City' onChange={(e) => setInfo(new Map(tempInfo.set("city",e.target.value)))} required fullWidth/>
+                <TextField defaultValue = {initialValues.get("state")} label='State' hintText='State' onChange={(e) => setInfo(new Map(tempInfo.set("state",e.target.value)))} required fullWidth/>
+                <TextField defaultValue = {initialValues.get("zip")} label='Zip' hintText='Zip' onChange={(e) => setInfo(new Map(tempInfo.set("zip",e.target.value)))} required fullWidth/>
+                <TextField defaultValue = {initialValues.get("bio")} rows={4} multiLine={true} label='Bio' hintText='Bio' onChange={(e) => setInfo(new Map(tempInfo.set("bio",e.target.value)))} required fullWidth/>
                 <RaisedButton label="Update Account" labelColor="white" backgroundColor='#0077c0' variant="contained" fullWidth style={{margin: '20px 0'}} onClick={applyUpdates}/>
                 <Button 
                 disableFocusRipple disableRipple style={{ textTransform: "none" }} 

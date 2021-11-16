@@ -11,6 +11,7 @@ import AccountPersonalization from './AccountPersonalization';
 import SearchScreen from './SearchScreen';
 import ProfileView from './ProfileView';
 import SpecificProfileView from './SpecificProfileView';
+import SpecificProfileView2 from './SpecificProfileView2';
 import CreateTask from './CreateTask';
 import UpdateAccount from './UpdateAccount';
 ReactDOM.render(
@@ -27,6 +28,7 @@ ReactDOM.render(
 
     <Route path='/profiles' component={ProfileView}/>
     <Route path='/profileselection' component={SpecificProfileView}/>
+    <Route path='/profileselection2' component={SpecificProfileView2}/>
   </BrowserRouter>,
   document.getElementById('root')
 );
