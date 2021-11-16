@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 
 @Path("/account")
-public class UserWebService {
+public class WebService {
     public static UserService userService = new UserService();
 
     // @POST

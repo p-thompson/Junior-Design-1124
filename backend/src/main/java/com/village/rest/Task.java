@@ -1,13 +1,14 @@
 package com.village.rest;
 
+import java.sql.Time;
 import java.time.DayOfWeek;
 
 public class Task {
     private int id;
     private String username;
-    private DayOfWeek day;
-    private String timeBegin;
-    private String timeEnd;
+    private String day;
+    private Time timeBegin;
+    private Time timeEnd;
     private ServiceType service;
 
     public Task() {
@@ -17,9 +18,9 @@ public class Task {
     public Task(
         int id,
         String username,
-        DayOfWeek day,
-        String timeBegin,
-        String timeEnd,
+        String day,
+        Time timeBegin,
+        Time timeEnd,
         ServiceType service
     ) {
         this.id = id;
@@ -38,19 +39,38 @@ public class Task {
         return this.username;
     }
 
-    public DayOfWeek getDay() {
+    public String getDay() {
         return this.day;
     }
 
-    public String getTimeBegin() {
+    public Time getTimeBegin() {
         return this.timeBegin;
     }
 
-    public String getTimeEnd() {
+    public Time getTimeEnd() {
         return this.timeEnd;
     }
 
-    public ServiceType getServiceType() {
+    public ServiceType getService() {
         return this.service;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public void setDay(String day) {
+        this.day = day;
+    }
+    public void setTimeBegin(Time timeBegin) {
+        this.timeBegin = timeBegin;
+    }
+    public void setTimeEnd(Time timeEnd) {
+        this.timeEnd = timeEnd;
+    }
+    public void setService(ServiceType service) {
+        this.service = service;
     }
 }
