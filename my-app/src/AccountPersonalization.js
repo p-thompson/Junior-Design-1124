@@ -108,13 +108,18 @@ function AccountPersonalization() {
   const history = useHistory();
   const goToLogin = () => history.push('/');
 
-  const fname = history.location.state.get("user").firstName;
-  const lname = history.location.state.get("user").lastName;
+  const fname1 = history.location.state.get("user").firstName;
+  const lname1 = history.location.state.get("user").lastName;
   const rating = "5.0";
-  const bio = history.location.state.get("user").bio;
+  const bio1 = history.location.state.get("user").bio;
   const goToCreateTask = () => history.push('/createtask');
-  const goToUpdateAccount = () => history.push('/updateaccount', history.location.state);
+  const goToUpdateAccount = () => history.push('/updateaccount');
 
+  
+  // pull these four fields from the backend
+  const fname = "fname";
+  const lname = "lname";
+  const bio = "bio";
 
 
   const index = 3;
@@ -222,7 +227,7 @@ function AccountPersonalization() {
             <Grid style={{paddingRight: 0, paddingLeft: 0}}>
 
               <Paper style={{width: 590, height: 510, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
-                <center><h3 className={classes.avail}>Open Tasks</h3></center>
+                <center><h3 className={classes.avail}>Weekly Tasks</h3></center>
                 
                 <Paper className={classes.mytimes} style={{width: 530, height: 412, right: 10, backgroundColor: '#E1EBEE'}}>
                  
