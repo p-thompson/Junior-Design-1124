@@ -8,11 +8,7 @@ import {Alert} from '@mui/material';
 import LockedOutlinedIcon from '@material-ui/icons/LockOutlined';
 import './CreateAccount.css';
 import { useHistory,  BrowserRouter as Router, Route } from "react-router-dom";
-import ReactDOM from 'react-dom';
-import ForgotPassword from "./ForgotPassword";
-import CreateAccount from "./CreateAccount";
 import {Helmet} from 'react-helmet';
-import { green } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -66,8 +62,6 @@ function Login() {
         }
     }
 
-    // const {fname, lname} = userInfo;
-    // onClick={() => setUserInfo({fname: "Meg", lname: "K"}
     return (
         <div className="Login">
         {errorValue && <Alert severity="error">{errorValue}</Alert>}
@@ -79,9 +73,7 @@ function Login() {
             <Paper elevation={5} style={{padding: 50, height: '550px', width:350, margin: "100px auto", backgroundColor: '#E1EBEE'}}>
                 <Grid align='center'>
                     <Avatar style={{backgroundColor: '#0077c0'}}>
-                        <LockedOutlinedIcon>
-
-                        </LockedOutlinedIcon>
+                        <LockedOutlinedIcon></LockedOutlinedIcon>
                     </Avatar>
                     <h1>It Takes a Village</h1>
                 </Grid>

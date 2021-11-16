@@ -1,19 +1,12 @@
 import React, { useState,Component  }  from 'react';
-import Button from "@material-ui/core/Button";
 import DatePicker from "react-datepicker";
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker'
 import {FormControl} from "@material-ui/core";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import { Checkbox } from '@material-ui/core';
-import { Typography } from '@material-ui/core';
 import "react-datepicker/dist/react-datepicker.css";
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import RaisedButton from 'material-ui/RaisedButton';
-import date from "./AccountPersonalization";
-import moment from "moment";
-import Banner from 'react-js-banner';
 import alert from 'alert'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 export var title = "";
@@ -22,10 +15,7 @@ export var end= "";
 export var myDate = "";
 export var day= new Date();
 
-
-
 export class Form extends Component {
-  //              <p>Your time is: {moment(startDate).format("LL")}</p>
   constructor(props) {
     super(props);
     day = new Date();
@@ -62,12 +52,6 @@ export class Form extends Component {
 
   }
 
-  onTaskSubmit = () => {
-    
-   
-    //date = moment(startDate).format("LL");
-    //console.log(date);
-  }
   render() {
     
     return (

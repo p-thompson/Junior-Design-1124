@@ -8,14 +8,11 @@ import VillageNavBar from './VillageNavBar';
 import { useHistory } from "react-router-dom";
 import './dashboard.css';
 import React, { useEffect, useState } from 'react'
-import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import UserCard from './UserCard'
 import UserCard2 from './UserCard2'
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import { width } from '@mui/system';
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -79,11 +76,8 @@ function Dashboard() {
   const history = useHistory();
   const goToLogin = () => history.push('/');
   //need to define fname as the names which match the search/ want to match/ have already etc.
-  const fname = 'paige';
 
   let notes2 = [{fname: "Paige", lname: "Thompson", note: "hi"}, {fname: "Bob", lname: "Allen", note: "hi"}, {fname: "Sarah", lname: "Fisher", note: "hi"}, {fname: "Dan", lname: "Brown", note: "hi"}];
-
-
     return (
         <div className={classes.root} style = {{overflowY: 'scroll'}}>
             <AppBar position="absolute" color='primary' className={classes.appBar}>
@@ -136,7 +130,6 @@ function Dashboard() {
                     </Grid>
                 </Grid>
         </div>
-    
     );
 }
 export default Dashboard;

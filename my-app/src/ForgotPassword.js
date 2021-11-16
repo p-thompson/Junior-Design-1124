@@ -5,7 +5,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {Grid, Paper, Button} from "@material-ui/core";
 import { useHistory} from "react-router-dom";
-import './Login.css';
 
 function ForgotPassword() {
     const history = useHistory();

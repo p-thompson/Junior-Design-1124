@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import TaskItems from "./TaskItems";
 import "./Tasks.css";
-import FlipMove from "react-flip-move";
 import {title, start, end, day} from "./Form";
 import moment from "moment";
 import { Container } from './Container';
@@ -18,13 +17,6 @@ class Tasks extends Component {
   }
   onSubmit = (event) => {
     event.preventDefault(event);
-   
-    
-    /*
-    event.preventDefault(event);
-    console.log(event.target.name.value);
-    console.log(event.target.mydate.value);
-    */
   };
   addItem(e) {
     var newItem = {

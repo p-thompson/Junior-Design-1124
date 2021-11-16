@@ -12,7 +12,6 @@ import SearchScreen from './SearchScreen';
 import ProfileView from './ProfileView';
 import SpecificProfileView from './SpecificProfileView';
 import SpecificProfileView2 from './SpecificProfileView2';
-import CreateTask from './CreateTask';
 import UpdateAccount from './UpdateAccount';
 ReactDOM.render(
   <BrowserRouter>
@@ -21,7 +20,6 @@ ReactDOM.render(
     <Route path="/forgotpassword" component={ForgotPassword}/>
     <Route path="/searchscreen" component={SearchScreen}/>
     <Route path='/dashboard' component={Dashboard}/>
-    <Route path="/createtask" component={CreateTask}/>
 
     <Route path = '/accountpersonalization' component={AccountPersonalization}/>
     <Route path = '/updateaccount' component={UpdateAccount}/>
@@ -33,7 +31,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

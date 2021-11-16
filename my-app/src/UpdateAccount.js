@@ -46,10 +46,6 @@ function UpdateAccount() {
         }
     }
 
-    const goToAccountPersonalizationChanged = () => {
-        history.push('/accountpersonalization', user2Info);
-    }
-
     const [errorValue, setErrorValue] = useState("")
     const [successValue, setSuccessValue] = useState("")
 
@@ -84,21 +80,6 @@ function UpdateAccount() {
     function applyUpdates() {
         // apply account updates here
         var changed = ValidateCredentials();
-        // const defaultValues = {
-        //     "id": history.location.state.get("user").id,
-        //     "username": tempInfo.get("username"),
-        //     "password": "",
-        //     "firstName": tempInfo.get("fname"),
-        //     "lastName": tempInfo.get("lname"),
-        //     "zipcode": tempInfo.get("zip"),
-        //     "state": tempInfo.get("state"),
-        //     "city": tempInfo.get("city"),
-        //     "street": tempInfo.get("street"),
-        //     "cell": tempInfo.get("cell"),
-        //     "email": tempInfo.get("email"),
-        //     "bio": tempInfo.get("bio"),
-        //     "userType": history.location.state.get("user").userType
-        // };
         const id =  history.location.state.get("user").id
         const type =  history.location.state.get("user").userType
         const defaultValues = {
@@ -132,7 +113,6 @@ function UpdateAccount() {
             })
             setSuccessValue("Account Information Changed!")
         }
-        // goToAccountPersonalizationChanged();
     }
     return (
         <div className="CreateAccount">

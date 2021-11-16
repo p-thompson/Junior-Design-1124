@@ -21,13 +21,6 @@ public class WebService {
     public static TaskService taskService = new TaskService();
     public static Gson g = new Gson();
 
-    // @POST
-    // @Path("/create")
-    // @Consumes(MediaType.APPLICATION_JSON)
-    // @Produces(MediaType.APPLICATION_JSON)
-    // public void createUser(User user) throws SQLException{
-    //     userService.createUser(user);
-    // }
 // ----------------------------- Account Methods ---------------------------------------
     @POST
     @Path("/create")
