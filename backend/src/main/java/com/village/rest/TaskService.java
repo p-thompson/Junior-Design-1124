@@ -1,6 +1,7 @@
 package com.village.rest;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class TaskService {
     private TaskDao taskDao = new TaskDao();
@@ -11,5 +12,13 @@ public class TaskService {
 
     public void removeTask(Task task) throws SQLException {
         taskDao.removeTask(task);
+    }
+
+    public Task getById(int id) throws SQLException {
+        return taskDao.getById(id);
+    }
+
+    public List<Task> getTasksByUsername(String username) throws SQLException {
+        return taskDao.getTasksByUsername(username);
     }
 }
