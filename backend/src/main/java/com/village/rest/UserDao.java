@@ -176,14 +176,17 @@ public class UserDao {
     }
 
     public void deleteRequestByID(int id1, int id2) throws SQLException {
-        // Connection connection = dbConnection.getConnection();
-        // String query = getGeneralRequestQuery();
-        // query = query + "WHERE requests.curr_user = ?";
-        // PreparedStatement statement = connection.prepareStatement(query);
-        // statement.setString(1, (id1 + ""));   
-        // statement.setString(1, (id2 + "")); 
-        // ResultSet rs = statement.executeQuery();
-        // statement.close();
-        // connection.close();
+        Connection connection = dbConnection.getConnection();  
+        String procedureCall = 
+        "CALL remove_requester(" +
+                "?, " +     // 1. id1
+                "?)";       // 2. id2
+        PreparedStatement statement = connection.prepareStatement(procedureCall);
+        statement.setInt(1, id1);
+        statement.setInt(2, id2);
+        
+        statement.execute();
+        statement.close();
+        connection.close();
     }
 }
