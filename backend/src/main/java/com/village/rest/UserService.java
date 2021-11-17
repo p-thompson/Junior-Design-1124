@@ -30,4 +30,8 @@ public class UserService {
     public void deleteRequestByID(int id1, int id2) throws SQLException {
         userDao.deleteRequestByID(id1, id2);
     }
+
+    public void addConnection(int id1, int id2) throws SQLException {
+        userDao.addConnection(id1, id2);
+    }
 }

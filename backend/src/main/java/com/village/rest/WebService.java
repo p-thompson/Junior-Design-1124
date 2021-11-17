@@ -150,4 +150,14 @@ public class WebService {
         Response response = Response.status(200).header("Access-Control-Allow-Origin", "*").build();
         return response;
     }
+
+    @POST
+    @Path("addConnection/{id1}/{id2}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addConnection(@PathParam("id1") int id1, @PathParam("id2") int id2) throws SQLException {
+        Gson g = new Gson();
+        userService.addConnection(id1, id2);
+        Response response = Response.status(200).header("Access-Control-Allow-Origin", "*").build();
+        return response;
+    }
 }

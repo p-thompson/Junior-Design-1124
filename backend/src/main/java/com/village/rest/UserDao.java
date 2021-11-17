@@ -189,4 +189,19 @@ public class UserDao {
         statement.close();
         connection.close();
     }
+
+    public void addConnection(int id1, int id2) throws SQLException {
+        Connection connection = dbConnection.getConnection();  
+        String procedureCall = 
+        "CALL add_connection(" +
+                "?, " +     // 1. id1
+                "?)";       // 2. id2
+        PreparedStatement statement = connection.prepareStatement(procedureCall);
+        statement.setInt(1, id1);
+        statement.setInt(2, id2);
+        
+        statement.execute();
+        statement.close();
+        connection.close();
+    }
 }
