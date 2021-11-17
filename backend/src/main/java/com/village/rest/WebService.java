@@ -2,6 +2,7 @@ package com.village.rest;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ArrayList;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -115,6 +116,37 @@ public class WebService {
         VolunteerServAndAvail servAndAvail = service.getVolunteerServAndAvailByUsername(username);
         Response response = Response.status(200).entity(g.toJson(servAndAvail))
             .header("Access-Control-Allow-Origin", "*").build();
+        return response;
+    }
+
+    // Connection and Request Methods
+    @GET
+    @Path("connections/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findConnectionsByID(@PathParam("id") int id) throws SQLException {
+        Gson g = new Gson();
+        List<User> connections = userService.findConnectionsByID(id);
+        Response response = Response.status(200).entity(g.toJson(connections)).header("Access-Control-Allow-Origin", "*").build();
+        return response;
+    }
+
+    @GET
+    @Path("requests/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findRequestsByID(@PathParam("id") int id) throws SQLException {
+        Gson g = new Gson();
+        List<User> requests = userService.findRequestsByID(id);
+        Response response = Response.status(200).entity(g.toJson(requests)).header("Access-Control-Allow-Origin", "*").build();
+        return response;
+    }
+
+    @DELETE
+    @Path("deleteRequest/{id1}/{id2} ")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteRequestByID(@PathParam("id1") int id1, @PathParam("id2") int id2) throws SQLException {
+        Gson g = new Gson();
+        userService.deleteRequestByID(id1, id2);
+        Response response = Response.status(200).header("Access-Control-Allow-Origin", "*").build();
         return response;
     }
 }

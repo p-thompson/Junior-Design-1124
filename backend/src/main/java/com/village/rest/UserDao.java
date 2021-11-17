@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao {
     private DbConnection dbConnection = new DbConnection();
@@ -89,6 +91,18 @@ public class UserDao {
         return user;
     }
 
+    public User findUserByID(int id) throws SQLException {
+        Connection connection = dbConnection.getConnection();
+        String query = getGeneralUserQuery();
+        query = query + "WHERE app_user.id = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, (id + ""));
+        ResultSet rs = statement.executeQuery();
+        User user = rowMapper.mapRow(rs);
+        statement.close();
+        connection.close();
+        return user;
+    }
 
     private String getGeneralUserQuery() {
         String query = 
@@ -107,5 +121,69 @@ public class UserDao {
             "       user_type" +
             "  FROM app_user ";
         return query;
+    }
+
+    private String getGeneralConnectionQuery() {
+        String query = 
+            "SELECT curr_user," +
+            "       connected" +
+            "  FROM connections ";
+        return query;
+    }
+
+    private String getGeneralRequestQuery() {
+        String query = 
+            "SELECT curr_user," +
+            "       requester" +
+            "  FROM requests ";
+        return query;
+    }
+
+    public List<User> findConnectionsByID(int id) throws SQLException {
+        Connection connection = dbConnection.getConnection();
+        List<User> matchedConnections = new ArrayList<User>();
+        String query = getGeneralConnectionQuery();
+        query = query + "WHERE connections.curr_user = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, (id + ""));   
+        ResultSet rs = statement.executeQuery();
+
+        while (rs.next()) {
+            User user = findUserByID(rs.getInt("connected"));
+            matchedConnections.add(user);
+        }
+        statement.close();
+        connection.close();
+        return matchedConnections;
+    }
+
+    public List<User> findRequestsByID(int id) throws SQLException {
+        Connection connection = dbConnection.getConnection();
+        List<User> matchedRequests = new ArrayList<User>();
+        String query = getGeneralRequestQuery();
+        query = query + "WHERE requests.curr_user = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, (id + ""));   
+        ResultSet rs = statement.executeQuery();
+
+        while (rs.next()) {
+            User user = findUserByID(rs.getInt("requester"));
+            matchedRequests.add(user);
+        }
+        statement.close();
+        connection.close();
+        return matchedRequests;
+    }
+
+    public void deleteRequestByID(int id1, int id2) throws SQLException {
+        // Connection connection = dbConnection.getConnection();
+        // String query = getGeneralRequestQuery();
+        // query = query + "WHERE requests.curr_user = ?";
+        // PreparedStatement statement = connection.prepareStatement(query);
+        // statement.setString(1, (id1 + ""));   
+        // statement.setString(1, (id2 + "")); 
+        // ResultSet rs = statement.executeQuery();
+        // statement.close();
+        // connection.close();
     }
 }
