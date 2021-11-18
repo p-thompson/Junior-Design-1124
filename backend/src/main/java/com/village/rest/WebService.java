@@ -2,7 +2,6 @@ package com.village.rest;
 
 import java.sql.SQLException;
 import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
+
 
 @Path("/account")
 public class WebService {
@@ -103,6 +103,17 @@ public class WebService {
     public Response getTasksByUsername(@PathParam("username") String username) throws SQLException {
         List<Task> tasks = taskService.getTasksByUsername(username);
         Response response = Response.status(200).entity(g.toJson(tasks))
+            .header("Access-Control-Allow-Origin", "*").build();
+        return response;
+    }
+
+    @GET
+    @Path("/volservandavail/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getVolunteerServAndAvailByUsername(@PathParam("username") String username) throws SQLException {
+        VolunteerServAndAvailService service = new VolunteerServAndAvailService();
+        VolunteerServAndAvail servAndAvail = service.getVolunteerServAndAvailByUsername(username);
+        Response response = Response.status(200).entity(g.toJson(servAndAvail))
             .header("Access-Control-Allow-Origin", "*").build();
         return response;
     }

@@ -3,12 +3,9 @@ package com.village.rest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.plaf.synth.SynthRadioButtonMenuItemUI;
 
 public class TaskDao {
     private DbConnection dbConnection = new DbConnection();
