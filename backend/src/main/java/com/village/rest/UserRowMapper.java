@@ -32,7 +32,8 @@ public class UserRowMapper {
             cell = rs.getString("cell");
             email = rs.getString("email");
             bio = rs.getString("bio");
-            if (rs.getString("user_type").equals(UserType.PARENT.name())) {
+            String userTypeString = rs.getString("user_type");
+            if (userTypeString.equals("parent")) {
                 userType = UserType.PARENT;
             } else {
                 userType = UserType.VOLUNTEER;
