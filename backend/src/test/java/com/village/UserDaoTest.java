@@ -2,6 +2,7 @@
 
 // import java.sql.SQLException;
 
+// import com.google.gson.Gson;
 // import com.village.rest.User;
 // import com.village.rest.UserDao;
 // import com.village.rest.UserType;
@@ -44,7 +45,9 @@
 
 //     @Test
 //     public void testFindUserByUsername() throws SQLException {
-//         User user = userDao.findUserByUsername("ab24");
+//         User user = userDao.findUserByUsername("janedoe34");
 //         System.out.println("found " + user.getFirstName() + " " + user.getLastName());
+//         Gson g = new Gson();
+//         System.out.println(g.toJson(user));
 //     }
 //  }
