@@ -42,6 +42,27 @@ CREATE TABLE task (
 	on update cascade
 ) ENGINE=InnoDB;
 
+-- Table Creation for Requests
+DROP TABLE IF EXISTS requests;
+CREATE TABLE requests (
+	curr_user int not null,
+    requester int not null,
+	CONSTRAINT original_user_constraint FOREIGN KEY (curr_user) REFERENCES app_user (id),
+    CONSTRAINT original_requester_constraint FOREIGN KEY (requester) REFERENCES app_user (id)
+	on update cascade
+) ENGINE=InnoDB;
+
+-- Table Creation for Connections
+DROP TABLE IF EXISTS connections;
+CREATE TABLE connections (
+	curr_user int not null,
+    connected int not null,
+	CONSTRAINT original_user_constraint2 FOREIGN KEY (curr_user) REFERENCES app_user (id),
+    CONSTRAINT original_connected_constraint FOREIGN KEY (connected) REFERENCES app_user (id)
+	on update cascade
+) ENGINE=InnoDB;
+
+
 -- Table Creation for Multivalued Attribute Volunteer Days Available
 DROP TABLE IF EXISTS volunteer_days_available;
 CREATE TABLE volunteer_days_available (

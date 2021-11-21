@@ -15,6 +15,7 @@ import UserCard2 from './UserCard2'
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import { width } from '@mui/system';
+import {Alert} from '@mui/material';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -81,7 +82,11 @@ function Dashboard() {
   //need to define fname as the names which match the search/ want to match/ have already etc.
   const fname = 'paige';
 
-  let notes2 = [{fname: "Paige", lname: "Thompson", note: "hi"}, {fname: "Bob", lname: "Allen", note: "hi"}, {fname: "Sarah", lname: "Fisher", note: "hi"}, {fname: "Dan", lname: "Brown", note: "hi"}];
+  // let notes2 = [{fname: "Paige", lname: "Thompson", note: "hi"}, {fname: "Bob", lname: "Allen", note: "hi"}, {fname: "Sarah", lname: "Fisher", note: "hi"}, {fname: "Dan", lname: "Brown", note: "hi"}];
+  // let notesAdd = new Array(history.location.state.get("connections"));
+  // for (var user in history.location.state.get("connections")) {
+  //   notesAdd.push(user);
+  // }
 
 
     return (
@@ -114,7 +119,7 @@ function Dashboard() {
 
                     <Paper elevation={5} style={{marginLeft: 80, padding: 6, width:460, backgroundColor: '#E1EBEE', maxHeight: 275, overflow: 'auto'}}>
                       <GridList cols ={1} style={{justifyContent: 'center'}}>
-                        {notes2.map(note => (
+                        {history.location.state.get("requests").map(note => (
                           <GridListTile key={note.id} style={{padding: 8, width: 400, height: 'auto'}}>
                             <UserCard note={note} handleDelete={handleDelete} />
                           </GridListTile>
@@ -124,7 +129,7 @@ function Dashboard() {
 
                     <Paper elevation={5} style={{marginLeft: 380, padding: 6, width:450, backgroundColor: '#E1EBEE', maxHeight: 275, overflow: 'auto'}}>
                       <GridList cols ={1} style={{justifyContent: 'center'}}>
-                        {notes2.map(note => (
+                        {history.location.state.get("connections").map(note => (
                           <GridListTile key={note.id} style={{padding: 8, width: 400, height: 'auto'}}>
                             <UserCard2 note={note} handleDelete={handleDelete} />
                           </GridListTile>

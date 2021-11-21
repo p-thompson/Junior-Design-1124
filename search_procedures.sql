@@ -30,6 +30,52 @@ where id=i_id;
 END //
 DELIMITER ;
 
+-- -------------------------------- Add Requester ------------------------------------
+DROP PROCEDURE IF EXISTS add_requester;
+DELIMITER //
+CREATE PROCEDURE add_requester(
+       IN i_curr_user int,
+       IN i_requester int
+)
+BEGIN
+INSERT INTO requests (curr_user, requester)
+select i_curr_user, i_requester;
+END //
+DELIMITER ;
+
+Call add_requester(1, 2);
+
+-- -------------------------------- Remove Requester ------------------------------------
+DROP PROCEDURE IF EXISTS remove_requester;
+DELIMITER //
+CREATE PROCEDURE remove_requester(
+       IN i_curr_user int,
+       IN i_requester int
+)
+BEGIN
+DELETE FROM requests
+WHERE curr_user = i_curr_user and requester = i_requester;
+END //
+DELIMITER ;
+
+Call remove_requester(1, 2);
+
+-- -------------------------------- Add Connection ------------------------------------
+DROP PROCEDURE IF EXISTS add_connection;
+DELIMITER //
+CREATE PROCEDURE add_connection(
+       IN i_curr_user int,
+       IN i_connected int
+)
+BEGIN
+INSERT INTO connections (curr_user, connected)
+select i_curr_user, i_connected;
+END //
+DELIMITER ;
+
+Call add_connection(1, 3);
+Call add_connection(1, 4);
+
 
 -- ----------------------------------------------------- Automatic Match Algorithm -------------------------------------------------------
 DROP PROCEDURE IF EXISTS parent_automatic_matching;

@@ -32,7 +32,7 @@ export default function UserCard2({ note, handleDelete }) {
           <CardHeader
             avatar={<Avatar alt="User Profile Image" img src="https://pbs.twimg.com/profile_images/1357505418/stickman_prof_pic.png" />}
             titleTypographyProps={{variant:'h6' }}
-            title={note.fname + " " + note.lname} 
+            title={note.firstName + " " + note.lastName} 
             action={
               <RaisedButton label="View Profile" align="right" variant="contained" backgroundColor='#0077c0' labelColor="white" style={{marginTop: '10px'}} onClick={goToSpecificView}>
               </RaisedButton>
