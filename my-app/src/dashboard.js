@@ -79,15 +79,6 @@ function Dashboard() {
   const classes = useStyles();
   const history = useHistory();
   const goToLogin = () => history.push('/');
-  //need to define fname as the names which match the search/ want to match/ have already etc.
-  const fname = 'paige';
-
-  // let notes2 = [{fname: "Paige", lname: "Thompson", note: "hi"}, {fname: "Bob", lname: "Allen", note: "hi"}, {fname: "Sarah", lname: "Fisher", note: "hi"}, {fname: "Dan", lname: "Brown", note: "hi"}];
-  // let notesAdd = new Array(history.location.state.get("connections"));
-  // for (var user in history.location.state.get("connections")) {
-  //   notesAdd.push(user);
-  // }
-
 
     return (
         <div className={classes.root} style = {{overflowY: 'scroll'}}>

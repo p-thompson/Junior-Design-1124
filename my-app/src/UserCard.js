@@ -16,12 +16,7 @@ import { Avatar } from "material-ui";
 
 export default function UserCard({ note, handleDelete }) {
     const history = useHistory();
-    // need to get the values in order to be able to input them into the cars
-    //I struggled with retrieving those from the database, hence the 'paige thompson's
-    // const fname = history.location.state.get("fname");
-    // const lname = history.location.state.get("lname");
-    // const rating = history.location.state.get("rating");
-    // const bio = history.location.state.get("bio");
+    history.location.state.set("selectedUser", note)
     const goToSpecificView = () => history.push('/profileselection', history.location.state);
 
   return (

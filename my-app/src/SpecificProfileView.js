@@ -52,6 +52,7 @@ function SpecificProfileView() {
     }));
 
     const history = useHistory();
+    let selectedUser = history.location.state.get("selectedUser")
     const returnToProfiles = () => history.goBack();
     const classes = useStyles();
     return (
@@ -74,17 +75,17 @@ function SpecificProfileView() {
             <Paper elevation={5} style={{padding: 50, height: '100vh', width:'90%', margin: "20px auto"}}>
                 <Grid container spacing={24} align='left'>
                     <Grid item xs={6}>
-                        <h1>Paige Thompson</h1>
+                        <h1>{selectedUser.firstName} {selectedUser.lastName}</h1>
                         {<Avatar alt="User Profile Image" img src="https://pbs.twimg.com/profile_images/1357505418/stickman_prof_pic.png" style={{height: 350, width: 350, marginLeft: 75, marginTop: 25}}/>}
                         <h1></h1>
                     </Grid>
                     <Grid item xs={6}>
                         <h1>Bio</h1>
                         <Paper elevation = {5} style={{backgroundColor: '#E1EBEE', overflow: 'auto', height: 'auto', marginTop: 10, padding: 8}}>
-                            <li>Paige Thompson</li>
+                            <li>{selectedUser.firstName} {selectedUser.lastName}</li>
                             <li>Tutor, Caregiver</li>
                             <li>Available from 1:30pm to 4:30pm</li>
-                            <p>Hi my name is Paige! I am so excited to work with your children</p>
+                            <p>{selectedUser.bio}</p>
                         </Paper>
                         <RaisedButton label="Accept Request" labelColor="black" backgroundColor='#AFE1AF' variant="contained" style={{margin: '15px 0', marginLeft:297, marginTop: 20}}/>
                         <RaisedButton label="Deny Request" labelColor="black" backgroundColor='#FF7F7F' variant="contained" style={{margin: '20px 0', marginLeft:305, marginTop: 20}}/>
