@@ -2,9 +2,12 @@
 
 // import java.sql.SQLException;
 
+// import com.google.gson.Gson;
 // import com.village.rest.User;
 // import com.village.rest.UserDao;
 // import com.village.rest.UserType;
+// import com.village.rest.VolunteerServAndAvail;
+// import com.village.rest.VolunteerServAndAvailDao;
 
 // import org.junit.BeforeClass;
 // import org.junit.Test;
@@ -44,7 +47,17 @@
 
 //     @Test
 //     public void testFindUserByUsername() throws SQLException {
-//         User user = userDao.findUserByUsername("ab24");
+//         User user = userDao.findUserByUsername("janedoe34");
 //         System.out.println("found " + user.getFirstName() + " " + user.getLastName());
+//         Gson g = new Gson();
+//         System.out.println(g.toJson(user));
+//     }
+
+//     @Test
+//     public void testGetVolunteerServAndAvail() throws SQLException {
+//         VolunteerServAndAvailDao dao = new VolunteerServAndAvailDao();
+//         VolunteerServAndAvail servAndAvail = dao.getVolunteerServiceAndAvailabilityByUsername("bobwilson88");
+//         Gson g = new Gson();
+//         System.out.println(g.toJson(servAndAvail));
 //     }
 //  }
