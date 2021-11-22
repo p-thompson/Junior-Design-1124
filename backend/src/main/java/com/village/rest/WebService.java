@@ -2,6 +2,8 @@ package com.village.rest;
 
 import java.sql.SQLException;
 import java.util.List;
+
+import javax.persistence.PersistenceContexts;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -107,6 +109,7 @@ public class WebService {
         return response;
     }
 
+    // ------------------------------ Volunteer Service & Availability --------------------------------------
     @GET
     @Path("/volservandavail/{username}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -117,4 +120,42 @@ public class WebService {
             .header("Access-Control-Allow-Origin", "*").build();
         return response;
     }
+
+    @POST
+    @Path("/volavail/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createVolunteerAvailability(@PathParam("username") String username, String availability) throws SQLException {
+        Availability newAvailability = g.fromJson(availability, Availability.class);
+        VolunteerServAndAvailService service = new VolunteerServAndAvailService();
+        service.createVolunteerAvailability(newAvailability, username);
+        Response response = Response.status(200).entity(availability).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS").header("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token").build();
+        return response;
+    }
+
+    @DELETE
+    @Path("/volavail/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response removeVolunteerAvailability(@PathParam("username") String username, String availability) throws SQLException {
+        Availability newAvailability = g.fromJson(availability, Availability.class);
+        VolunteerServAndAvailService service = new VolunteerServAndAvailService();
+        service.removeVolunteerAvailability(newAvailability, username);
+        Response response = Response.status(200).entity(availability).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS").header("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token").build();
+        return response;
+    }
+
+    @PUT
+    @Path("/volserv/")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response alterVolunteerService(String servAndAvail) throws SQLException {
+        VolunteerServAndAvail newServAndAvail = g.fromJson(servAndAvail, VolunteerServAndAvail.class);
+        VolunteerServAndAvailService service = new VolunteerServAndAvailService();
+        service.alterVolunteerServices(newServAndAvail);
+        Response response = Response.status(200).entity(servAndAvail).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "*").header("Access-Control-Allow-Headers", "*").build();
+        return response;
+
+    }
+    
 }

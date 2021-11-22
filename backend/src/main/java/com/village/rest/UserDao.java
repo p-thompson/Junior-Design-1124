@@ -37,6 +37,14 @@ public class UserDao {
         statement.setString(11, user.getUserType().name());
 
         statement.execute();
+
+        if (user.getUserType() == UserType.VOLUNTEER) {
+            String createServEntry = "CALL add_volunteer_services(?)";
+            PreparedStatement servStatement = connection.prepareStatement(createServEntry);
+            servStatement.setString(1, user.getUsername());
+            servStatement.execute();
+        }
+
         statement.close();
         connection.close();
     }

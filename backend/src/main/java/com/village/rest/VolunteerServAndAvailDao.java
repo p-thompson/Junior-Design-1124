@@ -44,4 +44,59 @@ public class VolunteerServAndAvailDao {
         connection.close();
         return volunteerServAndAvail;
     }
+
+    public void createVolunteerAvailability(Availability availability, String username) throws SQLException {
+        Connection connection = dbConnection.getConnection();
+        String procedureCall = "CALL add_volunteer_availability(" +
+            "?, " + //1. username
+            "?, " + //2. day_avail
+            "?, " + //3. time_begin
+            "?)";   //4. time_end
+        PreparedStatement statement = connection.prepareStatement(procedureCall);
+        statement.setString(1, username);
+        statement.setString(2, availability.getDay());
+        statement.setTime(3, availability.getTimeBegin());
+        statement.setTime(4, availability.getTimeEnd());
+
+        statement.execute();
+        statement.close();
+        connection.close();
+    }
+
+    public void removeVolunteerAvailability(Availability availability, String username) throws SQLException {
+        Connection connection = dbConnection.getConnection();
+        String procedureCall = "CALL remove_volunteer_availability(" +
+        "?, " + //1. username
+        "?, " + //2. day_avail
+        "?, " + //3. time_begin
+        "?)";   //4. time_end
+        PreparedStatement statement = connection.prepareStatement(procedureCall);
+        statement.setString(1, username);
+        statement.setString(2, availability.getDay());
+        statement.setTime(3, availability.getTimeBegin());
+        statement.setTime(4, availability.getTimeEnd());
+
+        statement.execute();
+        statement.close();
+        connection.close();   
+    }
+
+    public void alterVolunteerServices(VolunteerServAndAvail servAndAvail) throws SQLException {
+        Connection connection = dbConnection.getConnection();
+        String procedureCall = "CALL alter_volunteer_services(" +
+            "?, " + //1. username
+            "?, " + //2. tutor
+            "?, " + //3. babysit
+            "?)";   //4. transportation
+        PreparedStatement statement = connection.prepareStatement(procedureCall);
+        statement.setString(1, servAndAvail.getUsername());
+        statement.setBoolean(2, servAndAvail.getTutor());
+        statement.setBoolean(3, servAndAvail.getBabysit());
+        statement.setBoolean(4, servAndAvail.getTransportation());
+
+        statement.execute();
+        statement.close();
+        connection.close();
+        
+    }
 }

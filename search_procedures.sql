@@ -57,6 +57,3 @@ and ((task.service = 'babysit' and volunteer_services_provided.babysit = true)
 and parent.username = i_username);
 END //
  DELIMITER ;
-
- CALL parent_automatic_matching('janedoe34');
- select * from app_user;

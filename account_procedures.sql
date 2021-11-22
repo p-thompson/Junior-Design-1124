@@ -92,22 +92,17 @@ where username=i_username and day_avail=i_day_avail and time_begin=i_time_begin 
 END //
 DELIMITER ;
 
--- -------------------------------- Alter Parent Services ------------------------------------
-DROP PROCEDURE IF EXISTS alter_parent_services;
+-- --------------------------------Enter Default Volunteer Services -------------------------------
+DROP PROCEDURE IF EXISTS add_volunteer_services;
 DELIMITER //
-CREATE PROCEDURE alter_parent_services(
-	   IN i_username VARCHAR(20),
-       IN i_tutor boolean,
-       IN i_babysit boolean,
-       IN i_transportation boolean
+CREATE PROCEDURE add_volunteer_services(
+	   IN i_username VARCHAR(20)
 )
 BEGIN
-UPDATE parent_services_needed
-SET tutor=i_tutor, babysit=i_babysit, transportation=i_transportation
-where username=i_username;
+INSERT INTO volunteer_services_provided (username, tutor, babysit, transportation)
+select i_username, false, false, false;
 END //
 DELIMITER ;
-
 -- -------------------------------- Alter Volunteer Services  ------------------------------------
 DROP PROCEDURE IF EXISTS alter_volunteer_services;
 DELIMITER //

@@ -1,8 +1,10 @@
 // package com.village;
 
 // import java.sql.SQLException;
+// import java.sql.Time;
 
 // import com.google.gson.Gson;
+// import com.village.rest.Availability;
 // import com.village.rest.User;
 // import com.village.rest.UserDao;
 // import com.village.rest.UserType;
@@ -60,4 +62,29 @@
 //         Gson g = new Gson();
 //         System.out.println(g.toJson(servAndAvail));
 //     }
-//  }
+
+//     @Test
+//     public void testAddAvailability() throws SQLException {
+//         Availability availability = new Availability("Saturday", Time.valueOf("11:00:00"), Time.valueOf("12:00:00"));
+//         VolunteerServAndAvailDao dao = new VolunteerServAndAvailDao();
+//         dao.createVolunteerAvailability(availability, "annasmith20");
+//     }
+
+//     @Test
+//     public void testRemoveAvailability() throws SQLException {
+//         Availability availability = new Availability("Saturday", Time.valueOf("11:00:00"), Time.valueOf("12:00:00"));
+//         VolunteerServAndAvailDao dao = new VolunteerServAndAvailDao();
+//         dao.removeVolunteerAvailability(availability, "annasmith20");
+//     }
+
+//     @Test
+//     public void testAlterVolunteerServices() throws SQLException {
+//         VolunteerServAndAvail servAndAvail = new VolunteerServAndAvail();
+//         servAndAvail.setUsername("bobwilson88");
+//         servAndAvail.setTutor(true);
+//         servAndAvail.setBabysit(false);
+//         servAndAvail.setTransportation(false);
+//         VolunteerServAndAvailDao dao = new VolunteerServAndAvailDao();
+//         dao.alterVolunteerServices(servAndAvail);
+//     }
+// }

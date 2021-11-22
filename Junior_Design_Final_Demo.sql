@@ -57,7 +57,7 @@ CREATE TABLE volunteer_days_available (
 -- Table Creation for Multivalued Attribute Volunteer Services Provided
 DROP TABLE IF EXISTS volunteer_services_provided;
 CREATE TABLE volunteer_services_provided (
-	username char(15) NOT NULL,
+    username char(15) NOT NULL,
     tutor boolean default false,
     babysit boolean default false,
     transportation boolean default false,

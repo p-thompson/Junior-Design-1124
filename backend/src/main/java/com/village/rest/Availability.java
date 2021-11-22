@@ -8,6 +8,15 @@ public class Availability {
     private Time timeEnd;
 
 
+    public Availability() {
+    }
+
+    public Availability(String day, Time timeBegin, Time timeEnd) {
+        this.day = day;
+        this.timeBegin = timeBegin;
+        this.timeEnd = timeEnd;
+    }
+
     public String getDay() {
         return this.day;
     }
