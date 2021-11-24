@@ -34,4 +34,8 @@ public class UserService {
     public void addConnection(int id1, int id2) throws SQLException {
         userDao.addConnection(id1, id2);
     }
+
+    public void addRequest(int id1, int id2) throws SQLException {
+        userDao.addRequest(id1, id2);
+    }
 }
