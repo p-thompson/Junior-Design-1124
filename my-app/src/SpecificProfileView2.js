@@ -89,8 +89,8 @@ function SpecificProfileView() {
                         </Paper>
                         <h1>Contact Information</h1>
                         <Paper elevation = {5} style={{backgroundColor: '#E1EBEE', overflow: 'auto', height: 'auto', marginTop: 10, padding: 8}}>
-                            <p>Cellphone Number:</p>
-                            <p>Email:</p>
+                            <p>Cellphone Number: {selectedUser2.cell}</p>
+                            <p>Email: {selectedUser2.email}</p>
                         </Paper>
 
                     </Grid>
