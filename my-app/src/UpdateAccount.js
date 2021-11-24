@@ -11,7 +11,7 @@ import {Helmet} from 'react-helmet'
 
 function UpdateAccount() {
     const history = useHistory();
-    const [user2Info, setUser2Info] = useState(new Map([["user", ""], ["connections", ""], ["requests", ""]]));
+    const [user2Info, setUser2Info] = useState(new Map([["user", ""], ["connections", history.location.state.get("connections")], ["requests", history.location.state.get("requests")], ["selectedUser", history.location.state.get("selectedUser")]]));
 
     // set this map to values from the backend to populate the screen with current data
     const username = history.location.state.get("user").username;
@@ -84,21 +84,6 @@ function UpdateAccount() {
     function applyUpdates() {
         // apply account updates here
         var changed = ValidateCredentials();
-        // const defaultValues = {
-        //     "id": history.location.state.get("user").id,
-        //     "username": tempInfo.get("username"),
-        //     "password": "",
-        //     "firstName": tempInfo.get("fname"),
-        //     "lastName": tempInfo.get("lname"),
-        //     "zipcode": tempInfo.get("zip"),
-        //     "state": tempInfo.get("state"),
-        //     "city": tempInfo.get("city"),
-        //     "street": tempInfo.get("street"),
-        //     "cell": tempInfo.get("cell"),
-        //     "email": tempInfo.get("email"),
-        //     "bio": tempInfo.get("bio"),
-        //     "userType": history.location.state.get("user").userType
-        // };
         const id =  history.location.state.get("user").id
         const type =  history.location.state.get("user").userType
         const defaultValues = {
@@ -132,7 +117,6 @@ function UpdateAccount() {
             })
             setSuccessValue("Account Information Changed!")
         }
-        // goToAccountPersonalizationChanged();
     }
     return (
         <div className="CreateAccount">

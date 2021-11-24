@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Login() {
-    const [userInfo, setUserInfo] = useState(new Map([["user", ""], ["connections", ""], ["requests", ""], ["search", ""]]));
+    const [userInfo, setUserInfo] = useState(new Map([["user", ""], ["connections", []], ["requests", []], ["selectedUser", ""]]));
     const history = useHistory();
     const goToCreateAccount = () => history.push('/createaccount');
     const goToForgotPassword = () => history.push('/forgotpassword');
@@ -42,6 +42,11 @@ function Login() {
             .then(res => res.json())
             .then((data) => {
                 setUserInfo(new Map(userInfo.set("user",data)))
+
+                if (data == null) {
+                    setErrorValue("That username does not exist!")
+                    return;
+                }
                 fetch("http://localhost:8080/backend/rest/account/connections/" + data.id)
                 .then(res => res.json())
                 .then((data) => {

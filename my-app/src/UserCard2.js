@@ -22,8 +22,10 @@ export default function UserCard2({ note, handleDelete }) {
     // const lname = history.location.state.get("lname");
     // const rating = history.location.state.get("rating");
     // const bio = history.location.state.get("bio");
-    history.location.state.set("selectedUser2", note)
-    const goToSpecificView = () => history.push('/profileselection2', history.location.state);
+    const goToSpecificView = () => {
+      history.location.state.set("selectedUser", note)
+      history.push('/profileselection2', history.location.state);
+    }
 
   return (
     <div>

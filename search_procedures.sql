@@ -43,7 +43,7 @@ select i_curr_user, i_requester;
 END //
 DELIMITER ;
 
-Call add_requester(1, 2);
+-- Call add_requester(1, 3);
 
 -- -------------------------------- Remove Requester ------------------------------------
 DROP PROCEDURE IF EXISTS remove_requester;

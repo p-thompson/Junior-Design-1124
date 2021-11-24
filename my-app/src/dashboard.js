@@ -70,15 +70,17 @@ function Dashboard() {
   }  
   const [notes, setNotes] = useState([]);
 
-  useEffect(() => {
-    fetch('http://localhost:3000/dashboard')
-      .then(res => res.json())
-      .then(data => setNotes(data))
-  }, [])
+  // useEffect(() => {
+  //   fetch('http://localhost:3000/dashboard')
+  //     .then(res => res.json())
+  //     .then(data => setNotes(data))
+  // }, [])
 
   const classes = useStyles();
   const history = useHistory();
   const goToLogin = () => history.push('/');
+
+  console.log(history.location.state.get("requests"));
 
     return (
         <div className={classes.root} style = {{overflowY: 'scroll'}}>

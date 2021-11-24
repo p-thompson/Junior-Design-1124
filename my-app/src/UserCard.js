@@ -16,9 +16,10 @@ import { Avatar } from "material-ui";
 
 export default function UserCard({ note, handleDelete }) {
     const history = useHistory();
-    history.location.state.set("selectedUser", note)
-    const goToSpecificView = () => history.push('/profileselection', history.location.state);
-
+    const goToSpecificView = () => {
+      history.location.state.set("selectedUser", note)
+      history.push('/profileselection', history.location.state);
+    }
   return (
     <div>
       <MuiThemeProvider>

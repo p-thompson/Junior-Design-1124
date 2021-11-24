@@ -52,7 +52,7 @@ function SpecificProfileView() {
     }));
 
     const history = useHistory();
-    let selectedUser2 = history.location.state.get("selectedUser2");
+    let selectedUser2 = history.location.state.get("selectedUser");
     const returnToProfiles = () => history.goBack();
     const classes = useStyles();
     return (
