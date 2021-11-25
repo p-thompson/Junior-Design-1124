@@ -15,6 +15,13 @@ public class DbConnection {
 
     }
     public static void main(String[] args) {
+        try {
+            Class.forName("com.example.jdbc.Driver");
+        }  catch (Exception e) {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
+        
         /*
         try {
             Connection connection = DriverManager.getConnection(url, username, password);

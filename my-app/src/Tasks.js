@@ -29,7 +29,7 @@ class Tasks extends Component {
   addItem(e) {
     var newItem = {
       text: title,
-      day: moment(day).format("LL"),
+      day: day,
       starty: start,
       key: Date.now()
     };

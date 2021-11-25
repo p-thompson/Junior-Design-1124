@@ -14,13 +14,15 @@ import RaisedButton from 'material-ui/RaisedButton';
 import date from "./AccountPersonalization";
 import moment from "moment";
 import Banner from 'react-js-banner';
-import alert from 'alert'
+import alert from 'alert';
+import {Alert} from '@mui/material';
+//import "./../../backend/src/main/java/com/village/rest/task";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 export var title = "";
 export var start = "";
 export var end= "";
 export var myDate = "";
-export var day= new Date();
+export var day= "";
 
 
 
@@ -28,37 +30,55 @@ export class Form extends Component {
   //              <p>Your time is: {moment(startDate).format("LL")}</p>
   constructor(props) {
     super(props);
-    day = new Date();
+    day = "";
     end = "";
     start = "";
     title = "";
     this.state = {
-      day: new Date(),
+      day: "",
       value: "",
       start: "",
       end: "",
     };
+    this.err = {
+      msg: "",
+      sev: "success",
+      isVis: false,
+      
+      
+    };
     
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.addDate = this.addDate.bind(this);
     
   }
-  addDate(date) {
-    this.setState({day: date});
+  addDate(event) {
+    this.setState({day: event.target.value});
   } 
   handleChange(event) {
     this.setState({value: event.target.value});  
   }
+ 
+  
   handleSubmit(event) {
-    if (title.value != "Choose") {
+    if (this.state.value == "Choose" || !this.state.value) {
+      this.err.isVis = true;
+      this.err.msg = "Please choose a Title";
+      this.err.sev="error";
+    }
+    else if (this.state.value != "Choose") {
       title = this.state.value;
       start = this.state.start;
       end = this.state.end;
       day = this.state.day;
       console.log(this.state.title);
       event.preventDefault();
-      alert('Task Added');
-    }
+      this.err.isVis = true;
+      this.err.sev="success";
+      this.err.msg = "Task Added";
+
+    } 
 
   }
 
@@ -74,35 +94,39 @@ export class Form extends Component {
       <form style={{paddingLeft: 20}} onSubmit={this.handleSubmit}>
         
         <center><h2 style={{paddingBottom: 20, paddingRight: 10}}>Create New Task</h2></center>
+        {this.err.isVis && this.err.msg && <Alert severity={this.err.sev}>{this.err.msg}</Alert>}
         <TableRow style={{width: 100, paddingRight: 0}}>
           <TableCell style={{paddingLeft: 20}}>
             <div  className="form-group">
               <tr>
                 <label style={{paddingLeft: 43}}htmlFor="name">Title: </label>
                 <th style={{paddingLeft: 16}}>
-                  <select style={{width: 170}} value={this.state.value} onChange={this.handleChange}> 
+                  <select style={{width: 208, background:  "#E1EBEE"}} value={this.state.value} onChange={this.handleChange}> 
                     <option value="Choose">Choose...</option>    
-                    <option value="Childcare">Childcare</option>
+                    <option value="Childcare">Babysitting</option>
                     <option value="Tutoring">Tutoring</option>
-                    <option value="Housework">Housework</option>
-                    <option value="Carpooling">Carpooling</option>
+                    <option value="Carpooling">Transportation</option>
                   </select>
                 </th>
               </tr>
             </div>
             <div style={{paddingTop: 10}} className="datepick">
               <tr >
-                <label style={{paddingLeft: 40}} >Date:   </label>
-                <th style={{paddingLeft: 15, width: 220}}>
-                  <FormControl>
-                    <DatePicker 
-                      style={{width:220}}
-                      selected={ this.state.day }
-                      dateFormat="MM/dd/yyyy"
-                      onChange={(e) => this.addDate(e)}
-                    />
-                  </FormControl>
-                </th>
+                  <label style={{paddingLeft: 40}} >Date:   </label>     
+                  <th style={{paddingLeft: 15, width: 220}}>
+                    <select style={{width: 208, background:  "#E1EBEE"}} day={this.state.value} onChange={this.addDate}
+                    
+                    > 
+                      <option day="Choose">Choose...</option>
+                      <option day="Mon">Mondays</option>    
+                      <option day="Tues">Tuesdays</option>
+                      <option day="Weds">Wednesdays</option>
+                      <option day="Thurs">Thursdays</option>
+                      <option day="Fri">Fridays</option>
+                      <option day="Sat">Saturdays</option>
+                      <option day="Sun">Sundays</option>
+                    </select>
+                  </th>
               </tr>
             </div>
             <div style={{paddingTop: 10, paddingBottom: 45, paddingLeft: 40}} className="timepick">

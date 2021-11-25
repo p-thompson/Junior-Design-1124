@@ -108,39 +108,27 @@ function AccountPersonalization() {
   const history = useHistory();
   const goToLogin = () => history.push('/');
 
-  const fname1 = history.location.state.get("user").firstName;
-  const lname1 = history.location.state.get("user").lastName;
+  const fname = history.location.state.get("user").firstName;
+  const lname = history.location.state.get("user").lastName;
   const rating = "5.0";
-  const bio1 = history.location.state.get("user").bio;
+  const bio = history.location.state.get("user").bio;
   const goToCreateTask = () => history.push('/createtask');
   const goToUpdateAccount = () => history.push('/updateaccount');
 
   
   // pull these four fields from the backend
-  const fname = "fname";
-  const lname = "lname";
-  const bio = "bio";
-
+  //const fname = "fname";
+  //const lname = "lname";
+  //const bio = "bio";
+  //const myID = history.location.get("user").id;
 
   const index = 3;
   const [timeRange, setTimeRange] = useState(new Map([["start", ""], ["end", ""]]));
+  
   var obj = {
     table: []
   };
-  const [contacts, setContacts] = useState(data);
-  const [addFormData, setAddFormData] = useState({
-    Row: "",
-    Day: "",
-    start: "",
-    end: "",
-  });
-  const [editFormData, setEditFormData] = useState({
-    row: "",
-    day: "",
-    start: "",
-    end: "",
-  });
-  const [editContactId, setEditContactId] = useState(null);
+
 
  
   const handleAddTime = () => {
@@ -154,12 +142,12 @@ function AccountPersonalization() {
         end: timeRange.get("end"),
       };
   
-      const newContacts = [...contacts, newContact];
-      setContacts(newContacts);
+      
     }
   };
   const triggerText = 'Open form';
   const onSubmit = (event) => {
+    alert("hi");
     event.preventDefault(event);
     console.log(myDate);
     
@@ -227,7 +215,7 @@ function AccountPersonalization() {
             <Grid style={{paddingRight: 0, paddingLeft: 0}}>
 
               <Paper style={{width: 590, height: 510, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
-                <center><h3 className={classes.avail}>Weekly Tasks</h3></center>
+                <center><h3 className={classes.avail}>Open Tasks</h3></center>
                 
                 <Paper className={classes.mytimes} style={{width: 530, height: 412, right: 10, backgroundColor: '#E1EBEE'}}>
                  
