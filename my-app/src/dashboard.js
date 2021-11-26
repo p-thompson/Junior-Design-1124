@@ -100,17 +100,17 @@ function Dashboard() {
                 <Grid container className={classes.container}>
                     <Grid item xs={6} className={classes.grid}>
                         <Paper className={classes.paper} style= {{width: 375, marginLeft: 98, textAlign: 'center', backgroundColor: '#E1EBEE'}}>
-                            <Typography>Users who want to connect with you:</Typography>
+                            <Typography style={{ fontWeight: 600 }}>REQUESTS</Typography>
                         </Paper>
                     </Grid>
 
                     <Grid item xs={6} className={classes.grid}>
                         <Paper className={classes.paper} style= {{width: 375, marginLeft:98, textAlign: 'center', backgroundColor: '#E1EBEE'}}>
-                            <Typography>Users you've connected with:</Typography>
+                            <Typography style={{ fontWeight: 600 }}>CONNECTIONS</Typography>
                         </Paper>
                     </Grid>
 
-                    <Paper elevation={5} style={{marginLeft: 80, padding: 6, width:460, backgroundColor: '#E1EBEE', maxHeight: 275, overflow: 'auto'}}>
+                    <Paper elevation={5} style={{marginLeft: 80, padding: 6, width:460, backgroundColor: '#E1EBEE', maxHeight: 275, minHeight: 275, overflow: 'auto'}}>
                       <GridList cols ={1} style={{justifyContent: 'center'}}>
                         {history.location.state.get("requests").map(note => (
                           <GridListTile key={note.id} style={{padding: 8, width: 400, height: 'auto'}}>
@@ -120,7 +120,7 @@ function Dashboard() {
                       </GridList>
                     </Paper>
 
-                    <Paper elevation={5} style={{marginLeft: 380, padding: 6, width:450, backgroundColor: '#E1EBEE', maxHeight: 275, overflow: 'auto'}}>
+                    <Paper elevation={5} style={{marginLeft: 380, padding: 6, width:450, backgroundColor: '#E1EBEE', maxHeight: 275, minHeight: 275, overflow: 'auto'}}>
                       <GridList cols ={1} style={{justifyContent: 'center'}}>
                         {history.location.state.get("connections").map(note => (
                           <GridListTile key={note.id} style={{padding: 8, width: 400, height: 'auto'}}>

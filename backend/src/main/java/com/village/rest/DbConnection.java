@@ -15,24 +15,6 @@ public class DbConnection {
 
     }
     public static void main(String[] args) {
-        /*
-        try {
-            Connection connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected successfully");
-            String sql = "Call register_parent(?, 'pass1234567890', 'Alyssa', 'Behrend', '30308','GA','Atlanta','77 Ferst Drive', '594-438-8495', 'email@email.com')";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, "sbehrend");
-            statement.execute();
-            ResultSet rs2 = statement.executeQuery("Select username from app_user");
-            while ( rs2.next() ) {
-                String firstName = rs2.getString("username");
-                System.out.println(firstName);
-            }
-        } catch (Exception e) {
-            System.out.println("Error");
-            e.printStackTrace();
-        }
-        */
     }
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);

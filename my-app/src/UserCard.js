@@ -13,6 +13,11 @@ import DeleteOutlined from '@material-ui/icons/DeleteOutlined'
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Avatar } from "material-ui";
+import anna from './photos/anna_smith.jpeg';
+import bob from './photos/bob_wilson.jpeg';
+import jane from './photos/jane_doe.jpg';
+import joe from './photos/joe_brown.jpg';
+import stick from './photos/stickman_prof_pic.png';
 
 export default function UserCard({ note, handleDelete }) {
     const history = useHistory();
@@ -20,13 +25,26 @@ export default function UserCard({ note, handleDelete }) {
       history.location.state.set("selectedUser", note)
       history.push('/profileselection', history.location.state);
     }
+    const whichPhoto = () => {
+      if (note.id == 1) {
+        return jane;
+      } else if (note.id == 2) {
+        return joe;
+      } else if (note.id == 3) {
+        return anna;
+      } else if (note.id == 4) {
+        return bob;
+      } else {
+        return stick;
+      }
+    }
   return (
     <div>
       <MuiThemeProvider>
 
         <Card elevation={1} sx = {{width: 'auto'}}>
           <CardHeader
-            avatar={<Avatar alt="User Profile Image" img src="https://pbs.twimg.com/profile_images/1357505418/stickman_prof_pic.png" />}
+            avatar={<Avatar alt="User Profile Image" img src={whichPhoto()} />}
             titleTypographyProps={{variant:'h6' }}
             title={note.firstName + " " + note.lastName} 
             action={

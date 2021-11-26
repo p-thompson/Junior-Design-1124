@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { useHistory } from "react-router-dom";
+import Paper from "@mui/material/Paper";
 
 const useStyles = makeStyles({
     root: {
@@ -31,10 +32,12 @@ export default function VillageNavBar(props) {
     const goToAccountPersonalization = () => history.push('/accountpersonalization', history.location.state);
     
     return(
+        <Paper style={{backgroundColor: '#E1EBEE'}}>
         <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
         <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} onClick={goToDashboard}/>
         <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} onClick={goToSearch}/>
         <BottomNavigationAction label="Account" value="account" icon={<AccountCircleIcon/>} onClick={goToAccountPersonalization}/>
         </BottomNavigation>
+        </Paper>
     );
 }

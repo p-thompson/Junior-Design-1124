@@ -127,7 +127,7 @@ function UpdateAccount() {
         </Helmet>
         <MuiThemeProvider>
         <Grid>
-            <Paper elevation={5} style={{padding: 50, height: '500px', width:300, margin: "100px auto", overflow: "auto", backgroundColor: '#E1EBEE'}}>
+            <Paper elevation={5} style={{padding: 50, height: '500px', width:320, margin: "100px auto", overflow: "auto", backgroundColor: '#E1EBEE'}}>
                 <Grid align='center'>
                 <h1>Edit Account</h1>
                 </Grid>

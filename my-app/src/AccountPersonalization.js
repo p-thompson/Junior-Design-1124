@@ -222,7 +222,7 @@ function AccountPersonalization() {
             <Grid style={{paddingRight: 0, paddingLeft: 0}}>
 
               <Paper style={{width: 590, height: 510, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
-                <center><h3 className={classes.avail}>Open Tasks</h3></center>
+                <center><h3 className={classes.avail}>WEEKLY TASKS</h3></center>
                 
                 <Paper className={classes.mytimes} style={{width: 530, height: 412, right: 10, backgroundColor: '#E1EBEE'}}>
                  
