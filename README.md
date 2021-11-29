@@ -17,6 +17,11 @@ It Takes a Village is a website designed speicifcally for single parents in the 
 
 ### *Step 1*
 
+## Contributors 
+
+This project was outsourced to Georgia Tech students from Mine Hashas-Degertekin. 
+The students who built this project are: Alyssa Behrend, Meghan Kast, Rachel Mills, Tyler Scaramastro, and Paige Thompson.
+
 ## License
 
 It Takes a Village is licensed under the terms of GPLv2.
