@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import FlipMove from "react-flip-move";
-import {start, chooseday} from "./AccountPersonalization";
-import {myDate} from "./Form";
  
 class TodoItems extends Component {
   

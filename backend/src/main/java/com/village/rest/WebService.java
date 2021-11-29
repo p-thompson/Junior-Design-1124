@@ -2,13 +2,11 @@ package com.village.rest;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.ArrayList;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -16,7 +14,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 
-import java.util.List;
 
 @Path("/account")
 public class WebService {
@@ -24,13 +21,6 @@ public class WebService {
     public static TaskService taskService = new TaskService();
     public static Gson g = new Gson();
 
-    // @POST
-    // @Path("/create")
-    // @Consumes(MediaType.APPLICATION_JSON)
-    // @Produces(MediaType.APPLICATION_JSON)
-    // public void createUser(User user) throws SQLException{
-    //     userService.createUser(user);
-    // }
 // ----------------------------- Account Methods ---------------------------------------
     @POST
     @Path("/create")

@@ -3,7 +3,6 @@ package com.village.rest;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;;
 
 public class DbConnection {
 
@@ -19,10 +18,4 @@ public class DbConnection {
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
     } 
-
-    public void callProcedure(String procedureCall) throws SQLException{
-        Connection connection = DriverManager.getConnection(url, username, password);
-        Statement statement = connection.createStatement();
-        statement.executeQuery(procedureCall);
-    }
 }

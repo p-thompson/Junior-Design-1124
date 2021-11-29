@@ -1,34 +1,18 @@
 import React, { useState, Fragment } from "react";
-import { nanoid } from "nanoid";
 import './AccountPersonalization.css';
 import { Typography } from '@material-ui/core';
 import VillageNavBar from './VillageNavBar';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
 import {Grid, Paper, Select, Avatar, Button, FormControl, InputLabel} from "@material-ui/core";
 import './Login.css';
 import { useHistory} from "react-router-dom";
 import {Helmet} from 'react-helmet'
-import { positions } from '@material-ui/system';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Box from "@material-ui/core/Box";
-import MultiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import LockedOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
-import MenuItem from '@material-ui/core/MenuItem';
-import { Checkbox } from '@material-ui/core';
-import TimeRangePicker from '@wojtekmaj/react-timerange-picker'
 import data from "./mock-data.json";
 import Tasks from "./Tasks"
-import TaskItems from "./TaskItems";
-import { Container } from './Container';
 import { myDate } from "./Form";
 
 
@@ -136,35 +120,6 @@ function AccountPersonalization() {
     end: "",
   });
   const [editContactId, setEditContactId] = useState(null);
-
- 
-  const handleAddTime = () => {
-
-
-    if (timeRange.get('start').length != 0 && timeRange.get('end').length != 0) {
-      const newContact = {
-        row: index,
-        day: document.getElementById("weekday").value,
-        start: timeRange.get("start"),
-        end: timeRange.get("end"),
-      };
-  
-      const newContacts = [...contacts, newContact];
-      setContacts(newContacts);
-    }
-  };
-  const triggerText = 'Open form';
-  const onSubmit = (event) => {
-    event.preventDefault(event);
-    console.log(myDate);
-    
-    /*
-    event.preventDefault(event);
-    console.log(event.target.name.value);
-    console.log(event.target.mydate.value);
-    */
-
-  };
 
   return (
     <div className={classes.root}>

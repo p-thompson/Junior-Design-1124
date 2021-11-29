@@ -46,10 +46,6 @@ function UpdateAccount() {
         }
     }
 
-    const goToAccountPersonalizationChanged = () => {
-        history.push('/accountpersonalization', user2Info);
-    }
-
     const [errorValue, setErrorValue] = useState("")
     const [successValue, setSuccessValue] = useState("")
 

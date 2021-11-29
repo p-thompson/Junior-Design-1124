@@ -8,15 +8,11 @@ import VillageNavBar from './VillageNavBar';
 import { useHistory } from "react-router-dom";
 import './dashboard.css';
 import React, { useEffect, useState } from 'react'
-import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import UserCard from './UserCard'
 import UserCard2 from './UserCard2'
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import { width } from '@mui/system';
-import {Alert} from '@mui/material';
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -70,17 +66,9 @@ function Dashboard() {
   }  
   const [notes, setNotes] = useState([]);
 
-  // useEffect(() => {
-  //   fetch('http://localhost:3000/dashboard')
-  //     .then(res => res.json())
-  //     .then(data => setNotes(data))
-  // }, [])
-
   const classes = useStyles();
   const history = useHistory();
   const goToLogin = () => history.push('/');
-
-  console.log(history.location.state.get("requests"));
 
     return (
         <div className={classes.root} style = {{overflowY: 'scroll'}}>
