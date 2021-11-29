@@ -1,6 +1,7 @@
 # It Takes a Village
 > ### A website to connect single parents with others who can provide services to alleviate the stresses of single parenthood.
 
+It Takes a Village is a website designed speicifcally for single parents in the West End neighborhood of Atlanta to find others within the community who can provide services such as child care, tutoring, and transportation. The website allows parents to create multiple tasks which detail the day and time range they request the service and details the service in need. For example a parent who needs their child picked up from soccer practices on Thursdays at 5:00.
 ##
 
 ## Technologies
@@ -18,6 +19,6 @@
 
 ## License
 
-It Takes a Village 
+It Takes a Village is licensed under the terms of GPLv2.
 
 
