@@ -26,15 +26,24 @@ export default function VillageNavBar(props) {
         setValue(newValue);
     };
     const history = useHistory();
+    const userType = history.location.state.get("user").userType;
+
     const goToDashboard = () => history.push('/dashboard', history.location.state);
     const goToSearch = () => history.push('/searchscreen', history.location.state);
-    const goToAccountPersonalization = () => history.push('/accountpersonalization', history.location.state);
+    function AccountPersonalization () {
+
+        if (userType == 'VOLUNTEER') {
+            history.push('/accountpersonalizationvolunteer', history.location.state);
+        } else {
+            history.push('/accountpersonalization', history.location.state);
+        }
+    }
     
     return(
         <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
         <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} onClick={goToDashboard}/>
         <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} onClick={goToSearch}/>
-        <BottomNavigationAction label="Account" value="account" icon={<AccountCircleIcon/>} onClick={goToAccountPersonalization}/>
+        <BottomNavigationAction label="Account" value="account" icon={<AccountCircleIcon/>} onClick={AccountPersonalization}/>
         </BottomNavigation>
     );
 }

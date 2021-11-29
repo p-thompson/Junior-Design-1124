@@ -8,6 +8,7 @@ import CreateAccount from './CreateAccount';
 import ForgotPassword from './ForgotPassword';
 import Dashboard from './dashboard';
 import AccountPersonalization from './AccountPersonalization';
+import AccountPersonalizationVolunteer from './AccountPersonalizationVolunteer';
 import SearchScreen from './SearchScreen';
 import ProfileView from './ProfileView';
 import SpecificProfileView from './SpecificProfileView';
@@ -23,6 +24,7 @@ ReactDOM.render(
     <Route path="/createtask" component={CreateTask}/>
 
     <Route path = '/accountpersonalization' component={AccountPersonalization}/>
+    <Route path = '/accountpersonalizationvolunteer' component={AccountPersonalizationVolunteer}/>
     <Route path = '/updateaccount' component={UpdateAccount}/>
 
     <Route path='/profiles' component={ProfileView}/>
