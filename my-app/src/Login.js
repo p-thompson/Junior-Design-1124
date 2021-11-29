@@ -78,19 +78,17 @@ function Login() {
                     goToDashboard()
                 }
             }
-            fetch("http://localhost:8080/backend/rest/account/search/" + usernameValue)
-            .then(res => res.json())
-            .then((data) => {
-                setUserInfo(new Map(userInfo.set("user", data)))
-            })
-            .catch(err => {
-                throw new Error(err)
-            })
+            // fetch("http://localhost:8080/backend/rest/account/search/" + usernameValue)
+            // .then(res => res.json())
+            // .then((data) => {
+            //     setUserInfo(new Map(userInfo.set("user", data)))
+            // })
+            // .catch(err => {
+            //     throw new Error(err)
+            // })
         }
     }
 
-    // const {fname, lname} = userInfo;
-    // onClick={() => setUserInfo({fname: "Meg", lname: "K"}
     return (
         <div className="Login">
         {errorValue && <Alert severity="error">{errorValue}</Alert>}
