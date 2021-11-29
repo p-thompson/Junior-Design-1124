@@ -1,4 +1,5 @@
-###It Takes a Village
+# It Takes a Village
+> ### A website to connect single parents with others who can provide services to alleviate the stresses of single parenthood.
 
 ##
 
@@ -13,6 +14,10 @@
 
 ## Installation
 
+### *Step 1*
+
 ## License
+
+It Takes a Village 
 
 
