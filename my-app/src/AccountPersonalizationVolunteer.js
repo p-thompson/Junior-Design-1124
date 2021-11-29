@@ -26,8 +26,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { Checkbox } from '@material-ui/core';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker'
 import data from "./mock-data.json";
-import Tasks from "./Tasks"
-import TaskItems from "./TaskItems";
 import { Container } from './Container';
 import { myDate } from "./Form";
 import EditableRow from "./EditableRow";
@@ -183,6 +181,7 @@ function AccountPersonalizationVolunteer() {
  
   const handleAddTime = () => {
 
+    console.log( document.getElementById("weekday").value);
 
     if (timeRange.get('start').length != 0 && timeRange.get('end').length != 0) {
       const newContact = {
@@ -191,23 +190,14 @@ function AccountPersonalizationVolunteer() {
         start: timeRange.get("start"),
         end: timeRange.get("end"),
       };
+      console.log( document.getElementById("weekday").value);
   
       const newContacts = [...contacts, newContact];
       setContacts(newContacts);
     }
   };
   const triggerText = 'Open form';
-  const onSubmit = (event) => {
-    event.preventDefault(event);
-    console.log(myDate);
-    
-    /*
-    event.preventDefault(event);
-    console.log(event.target.name.value);
-    console.log(event.target.mydate.value);
-    */
 
-  };
 
   return (
     <div className={classes.root}>
@@ -263,7 +253,7 @@ function AccountPersonalizationVolunteer() {
           </TableCell>
           <TableCell align="center" className={classes.myavail} style={{paddingLeft: 0, paddingTop: 85}}>
             <Grid style={{paddingRight: 0, paddingLeft: 0}}>
-              <Paper style={{width: 390, height: 540, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
+              <Paper style={{width: 390, height: 510, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
                 <center><h3 className={classes.avail}>Availability</h3></center>
                 <Paper className={classes.mytimes} style={{width: 347, height: 362, right: 10, backgroundColor: '#E1EBEE'}}>
                   <table style={{borderCollapse: 'separate', borderSpacing: '25px 15px'}}>
@@ -299,7 +289,7 @@ function AccountPersonalizationVolunteer() {
                 </Paper>
                 <TableRow>
                   <TableCell>
-                    <FormControl style={{ paddingBottom: 10, minWidth: 85, paddingLeft: 14, paddingTop: 5, fontSize: 12 }}>          
+                    <FormControl style={{ bottom: 10, paddingBottom: 10, minWidth: 85, paddingLeft: 14, paddingTop: 0, fontSize: 12 }}>          
                     <FormControl>
                     <InputLabel>Day</InputLabel>
                     <Select
@@ -324,8 +314,50 @@ function AccountPersonalizationVolunteer() {
                       <TimeRangePicker 
                         id= "addtime"
                         disableClock= {true}
-                        onChange={(newValue)=>setValue(value)}
-                        value={value}
+                        onChange={(e) => {
+                          if (e != null) {
+                            var newtime  = "";
+                            if (typeof e[0] === 'string') {
+                              newtime = e[0];       
+                              const hour = parseInt(newtime + "");
+                              if (hour < 12) {
+                                newtime += "AM";
+                              } else {
+                                newtime += "PM";
+                              }
+                              if (hour < 10 && hour > 1) {
+                                newtime = newtime.substring(1, newtime.length);;
+                              } else if (hour < 1 && hour >= 0) {
+                                newtime = "12" + newtime.substring(2, newtime.length);
+                              } else if (hour > 12) {
+                                const newhour = (parseInt(newtime.substring(0,2))) - 12;
+                                newtime = (newhour + "") + newtime.substring(2, newtime.length);
+                              }
+                              timeRange.set("start", newtime);
+                            } 
+                            if ( (typeof e[1] === 'string')) {
+                              var newtime  = "";
+                              newtime = e[1];       
+                              const hour = parseInt(newtime + "");
+                              if (hour < 12) {
+                                newtime += " AM";
+                              } else {
+                                newtime += "PM";
+                              }
+                              if (hour < 10 && hour > 1) {
+                                newtime = newtime.substring(1, newtime.length);;
+                              } else if (hour < 1 && hour >= 0) {
+                                newtime = "12" + newtime.substring(2, newtime.length);
+                              } else if (hour > 12) {
+                                const newhour = (parseInt(newtime.substring(0,2))) - 12;
+                                newtime = (newhour + "") + newtime.substring(2, newtime.length);
+                              }
+                              timeRange.set("end", newtime);
+                            }
+  
+                          }
+                          
+                        }}
                         disableClock={true}
                       />
                     </FormControl>
