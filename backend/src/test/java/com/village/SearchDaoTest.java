@@ -1,6 +1,7 @@
 // package com.village;
 
 // import java.sql.SQLException;
+// import java.sql.Time;
 
 // import com.google.gson.Gson;
 // import com.village.rest.SearchDao;
@@ -43,5 +44,20 @@
 //         Gson g = new Gson();
 //         String taskJson = g.toJson(tasks);
 //         System.out.println(taskJson);
+//         System.out.println(ServiceType.BABYSIT.name().toLowerCase());
+//     }
+
+//     @Test
+//     public void testManualSearchForParent() throws SQLException {
+//         Task task = new Task();
+//         task.setDay("Friday");
+//         task.setTimeBegin(Time.valueOf("11:30:00"));
+//         task.setTimeEnd(Time.valueOf("15:00:00"));
+//         task.setService(ServiceType.TRANSPORTATION);
+//         List<User> volunteers = searchDao.manualSearchForParent(task);
+//         Gson g = new Gson();
+//         String volJson = g.toJson(volunteers);
+//         System.out.println(volJson);
+        
 //     }
 // }

@@ -9,4 +9,8 @@ public class SearchService {
     public List<User> automaticSearchForParent(String username) throws SQLException {
         return searchDao.automaticSearchForParent(username);
     }
+
+    public List<User> manualSearchForParent(Task task) throws SQLException {
+        return searchDao.manualSearchForParent(task);
+    }
 }
