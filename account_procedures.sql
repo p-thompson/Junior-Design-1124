@@ -57,7 +57,7 @@ CREATE PROCEDURE alter_info(
 )
 BEGIN
 UPDATE app_user 
-SET username=i_username, pass=Md5(i_password), first_name=i_fname, last_name=i_lname, zip=i_zip, state=i_state, city=i_city, street=i_street, cell=i_cell, email=i_email, bio=i_bio
+SET username=i_username, first_name=i_fname, last_name=i_lname, zip=i_zip, state=i_state, city=i_city, street=i_street, cell=i_cell, email=i_email, bio=i_bio
 where id=i_id;
 END //
 DELIMITER ;

@@ -3,7 +3,7 @@ package com.village.rest;
 import java.sql.SQLException;
 
 public class UserService {
-    private UserDao userDao = new UserDao(new DbConnection(), new UserRowMapper());
+    private UserDao userDao = new UserDao();
 
     public void createUser(User user) throws SQLException {
         userDao.createUser(user);

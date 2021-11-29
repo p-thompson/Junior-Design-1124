@@ -12,7 +12,9 @@ import {Helmet} from 'react-helmet'
 function UpdateAccount() {
     const history = useHistory();
     const [user2Info, setUser2Info] = useState(new Map([["user", ""], ["connections", ""], ["requests", ""]]));
+
     const userType = history.location.state.get("user").userType;
+
     // set this map to values from the backend to populate the screen with current data
     const username = history.location.state.get("user").username;
     const initialValues = new Map(
@@ -40,18 +42,21 @@ function UpdateAccount() {
 
     const goToAccountPersonalization = () => {
         if (successValue != "") {
-            history.push('/accountpersonalization', user2Info);
+            if (userType == 'VOLUNTEER') {
+                history.push('/accountpersonalizationvolunteer', user2Info);
+            } else {
+                history.push('/accountpersonalization', user2Info);
+            }
+            
         } else {
             history.push('/accountpersonalization', history.location.state);
         }
+
     }
 
+
+       
     const goToAccountPersonalizationChanged = () => {
-        history.push('/accountpersonalization', user2Info);
-    }
-
-    function AccountPersonalization () {
-
         if (userType == 'VOLUNTEER') {
             history.push('/accountpersonalizationvolunteer', user2Info);
         } else {
@@ -147,6 +152,7 @@ function UpdateAccount() {
     return (
         <div className="CreateAccount">
         {errorValue && <Alert severity="error">{errorValue}</Alert>}
+        {successValue && <Alert severity="success">{successValue}</Alert>}
         <Helmet>
         <title>ItTakesAVillage</title>
         </Helmet>
@@ -172,7 +178,7 @@ function UpdateAccount() {
                 disableFocusRipple disableRipple style={{ textTransform: "none" }} 
                 variant="text"
                 fullWidth
-                onClick={AccountPersonalization}
+                onClick={goToAccountPersonalization}
                 color="primary">Back to Account</Button>
                 <Button
                 disableFocusRipple disableRipple style={{ textTransform: "none"}}

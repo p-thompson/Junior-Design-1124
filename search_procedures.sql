@@ -39,11 +39,11 @@ CREATE PROCEDURE parent_automatic_matching(
 	   IN i_username varchar(15)
 )
 BEGIN
-SELECT concat(volunteer.first_name, ' ', volunteer.last_name) as volunteer, 
-task.service as service,
-volunteer_days_available.day_avail as day,
-volunteer_days_available.time_begin as start_time, 
-volunteer_days_available.time_end as end_time
+SELECT volunteer.username
+-- task.service as service,
+-- volunteer_days_available.day_avail as day,
+-- volunteer_days_available.time_begin as start_time, 
+-- volunteer_days_available.time_end as end_time
 from app_user as volunteer
 join volunteer_days_available on volunteer.username = volunteer_days_available.username
 join task on volunteer_days_available.day_avail = task.day_avail 
@@ -59,3 +59,4 @@ END //
  DELIMITER ;
 
  CALL parent_automatic_matching('janedoe34');
+ select * from app_user;
