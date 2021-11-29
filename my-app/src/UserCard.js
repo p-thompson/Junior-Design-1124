@@ -13,26 +13,40 @@ import DeleteOutlined from '@material-ui/icons/DeleteOutlined'
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Avatar } from "material-ui";
+import anna from './photos/anna_smith.jpeg';
+import bob from './photos/bob_wilson.jpeg';
+import jane from './photos/jane_doe.jpg';
+import joe from './photos/joe_brown.jpg';
+import stick from './photos/stickman_prof_pic.png';
 
 export default function UserCard({ note, handleDelete }) {
     const history = useHistory();
-    // need to get the values in order to be able to input them into the cars
-    //I struggled with retrieving those from the database, hence the 'paige thompson's
-    // const fname = history.location.state.get("fname");
-    // const lname = history.location.state.get("lname");
-    // const rating = history.location.state.get("rating");
-    // const bio = history.location.state.get("bio");
-    const goToSpecificView = () => history.push('/profileselection', history.location.state);
-
+    const goToSpecificView = () => {
+      history.location.state.set("selectedUser", note)
+      history.push('/profileselection', history.location.state);
+    }
+    const whichPhoto = () => {
+      if (note.id == 1) {
+        return jane;
+      } else if (note.id == 2) {
+        return joe;
+      } else if (note.id == 3) {
+        return anna;
+      } else if (note.id == 4) {
+        return bob;
+      } else {
+        return stick;
+      }
+    }
   return (
     <div>
       <MuiThemeProvider>
 
         <Card elevation={1} sx = {{width: 'auto'}}>
           <CardHeader
-            avatar={<Avatar alt="User Profile Image" img src="https://pbs.twimg.com/profile_images/1357505418/stickman_prof_pic.png" />}
+            avatar={<Avatar alt="User Profile Image" img src={whichPhoto()} />}
             titleTypographyProps={{variant:'h6' }}
-            title={note.fname + " " + note.lname} 
+            title={note.firstName + " " + note.lastName} 
             action={
               <RaisedButton label="View Profile" align="right" variant="contained" backgroundColor='#0077c0' labelColor="white" style={{marginTop: '10px'}} onClick={goToSpecificView}>
               </RaisedButton>

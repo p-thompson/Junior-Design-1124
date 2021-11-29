@@ -104,7 +104,7 @@ function SearchScreen() {
       </AppBar>
       <Grid>
             <Paper elevation={5} style={{padding: 30, height: '600px', width:350, margin: "100px auto", backgroundColor: '#E1EBEE'}}>
-                  <center><h2>What Help is Needed?</h2></center>
+                  <center><h2>Help Needed</h2></center>
                   <FormControl style={{ minWidth: 80 }} align="center" fullWidth>
                     <InputLabel id="demo-simple-select-label">Position</InputLabel>
                     <Select
@@ -118,14 +118,14 @@ function SearchScreen() {
                     </Select>
                   </FormControl>
                   <TableCell></TableCell>
-                  <center><h2>Select Time Range</h2></center>
+                  <center><h2>Time Range</h2></center>
                   <center><TimeRangePicker
                     disableClock= {true}
                     onChange={(newValue) => setValue(value)}
                     value={value}
                   /></center>
                   <TableCell></TableCell>
-                  <center><h2>Select Date</h2></center>
+                  <center><h2>Date</h2></center>
                   <center><DatePicker 
                   value={startDate} 
                   onChange={onChange} 

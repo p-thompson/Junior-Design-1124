@@ -10,11 +10,28 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import './Login.css';
+import anna from './photos/anna_smith.jpeg';
+import bob from './photos/bob_wilson.jpeg';
+import jane from './photos/jane_doe.jpg';
+import joe from './photos/joe_brown.jpg';
+import stick from './photos/stickman_prof_pic.png';
 
 
 
 function SpecificProfileView() {
-
+    const whichPhoto = () => {
+        if (selectedUser2.id == 1) {
+          return jane;
+        } else if (selectedUser2.id == 2) {
+          return joe;
+        } else if (selectedUser2.id == 3) {
+          return anna;
+        } else if (selectedUser2.id == 4) {
+          return bob;
+        } else {
+          return stick;
+        }
+      }
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -52,6 +69,7 @@ function SpecificProfileView() {
     }));
 
     const history = useHistory();
+    let selectedUser2 = history.location.state.get("selectedUser");
     const returnToProfiles = () => history.goBack();
     const classes = useStyles();
     return (
@@ -74,22 +92,22 @@ function SpecificProfileView() {
             <Paper elevation={5} style={{padding: 50, height: '100vh', width:'90%', margin: "20px auto"}}>
                 <Grid container spacing={24} align='left'>
                     <Grid item xs={6}>
-                        <h1>Paige Thompson</h1>
-                        {<Avatar alt="User Profile Image" img src="https://pbs.twimg.com/profile_images/1357505418/stickman_prof_pic.png" style={{height: 350, width: 350, marginLeft: 75, marginTop: 25}}/>}
+                        <h1>{selectedUser2.firstName} {selectedUser2.lastName}</h1>
+                        {<Avatar alt="User Profile Image" img src={whichPhoto()} style={{height: 350, width: 350, marginLeft: 75, marginTop: 25}}/>}
                         <h1></h1>
                     </Grid>
                     <Grid item xs={6}>
                         <h1>Bio</h1>
                         <Paper elevation = {5} style={{backgroundColor: '#E1EBEE', overflow: 'auto', height: 'auto', marginTop: 10, padding: 8}}>
-                            <li>Paige Thompson</li>
+                            <li>{selectedUser2.firstName} {selectedUser2.lastName}</li>
                             <li>Tutor, Caregiver</li>
                             <li>Available from 1:30pm to 4:30pm</li>
-                            <p>Hi my name is Paige! I am so excited to work with your children</p>
+                            <p>{selectedUser2.bio}</p>
                         </Paper>
                         <h1>Contact Information</h1>
                         <Paper elevation = {5} style={{backgroundColor: '#E1EBEE', overflow: 'auto', height: 'auto', marginTop: 10, padding: 8}}>
-                            <p>Cellphone Number:</p>
-                            <p>Email:</p>
+                            <p>Cellphone Number: {selectedUser2.cell}</p>
+                            <p>Email: {selectedUser2.email}</p>
                         </Paper>
 
                     </Grid>
