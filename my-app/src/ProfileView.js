@@ -5,21 +5,44 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {Grid, Paper, Avatar, Button, Box} from "@material-ui/core";
 import VillageNavBar from './VillageNavBar';
 import { useHistory } from "react-router-dom";
+import anna from './photos/anna_smith.jpeg';
+import bob from './photos/bob_wilson.jpeg';
+import jane from './photos/jane_doe.jpg';
+import joe from './photos/joe_brown.jpg';
+import stick from './photos/stickman_prof_pic.png';
 
-function CreateListing() {
+
+function CreateListing(props) {
+
+
+    const whichPhoto = () => {
+        if (props.user.id == 1) {
+          return jane;
+        } else if (props.user.id == 2) {
+          return joe;
+        } else if (props.user.id == 3) {
+          return anna;
+        } else if (props.user.id == 4) {
+          return bob;
+        } else {
+          return stick;
+        }
+      }
     const history = useHistory();
-    const goToSpecificView = () => history.push('/profileselection', history.location.state);
-
+    const goToSpecificView = () => {
+        history.location.state.set("selectedUser", props.user);
+        
+        history.push('/profileselectionsearch', history.location.state);
+    }
+    
     return(
         <Grid container spacing={24} align='left'>
             <Grid item xs={4}>
-                <img src="https://pbs.twimg.com/profile_images/1357505418/stickman_prof_pic.png" width="150" height="150"/>
+                {<Avatar alt="User Profile Image" img src={whichPhoto()} style={{height: 100, width: 100, marginLeft: 75, marginTop: 35}}/>}
             </Grid>
             <Grid item xs={4}>
-                <Paper style={{border: "1px solid black"}}>
-                    <h4>Ani Warden</h4>
-                    <h4>Caregiver</h4>
-                    <h4>Available from 3pm to 6pm</h4>
+                <Paper style={{border: "1px solid black", marginTop: 50, marginBottom:50}}>
+                    <h4>{props.user.firstName} {props.user.lastName}</h4>
                 </Paper>
             </Grid>
             <Grid item xs={4}>
@@ -33,13 +56,21 @@ function CreateListing() {
 }
 
 function ProfileView() {
+
+    const history = useHistory();
+
+    const searchResults = history.location.state.get("search");
+    
+    let itemList=[];
+
+    searchResults.forEach((item, index) => {
+        itemList.push(<CreateListing user={item}/>);
+    })
     return (
       <MuiThemeProvider>
             <Paper elevation={5} style={{padding: 50, height: '100vh', width:'90%', margin: "20px auto"}}>
                 <h1 align="left">Profile List</h1>
-                <CreateListing />
-                <CreateListing />
-                <CreateListing />
+                {itemList}
             </Paper>
       </MuiThemeProvider>
     );

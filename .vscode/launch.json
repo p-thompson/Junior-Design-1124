@@ -37,6 +37,16 @@
             "request": "launch",
             "mainClass": "com.village.DbConnection",
             "projectName": "server"
+        },
+        
+        {
+            "type": "pwa-chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}"
         }
+            
+          
     ]
 }

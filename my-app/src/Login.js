@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Login() {
-    const [userInfo, setUserInfo] = useState(new Map([["user", ""], ["connections", []], ["requests", []], ["selectedUser", ""]]));
+    const [userInfo, setUserInfo] = useState(new Map([["user", ""], ["connections", []], ["requests", []], ["search", ""], ["selectedUser", ""], ['servAndAvail', '']]));
     const history = useHistory();
     const goToCreateAccount = () => history.push('/createaccount');
     const goToForgotPassword = () => history.push('/forgotpassword');
@@ -75,6 +75,14 @@ function Login() {
                 if (passwordValue != userInfo.get("user").password) {
                     setErrorValue("The password input is incorrect!")
                 } else {
+                    fetch("http://localhost:8080/backend/rest/account/search/" + usernameValue)
+                    .then(res => res.json())
+                    .then((data) => {
+                        setUserInfo(new Map(userInfo.set("search", data)))
+                    })
+                    .catch(err => {
+                        throw new Error(err)
+                    })
                     goToDashboard()
                 }
             }
