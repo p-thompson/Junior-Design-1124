@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Login() {
-    const [userInfo, setUserInfo] = useState(new Map([["user", ""], ["connections", ""], ["requests", ""], ["search", ""]]));
+    const [userInfo, setUserInfo] = useState(new Map([["user", ""], ["connections", []], ["requests", []], ["search", ""], ["selectedUser", ""], ['servAndAvail', '']]));
     const history = useHistory();
     const goToCreateAccount = () => history.push('/createaccount');
     const goToForgotPassword = () => history.push('/forgotpassword');
@@ -30,6 +30,7 @@ function Login() {
     const [usernameValue, setUsernameValue] = useState("")
     const [passwordValue, setPasswordValue] = useState("")
     const [errorValue, setErrorValue] = useState("")
+    const [tempID, setID] = useState(0)
 
     function ValidateCredentials() {
         if (usernameValue.length === 0) {
@@ -41,6 +42,28 @@ function Login() {
             .then(res => res.json())
             .then((data) => {
                 setUserInfo(new Map(userInfo.set("user",data)))
+
+                if (data == null) {
+                    setErrorValue("That username does not exist!")
+                    return;
+                }
+                fetch("http://localhost:8080/backend/rest/account/connections/" + data.id)
+                .then(res => res.json())
+                .then((data) => {
+                    setUserInfo(new Map(userInfo.set("connections",data)))
+                })
+                .catch(err => {
+                    throw new Error(err)
+                })
+
+                fetch("http://localhost:8080/backend/rest/account/requests/" + data.id)
+                .then(res => res.json())
+                .then((data) => {
+                    setUserInfo(new Map(userInfo.set("requests",data)))
+                })
+                .catch(err => {
+                    throw new Error(err)
+                })
             })
             .catch(err => {
                 throw new Error(err)
@@ -52,22 +75,20 @@ function Login() {
                 if (passwordValue != userInfo.get("user").password) {
                     setErrorValue("The password input is incorrect!")
                 } else {
+                    fetch("http://localhost:8080/backend/rest/account/search/" + usernameValue)
+                    .then(res => res.json())
+                    .then((data) => {
+                        setUserInfo(new Map(userInfo.set("search", data)))
+                    })
+                    .catch(err => {
+                        throw new Error(err)
+                    })
                     goToDashboard()
                 }
             }
-            fetch("http://localhost:8080/backend/rest/account/search/" + usernameValue)
-            .then(res => res.json())
-            .then((data) => {
-                setUserInfo(new Map(userInfo.set("user", data)))
-            })
-            .catch(err => {
-                throw new Error(err)
-            })
         }
     }
 
-    // const {fname, lname} = userInfo;
-    // onClick={() => setUserInfo({fname: "Meg", lname: "K"}
     return (
         <div className="Login">
         {errorValue && <Alert severity="error">{errorValue}</Alert>}
@@ -102,5 +123,3 @@ function Login() {
 
 }
 export default Login;
-
-

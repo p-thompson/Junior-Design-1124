@@ -8,14 +8,11 @@ import VillageNavBar from './VillageNavBar';
 import { useHistory } from "react-router-dom";
 import './dashboard.css';
 import React, { useEffect, useState } from 'react'
-import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import UserCard from './UserCard'
 import UserCard2 from './UserCard2'
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import { width } from '@mui/system';
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -69,20 +66,9 @@ function Dashboard() {
   }  
   const [notes, setNotes] = useState([]);
 
-  useEffect(() => {
-    fetch('http://localhost:3000/dashboard')
-      .then(res => res.json())
-      .then(data => setNotes(data))
-  }, [])
-
   const classes = useStyles();
   const history = useHistory();
   const goToLogin = () => history.push('/');
-  //need to define fname as the names which match the search/ want to match/ have already etc.
-  const fname = 'paige';
-
-  let notes2 = [{fname: "Paige", lname: "Thompson", note: "hi"}, {fname: "Bob", lname: "Allen", note: "hi"}, {fname: "Sarah", lname: "Fisher", note: "hi"}, {fname: "Dan", lname: "Brown", note: "hi"}];
-
 
     return (
         <div className={classes.root} style = {{overflowY: 'scroll'}}>
@@ -102,19 +88,19 @@ function Dashboard() {
                 <Grid container className={classes.container}>
                     <Grid item xs={6} className={classes.grid}>
                         <Paper className={classes.paper} style= {{width: 375, marginLeft: 98, textAlign: 'center', backgroundColor: '#E1EBEE'}}>
-                            <Typography>Users who want to connect with you:</Typography>
+                            <Typography style={{ fontWeight: 600 }}>REQUESTS</Typography>
                         </Paper>
                     </Grid>
 
                     <Grid item xs={6} className={classes.grid}>
                         <Paper className={classes.paper} style= {{width: 375, marginLeft:98, textAlign: 'center', backgroundColor: '#E1EBEE'}}>
-                            <Typography>Users you've connected with:</Typography>
+                            <Typography style={{ fontWeight: 600 }}>CONNECTIONS</Typography>
                         </Paper>
                     </Grid>
 
-                    <Paper elevation={5} style={{marginLeft: 80, padding: 6, width:460, backgroundColor: '#E1EBEE', maxHeight: 275, overflow: 'auto'}}>
+                    <Paper elevation={5} style={{marginLeft: 80, padding: 6, width:460, backgroundColor: '#E1EBEE', maxHeight: 275, minHeight: 275, overflow: 'auto'}}>
                       <GridList cols ={1} style={{justifyContent: 'center'}}>
-                        {notes2.map(note => (
+                        {history.location.state.get("requests").map(note => (
                           <GridListTile key={note.id} style={{padding: 8, width: 400, height: 'auto'}}>
                             <UserCard note={note} handleDelete={handleDelete} />
                           </GridListTile>
@@ -122,9 +108,9 @@ function Dashboard() {
                       </GridList>
                     </Paper>
 
-                    <Paper elevation={5} style={{marginLeft: 380, padding: 6, width:450, backgroundColor: '#E1EBEE', maxHeight: 275, overflow: 'auto'}}>
+                    <Paper elevation={5} style={{marginLeft: 380, padding: 6, width:450, backgroundColor: '#E1EBEE', maxHeight: 275, minHeight: 275, overflow: 'auto'}}>
                       <GridList cols ={1} style={{justifyContent: 'center'}}>
-                        {notes2.map(note => (
+                        {history.location.state.get("connections").map(note => (
                           <GridListTile key={note.id} style={{padding: 8, width: 400, height: 'auto'}}>
                             <UserCard2 note={note} handleDelete={handleDelete} />
                           </GridListTile>

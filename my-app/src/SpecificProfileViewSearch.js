@@ -18,7 +18,8 @@ import stick from './photos/stickman_prof_pic.png';
 
 
 
-function SpecificProfileView() {
+function SpecificProfileViewSearch() {
+
     const whichPhoto = () => {
         if (selectedUser.id == 1) {
           return jane;
@@ -32,6 +33,7 @@ function SpecificProfileView() {
           return stick;
         }
       }
+
     const useStyles = makeStyles((theme) => ({
         root: {
             display: 'flex',
@@ -68,68 +70,7 @@ function SpecificProfileView() {
     }));
 
     const history = useHistory();
-    const [user2Info, setUser2Info] = useState(new Map([["user", history.location.state.get("user")], ["connections", history.location.state.get("connections")], ["requests", history.location.state.get("requests")], ['search', history.location.state.get("search")], ["selectedUser", history.location.state.get("selectedUser")]]));
-    let selectedUser = history.location.state.get("selectedUser")
-    const currID = history.location.state.get("user").id;
-    const returnToProfiles = () => history.push('/dashboard', user2Info);
-    const classes = useStyles();
-
-    function acceptRequest() {
-        // add connection
-        const requestOptionsAdd = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json'}
-        };
-        fetch("http://localhost:8080/backend/rest/account/addConnection/" + currID + "/" + selectedUser.id, requestOptionsAdd)
-        .then(res => res.json())
-        .then((data) => {
-            setUser2Info(new Map(user2Info.set("connections", data)))
-        })
-        .catch(err => {
-            throw new Error(err)
-        })
-
-        // then delete the request
-        const requestOptions = {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json'}
-        };
-        fetch("http://localhost:8080/backend/rest/account/deleteRequest/" + currID + "/" + selectedUser.id, requestOptions)
-        .then(res => res.json())
-        .then((data) => {
-            setUser2Info(new Map(user2Info.set("requests", data)))
-            console.log(data)
-        })
-        .catch(err => {
-            throw new Error(err)
-        })
-
-        const confirmWindow = window.confirm(
-            "The request has been approved!"
-        )
-    }
-
-    function denyRequest() {
-        const requestOptions = {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json'}
-        };
-        fetch("http://localhost:8080/backend/rest/account/deleteRequest/" + currID + "/" + selectedUser.id, requestOptions)
-        .then(res => res.json())
-        .then((data) => {
-            setUser2Info(new Map(user2Info.set("requests", data)))
-            console.log(data)
-        })
-        .catch(err => {
-            throw new Error(err)
-        })
-
-        const confirmWindow = window.confirm(
-            "The request has been denied"
-        )
-        console.log(user2Info.get("requests"))
-    }
-
+    let selectedUser = history.location.state.get("selectedUser");
     const [ fetching, setFetching ] = useState('');
 
     fetch("http://localhost:8080/backend/rest/account/volservandavail/" + selectedUser.username)
@@ -141,9 +82,8 @@ function SpecificProfileView() {
         .catch(err => {
             throw new Error(err);
         })
-
-
     
+
     var servAndAvail = history.location.state.get("servAndAvail");
 
     function getServices() {
@@ -160,10 +100,9 @@ function SpecificProfileView() {
                 servs.push(<li>Transportation</li>);
             }
         }
-            
+        
         return servs;
     }
-
 
     function getAvailability() {
         servAndAvail = history.location.state.get('servAndAvail');
@@ -186,9 +125,31 @@ function SpecificProfileView() {
         return avails;
     }
 
+    function requestContactInfo() {
+        // add connection
+        const currID = history.location.state.get('user').id;
+        const requestOptionsAdd = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'}
+        };
+        console.log("http://localhost:8080/backend/rest/account/addRequest/" + selectedUser.id + "/" + currID);
+        fetch("http://localhost:8080/backend/rest/account/addRequest/" + selectedUser.id + "/" + currID, requestOptionsAdd)
+        .then((data) => {
+            setFetching('done');
+        })
+        .catch(err => {
+            throw new Error(err)
+        })
+        window.confirm(
+            "Contact information has been successfully requested."
+        )
+    }
+
     var services = getServices();
     var availabilities = getAvailability();
 
+    const returnToProfiles = () => history.goBack();
+    const classes = useStyles();
     return (
         <div>
             <AppBar position="absolute" color='primary' className={classes.appBar}>
@@ -223,8 +184,8 @@ function SpecificProfileView() {
                             {availabilities}
                             <p>{selectedUser.bio}</p>
                         </Paper>
-                        <RaisedButton label="Accept Request" labelColor="black" backgroundColor='#AFE1AF' variant="contained" style={{margin: '15px 0', marginLeft:297, marginTop: 20}}  onClick={acceptRequest}/>
-                        <RaisedButton label="Deny Request" labelColor="black" backgroundColor='#FF7F7F' variant="contained" style={{margin: '20px 0', marginLeft:305, marginTop: 20}}  onClick={denyRequest}/>
+                        <RaisedButton onClick={requestContactInfo} label="Request Connection" labelColor="white" backgroundColor='#0077c0' variant="contained" style={{margin: '15px 0', marginLeft:175, marginTop: 20}}/>
+
                     </Grid>
                     <Grid item>
                         <VillageNavBar page="home"/>
@@ -235,4 +196,4 @@ function SpecificProfileView() {
         </div>
     );
 }
-export default SpecificProfileView;
+export default SpecificProfileViewSearch;

@@ -21,13 +21,6 @@ public class WebService {
     public static TaskService taskService = new TaskService();
     public static Gson g = new Gson();
 
-    // @POST
-    // @Path("/create")
-    // @Consumes(MediaType.APPLICATION_JSON)
-    // @Produces(MediaType.APPLICATION_JSON)
-    // public void createUser(User user) throws SQLException{
-    //     userService.createUser(user);
-    // }
 // ----------------------------- Account Methods ---------------------------------------
     @POST
     @Path("/create")
@@ -115,6 +108,57 @@ public class WebService {
         VolunteerServAndAvail servAndAvail = service.getVolunteerServAndAvailByUsername(username);
         Response response = Response.status(200).entity(g.toJson(servAndAvail))
             .header("Access-Control-Allow-Origin", "*").build();
+        return response;
+    }
+
+    // Connection and Request Methods
+    @GET
+    @Path("connections/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findConnectionsByID(@PathParam("id") int id) throws SQLException {
+        Gson g = new Gson();
+        List<User> connections = userService.findConnectionsByID(id);
+        Response response = Response.status(200).entity(g.toJson(connections)).header("Access-Control-Allow-Origin", "*").build();
+        return response;
+    }
+
+    @GET
+    @Path("requests/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findRequestsByID(@PathParam("id") int id) throws SQLException {
+        Gson g = new Gson();
+        List<User> requests = userService.findRequestsByID(id);
+        Response response = Response.status(200).entity(g.toJson(requests)).header("Access-Control-Allow-Origin", "*").build();
+        return response;
+    }
+
+    @DELETE
+    @Path("deleteRequest/{id1}/{id2}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteRequestByID(@PathParam("id1") int id1, @PathParam("id2") int id2) throws SQLException {
+        Gson g = new Gson();
+        userService.deleteRequestByID(id1, id2);
+        Response response = findRequestsByID(id1);
+        return response;
+    }
+
+    @POST
+    @Path("addConnection/{id1}/{id2}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addConnection(@PathParam("id1") int id1, @PathParam("id2") int id2) throws SQLException {
+        Gson g = new Gson();
+        userService.addConnection(id1, id2);
+        Response response = findConnectionsByID(id1);
+        return response;
+    }
+
+    @POST
+    @Path("addRequest/{id1}/{id2}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addRequest(@PathParam("id1") int id1, @PathParam("id2") int id2) throws SQLException {
+        Gson g = new Gson();
+        userService.addRequest(id1, id2);
+        Response response = Response.status(200).header("Access-Control-Allow-Origin", "*").build();
         return response;
     }
 }

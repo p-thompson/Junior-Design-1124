@@ -3,7 +3,6 @@ package com.village.rest;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;;
 
 public class DbConnection {
 
@@ -15,6 +14,7 @@ public class DbConnection {
 
     }
     public static void main(String[] args) {
+<<<<<<< HEAD
         try {
             Class.forName("com.example.jdbc.Driver");
         }  catch (Exception e) {
@@ -40,14 +40,10 @@ public class DbConnection {
             e.printStackTrace();
         }
         */
+=======
+>>>>>>> 86b1fe78ffb765632d13e1490947b5c6a5ac602b
     }
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
     } 
-
-    public void callProcedure(String procedureCall) throws SQLException{
-        Connection connection = DriverManager.getConnection(url, username, password);
-        Statement statement = connection.createStatement();
-        statement.executeQuery(procedureCall);
-    }
 }

@@ -151,7 +151,6 @@ function AccountPersonalization() {
   const onSubmit = (event) => {
     alert("hi");
     event.preventDefault(event);
-    console.log(myDate);
     
     /*
     event.preventDefault(event);

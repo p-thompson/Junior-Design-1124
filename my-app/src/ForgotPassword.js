@@ -14,7 +14,7 @@ function ForgotPassword() {
     return (
         <MuiThemeProvider>
         <Grid>
-            <Paper elevation={5} style={{padding: 50, height: '400px', width:280, margin: "100px auto", backgroundColor: '#E1EBEE'}}>
+            <Paper elevation={5} style={{padding: 50, height: '550px', width:350, margin: "100px auto", backgroundColor: '#E1EBEE'}}>
                 <h1 align="center">Forgot Your Password?</h1>
                 <h4 align="center">Enter your email address to be sent instructions for resetting your password.</h4>
                 <TextField label='Email Address' hintText='Email Address' required fullWidth/>
