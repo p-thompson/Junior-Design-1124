@@ -27,7 +27,7 @@ While this project does use dependent libraries, these are provided in the It Ta
 
 You can find these under `lib` folder and include: `javax.ws.rs-api-2.1.1.jar` , `junit-4.10.jar`, `mysql-connector-java-8.0.26.jar`.
 
-The last library listed, `mysql-connector-java-8.0.26.jar`, does require further installtion which will be detailed further in Step PUT STEP HERE.
+The last library listed, `mysql-connector-java-8.0.26.jar`, does require further installtion which will be detailed further in Step 4.
 
 
 ### *Step 3: Download Instructions*
