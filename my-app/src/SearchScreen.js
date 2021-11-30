@@ -77,13 +77,30 @@ const useStyles = makeStyles((theme) => ({
 
 
 function SearchScreen() {
-
+  this.state = {
+    day: "",
+    value: "",
+    start: "",
+    end: "",
+    timeBegin: "",
+    timeEnd: "",
+  }
+  
   const classes = useStyles();
   const history = useHistory();
   const goToProfileView = () => history.push('/profiles', history.location.state);
   const goToLogin = () => history.push('/');
   const [startDate, onChange] = useState(new Date());
   const [value, setValue] = useState([new Date(), new Date()]);
+
+  const username = history.location.state.get("user").username;
+  this.handleChange = this.handleChange.bind(this);
+  this.handleSubmit = this.handleSubmit.bind(this);
+  this.addDate = this.addDate.bind(this);
+
+  handleChange(event) {
+    this.setState({value: event.target.value});  
+  }
 
 
   return (
