@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Login() {
-    const [userInfo, setUserInfo] = useState(new Map([["user", ""], ["connections", ""], ["requests", ""], ["search", ""], ["selectedUser", ""]]));
+    const [userInfo, setUserInfo] = useState(new Map([["user", ""], ["connections", []], ["requests", []], ["search", ""], ["selectedUser", ""], ['servAndAvail', '']]));
     const history = useHistory();
     const goToCreateAccount = () => history.push('/createaccount');
     const goToForgotPassword = () => history.push('/forgotpassword');

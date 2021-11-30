@@ -11,7 +11,7 @@ import {Helmet} from 'react-helmet'
 
 function UpdateAccount() {
     const history = useHistory();
-    const [user2Info, setUser2Info] = useState(new Map([["user", ""], ["connections", history.location.state.get("connections")], ["requests", history.location.state.get("requests")], ["selectedUser", history.location.state.get("selectedUser")]]));
+    const [user2Info, setUser2Info] = useState(new Map([["user", ""], ["connections", history.location.state.get("connections")], ["requests", history.location.state.get("requests")], ['search', history.location.state.get('search')], ["selectedUser", history.location.state.get("selectedUser")]]));
 
     // set this map to values from the backend to populate the screen with current data
     const username = history.location.state.get("user").username;
