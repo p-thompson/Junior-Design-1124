@@ -13,6 +13,40 @@ It Takes a Village is a website designed speicifcally for single parents in the 
 - MySQL v8.0.26
 - Apahce Tomcat 9.0.54
 
+## Installation 
+
+### *Step 1*
+Pre-requisites
+
+
+### *Step 2*
+Dependent libraries that must be installed
+
+
+### *Step 3*
+Download instructions
+
+
+
+### *Step 4*
+Build instructions (if needed)
+
+
+
+### *Step 5*
+Installation of actual application
+
+
+
+### *Step 6*
+
+
+
+### *Step 7*
+
+
+## Release Notes
+
 
 ## Contributors 
 
