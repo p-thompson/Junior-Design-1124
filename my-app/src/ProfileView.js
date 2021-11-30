@@ -6,8 +6,6 @@ import {Grid, Paper, Avatar, Button, Box} from "@material-ui/core";
 import VillageNavBar from './VillageNavBar';
 import { useHistory } from "react-router-dom";
 
-
-
 function CreateListing() {
     const history = useHistory();
     const goToSpecificView = () => history.push('/profileselection', history.location.state);

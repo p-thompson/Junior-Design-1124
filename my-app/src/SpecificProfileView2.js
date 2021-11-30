@@ -1,7 +1,6 @@
 // All necessary imports;
 import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
 import {Grid, Paper, Avatar, Button, Box} from "@material-ui/core";
 import VillageNavBar from './VillageNavBar';
 import { useHistory } from "react-router-dom";
@@ -15,8 +14,6 @@ import bob from './photos/bob_wilson.jpeg';
 import jane from './photos/jane_doe.jpg';
 import joe from './photos/joe_brown.jpg';
 import stick from './photos/stickman_prof_pic.png';
-
-
 
 function SpecificProfileView() {
     const whichPhoto = () => {
