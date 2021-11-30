@@ -45,16 +45,6 @@ export class Form extends Component {
       sev: "success",
       isVis: false,
     };
-    /*
-    this.task = {
-      id = 0,
-      usern = "",
-      day = "",
-      begin = "",
-      end: "",
-      type = "",
-    }
-    */
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addDate = this.addDate.bind(this);
@@ -75,12 +65,6 @@ export class Form extends Component {
       "timeEnd": "12:31:00 PM",
       "service": "BABYSIT",
     };
-    /*
-       TUTOR, 
-    BABYSIT,
-    TRANSPORTATION,
-    NOTPROVIDED
-    */
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
@@ -96,23 +80,6 @@ export class Form extends Component {
           throw new Error(err);
       })
   }
- 
-    /*
-    const handleDelete = async (id) => {
-    await fetch('http://localhost:3000/dashboard/' + id, {
-      method: 'DELETE'
-    })
-    const newNotes = notes.filter(note => note.id != id)
-    setNotes(newNotes)
-  }  
-  const [notes, setNotes] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:3000/dashboard')
-      .then(res => res.json())
-      .then(data => setNotes(data))
-  }, [])
-  */
 
   handleSubmit(event) {
     if (this.state.value == "Choose" || !this.state.value) {
@@ -134,10 +101,8 @@ export class Form extends Component {
       start = this.state.time1;
       end = this.state.time2;
       day = this.state.day;
-      //day = day.substring(0, day.length - 1);
       event.preventDefault();
       this.err.isVis = true;
-      //this.handleAddTask();
 
       const myTask = {
         
@@ -147,14 +112,6 @@ export class Form extends Component {
         "timeEnd": this.state.end.substring(0, this.state.end.length - 3) + ":00 " + this.state.end.substring(this.state.end.length - 2, this.state.end.length),
         "service": title.toUpperCase(),
       };
-      /*
-         TUTOR, 
-      BABYSIT,
-      TRANSPORTATION,
-      NOTPROVIDED
-      day.substring(0, day.length - 1)
-      */
-      //console.log(this.state.start.substring(0, start.length - 3) + ":00 " + this.state.start.substring(start.length - 2, start.length));
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
