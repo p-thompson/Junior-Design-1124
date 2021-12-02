@@ -68,4 +68,18 @@ public class TaskDao {
         connection.close();
         return tasks;
     }
+
+    public int getLatestTaskId() throws SQLException {
+        int taskId = 0;
+        Connection connection = dbConnection.getConnection();
+        String query = "SELECT MAX(id) as lastId FROM task";
+        PreparedStatement statement = connection.prepareStatement(query);
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            taskId = rs.getInt("lastId");
+        }
+        statement.close();
+        connection.close();
+        return taskId;
+    }
 }

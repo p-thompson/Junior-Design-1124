@@ -59,13 +59,21 @@ function ProfileView() {
 
     const history = useHistory();
 
-    const searchResults = history.location.state.get("search");
+    var searchResults = [];
+    if (history.location.state.get("searchType") === "manual") {
+      searchResults = history.location.state.get("manSearch");
+    } else {
+      searchResults = history.location.state.get("search");
+    }
     
     let itemList=[];
-
-    searchResults.forEach((item, index) => {
+    if (searchResults.length === 0) {
+      itemList.push(<div>No Results Found</div>);
+    } else {
+      searchResults.forEach((item, index) => {
         itemList.push(<CreateListing user={item}/>);
     })
+    }
     return (
       <MuiThemeProvider>
             <Paper elevation={5} style={{padding: 50, height: '100vh', width:'90%', margin: "20px auto"}}>
