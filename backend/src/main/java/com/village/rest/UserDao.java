@@ -192,16 +192,27 @@ public class UserDao {
 
     public void addConnection(int id1, int id2) throws SQLException {
         Connection connection = dbConnection.getConnection();  
-        String procedureCall = 
+        String procedureCall1 = 
         "CALL add_connection(" +
                 "?, " +     // 1. id1
                 "?)";       // 2. id2
-        PreparedStatement statement = connection.prepareStatement(procedureCall);
-        statement.setInt(1, id1);
-        statement.setInt(2, id2);
+        PreparedStatement statement1 = connection.prepareStatement(procedureCall1);
+        statement1.setInt(1, id1);
+        statement1.setInt(2, id2);
         
-        statement.execute();
-        statement.close();
+        statement1.execute();
+        statement1.close();
+
+        String procedureCall2 = 
+        "CALL add_connection(" +
+                "?, " +     // 1. id2
+                "?)";       // 2. id1
+        PreparedStatement statement2 = connection.prepareStatement(procedureCall2);
+        statement2.setInt(1, id2);
+        statement2.setInt(2, id1);
+        
+        statement2.execute();
+        statement2.close();
         connection.close();
     }
 

@@ -91,10 +91,12 @@ CREATE TABLE volunteer_services_provided (
 -- Insert into App Users
 INSERT INTO app_user VALUES (1,'janedoe34','mypassword','Jane','Doe','30308','GA','Atlanta','15 Tech Lane', '404-444-4444', 'janedoe@gatech.edu', 'My name is Jane. I have two children aged 8 and 9. I am looking for a tutor in math for both of them', 'parent');
 INSERT INTO app_user VALUES (2,'bobwilson88','mypassword2','Bob','Wilson','30308','GA','Atlanta','10 Buzz Drive', '404-888-8888', 'bobwilson@gatech.edu', 'My name is Bob. I am a volunteer who can tutor in math and science.', 'volunteer');
-INSERT INTO app_user VALUES (3,'annasmith20','mypassword3','Anna','Smith','30308','GA','Atlanta','101 Jacket Way', '404-555-5555', 'asmith@gatech.edu', 'My name is Anna. I can tutor in english and I can also babysit and do housework.', 'volunteer');
+INSERT INTO app_user VALUES (3,'annasmith20','mypassword3','Anna','Smith','30308','GA','Atlanta','101 Jacket Way', '404-555-5555', 'asmith@gatech.edu', 'My name is Anna. I can tutor, babysit and transport children to/from school.', 'volunteer');
 INSERT INTO app_user VALUES (4,'joebrown56','mypassword4','Joe','Brown','30308','GA','Atlanta','77 Ferst Drive', '404-999-9999', 'joebrown@gatech.edu', 'My name is Joe Brown. I have one child aged 5 and am looking for someone to watch her while I am at work. 
 							I am also looking for someone to tutor her in english', 'parent');
-INSERT INTO app_user VALUES(5, 'void', '', '','','','','','','','','', 'parent');
+INSERT INTO app_user VALUES (5,'sallyjones13','mypassword8','Sally','Jones','30308','GA','Atlanta','88 Bobby Dodd', '404-999-7777', 'sallyjones@gatech.edu', 'My name is Sally Jones. I can babysit and I can also transport children to/from school.', 'volunteer');
+INSERT INTO app_user VALUES (6,'mikejohn55','mypassword10','Mike','Johnson','30308','GA','Atlanta','99 Spring Street', '404-444-5555', 'mikejohn22@gatech.edu', 'My name is Mike Johnson. I have two children aged 5 and 6. I am looking for someone to tutor them after school.', 'parent');
+INSERT INTO app_user VALUES(7, 'void', '', '','','','','','','','','', 'parent');
 -- Insert into tasks
 INSERT INTO task VALUES (1, 'janedoe34', 'Friday', '11:30', '15:00', 'babysit');
 

@@ -1,6 +1,8 @@
 import React, { useState, Fragment } from "react";
 import './AccountPersonalization.css';
 import { Typography } from '@material-ui/core';
+import Box from '@mui/material/Box'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import VillageNavBar from './VillageNavBar';
 import {Grid, Paper, Select, Avatar, Button, FormControl, InputLabel} from "@material-ui/core";
 import './Login.css';
@@ -14,6 +16,14 @@ import TableRow from "@material-ui/core/TableRow";
 import data from "./mock-data.json";
 import Tasks from "./Tasks"
 import { myDate } from "./Form";
+import RaisedButton from 'material-ui/RaisedButton';
+import anna from './photos/anna_smith.jpeg';
+import bob from './photos/bob_wilson.jpeg';
+import jane from './photos/jane_doe.jpg';
+import joe from './photos/joe_brown.jpg';
+import sally from './photos/sally_jones.jpg';
+import mike from './photos/mike_johnson.jpg';
+import stick from './photos/stickman_prof_pic.png';
 
 
 
@@ -90,6 +100,24 @@ container: {
 function AccountPersonalization() {
   const classes = useStyles();
   const history = useHistory();
+  const id = history.location.state.get("user").id;
+  const whichPhoto = () => {
+    if (id == 1) {
+      return jane;
+    } else if (id == 2) {
+      return joe;
+    } else if (id == 3) {
+      return anna;
+    } else if (id == 4) {
+      return bob;
+    } else if (id == 5) {
+       return sally
+    } else if (id == 6) {
+      return mike
+    } else {
+      return stick;
+    }
+  }
   const goToLogin = () => history.push('/');
 
   const fname = history.location.state.get("user").firstName;
@@ -145,22 +173,23 @@ function AccountPersonalization() {
               <Grid>
                 <Paper style={{width: 350, height: 510}} className={classes.paper} >
                   <Grid className={classes.elems} align='center'>
-                    <Avatar style={{backgroundColor: '#0077c0'}}>
+                  <h1>{fname}'s Profile</h1>
+                    <Avatar alt="User Profile Image" img src={whichPhoto()} style={{ width: 100, height: 100 }} >
 
                     </Avatar>
-                    <Button>Change Profile Picture</Button>
-                    <h1>It Takes a Village</h1>
-                    
+                    <h1></h1>
                     <Paper className={classes.paper}>
-                    <Typography align="left">Name: {fname} {lname}</Typography>
-                      <Typography align="left">Bio: {bio}</Typography>
+                    <Typography align="left" ><strong>Name: </strong> {fname} {lname}</Typography>
+                      <Typography align="left"><strong>Bio: </strong> {bio}</Typography>
                       <Grid>
                         <th><br></br></th>
                       </Grid>
                       <Grid>
                         <th><br></br></th>
                       </Grid>
-                      <Button onClick={goToUpdateAccount}>Edit Account</Button>
+                      <MuiThemeProvider>
+                      <RaisedButton label="Edit Account" backgroundColor='#0077c0' labelColor='white' variant="contained" fullWidth style={{margin: '15px 0'}} onClick={goToUpdateAccount}/>
+                      </MuiThemeProvider>
                       <Grid>
                         <th><br></br></th>
                       </Grid>
