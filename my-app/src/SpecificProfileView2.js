@@ -13,6 +13,8 @@ import anna from './photos/anna_smith.jpeg';
 import bob from './photos/bob_wilson.jpeg';
 import jane from './photos/jane_doe.jpg';
 import joe from './photos/joe_brown.jpg';
+import sally from './photos/sally_jones.jpg';
+import mike from './photos/mike_johnson.jpg';
 import stick from './photos/stickman_prof_pic.png';
 
 function SpecificProfileView() {
@@ -25,6 +27,10 @@ function SpecificProfileView() {
           return anna;
         } else if (selectedUser.id == 4) {
           return bob;
+        } else if (selectedUser.id == 5) {
+           return sally
+        } else if (selectedUser.id == 6) {
+          return mike
         } else {
           return stick;
         }

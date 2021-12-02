@@ -43,7 +43,8 @@ select i_curr_user, i_requester;
 END //
 DELIMITER ;
 
--- Call add_requester(1, 3);
+Call add_requester(1, 5);
+Call add_requester(1, 2);
 
 -- -------------------------------- Remove Requester ------------------------------------
 DROP PROCEDURE IF EXISTS remove_requester;
@@ -58,7 +59,7 @@ WHERE curr_user = i_curr_user and requester = i_requester;
 END //
 DELIMITER ;
 
-Call remove_requester(1, 2);
+-- Call remove_requester(1, 2);
 
 -- -------------------------------- Add Connection ------------------------------------
 DROP PROCEDURE IF EXISTS add_connection;
@@ -73,8 +74,8 @@ select i_curr_user, i_connected;
 END //
 DELIMITER ;
 
-Call add_connection(1, 3);
-Call add_connection(1, 4);
+Call add_connection(3, 6);
+Call add_connection(3, 4);
 
 
 -- ----------------------------------------------------- Automatic Match Algorithm -------------------------------------------------------
