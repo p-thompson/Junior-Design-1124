@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Login() {
-    const [userInfo, setUserInfo] = useState(new Map([["user", ""], ["connections", []], ["requests", []], ["search", ""], ["selectedUser", ""], ['servAndAvail', '']]));
+    const [userInfo, setUserInfo] = useState(new Map([["user", ""], ["connections", []], ["task", []], ["requests", []], ["search", ""], ["selectedUser", ""], ['servAndAvail', '']]));
     const history = useHistory();
     const goToCreateAccount = () => history.push('/createaccount');
     const goToForgotPassword = () => history.push('/forgotpassword');
@@ -51,6 +51,14 @@ function Login() {
                 .then(res => res.json())
                 .then((data) => {
                     setUserInfo(new Map(userInfo.set("connections",data)))
+                })
+                .catch(err => {
+                    throw new Error(err)
+                })
+                fetch("http://localhost:8080/backend/rest/account/task/" + usernameValue)
+                .then(res => res.json())
+                .then((data) => {
+                    setUserInfo(new Map(userInfo.set("task",data)))
                 })
                 .catch(err => {
                     throw new Error(err)

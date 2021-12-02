@@ -30,10 +30,11 @@ import Tasks from "./Tasks"
 import TaskItems from "./TaskItems";
 import { Container } from './Container';
 import { myDate } from "./Form";
+import LoadTasks from "./LoadTasks";
 
 export var myid = 0;
 export var myusername = "";
-
+export var history;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -106,7 +107,7 @@ container: {
 }));
 function AccountPersonalization() {
   const classes = useStyles();
-  const history = useHistory();
+  history = useHistory();
   const goToLogin = () => history.push('/');
   myusername = history.location.state.get("user").username;
   myid = history.location.state.get("user").id;
@@ -116,7 +117,7 @@ function AccountPersonalization() {
   const bio = history.location.state.get("user").bio;
   const goToCreateTask = () => history.push('/createtask');
   const goToUpdateAccount = () => history.push('/updateaccount');
-
+  const [notes, setNotes] = useState([]);
   
   // pull these four fields from the backend
   //const fname = "fname";
@@ -223,6 +224,9 @@ function AccountPersonalization() {
                   <div id="taskcontainer">
                     <Tasks/>
 
+                  </div>
+                  <div>
+                    <LoadTasks></LoadTasks>
                   </div>
                   <tr></tr>
                 </Paper>
