@@ -88,6 +88,9 @@ function SpecificProfileViewSearch() {
 
     function getServices() {
         var servs = []
+        if (selectedUser.userType.toUpperCase() === "VOLUNTEER") {
+            servs.push(<p>Services:</p>)
+        }
         var currUser = servAndAvail;
         if (currUser) {
             if (currUser.tutor) {
@@ -107,6 +110,9 @@ function SpecificProfileViewSearch() {
     function getAvailability() {
         servAndAvail = history.location.state.get('servAndAvail');
         var avails = []
+        if (selectedUser.userType.toUpperCase() === "VOLUNTEER") {
+            avails.push(<p>Availability:</p>)
+        }
         if (servAndAvail) {
             servAndAvail.availability.forEach(e => {
                 var time1 = e.timeBegin.slice(0,5) + e.timeBegin.slice(-2);
@@ -178,9 +184,7 @@ function SpecificProfileViewSearch() {
                         <h1>Bio</h1>
                         <Paper elevation = {5} style={{backgroundColor: '#E1EBEE', overflow: 'auto', height: 'auto', marginTop: 10, padding: 8}}>
                             <p>Name: {selectedUser.firstName} {selectedUser.lastName}</p>
-                            <p>Services: </p>
                             {services}
-                            <p>Available:</p>
                             {availabilities}
                             <p>{selectedUser.bio}</p>
                         </Paper>
