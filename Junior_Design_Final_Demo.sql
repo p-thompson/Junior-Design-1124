@@ -94,6 +94,7 @@ INSERT INTO app_user VALUES (2,'bobwilson88','mypassword2','Bob','Wilson','30308
 INSERT INTO app_user VALUES (3,'annasmith20','mypassword3','Anna','Smith','30308','GA','Atlanta','101 Jacket Way', '404-555-5555', 'asmith@gatech.edu', 'My name is Anna. I can tutor in english and I can also babysit and do housework.', 'volunteer');
 INSERT INTO app_user VALUES (4,'joebrown56','mypassword4','Joe','Brown','30308','GA','Atlanta','77 Ferst Drive', '404-999-9999', 'joebrown@gatech.edu', 'My name is Joe Brown. I have one child aged 5 and am looking for someone to watch her while I am at work. 
 							I am also looking for someone to tutor her in english', 'parent');
+INSERT INTO app_user VALUES(5, 'void', '', '','','','','','','','','', 'parent');
 -- Insert into tasks
 INSERT INTO task VALUES (1, 'janedoe34', 'Friday', '11:30', '15:00', 'babysit');
 

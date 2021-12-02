@@ -30,35 +30,25 @@ public class SearchDao {
         return matchedVolunteers;
     }
 
-    public List<User> manualSearchForParent(Task task) throws SQLException {
+    public List<User> manualSearchForParent() throws SQLException {
         List<User> matchedVolunteers = new ArrayList<User>();
-        String service = task.getService().name().toLowerCase();
-        String serviceQuery = "AND volunteer_services_provided.";
-        if (service.equals("babysit")) {
-            serviceQuery += "babysit = true)";
-        } else if (service.equals("tutor")) {
-            serviceQuery += "tutor = true)";
-        } else if (service.equals("transportation")) {
-            serviceQuery += "transportation = true)";
-        } else {
-            serviceQuery = ")";
-        }
-
-        String query = "SELECT DISTINCT volunteer.username " +
-        "FROM app_user as volunteer " +
-        "JOIN volunteer_days_available ON volunteer.username = volunteer_days_available.username " +
-        "JOIN volunteer_services_provided ON volunteer.username = volunteer_services_provided.username " +
-        "WHERE (volunteer_days_available.time_begin <= ? " +
-        "AND volunteer_days_available.time_end >= ? " +
-        "AND volunteer_days_available.day_avail = ? " +
-        serviceQuery;
+        String query = 
+            "SELECT volunteer.username " +
+            "from app_user as volunteer " +
+            "join volunteer_days_available on volunteer.username = volunteer_days_available.username " +
+            "join task on volunteer_days_available.day_avail = task.day_avail " + 
+            "join volunteer_services_provided on volunteer.username = volunteer_services_provided.username " +
+            "where (volunteer_days_available.time_begin <= task.time_begin " +
+            "and volunteer_days_available.time_end >= task.time_end " +
+            "and ((task.service = 'babysit' and volunteer_services_provided.babysit = true) " +
+                    "or (task.service = 'tutor' and volunteer_services_provided.tutor = true) " +
+                    "or (task.service = 'transportation' and volunteer_services_provided.transportation = true)) " +
+            "and task.id = ?)";
+        
         Connection connection = dbConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
-        statement.setTime(1, task.getTimeBegin());
-        statement.setTime(2, task.getTimeEnd());
-        statement.setString(3, task.getDay());
-        
-
+        TaskDao taskDao = new TaskDao();
+        statement.setInt(1, taskDao.getLatestTaskId());
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
             User user = userDao.findUserByUsername(rs.getString("username"));
