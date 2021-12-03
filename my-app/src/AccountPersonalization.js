@@ -169,7 +169,9 @@ function AccountPersonalization() {
       transform: 'translate(-50%, -50%)',
       width: '470px',
       height: '415px',
+      background:  "#E1EBEE",
     },
+    background:  "#E1EBEE",
  
   };
 
@@ -300,7 +302,9 @@ function AccountPersonalization() {
                       <th>
                       <center><h2 style={{paddingBottom: 20, paddingLeft: 75}}>Create New Task</h2></center>
                       </th>
-                      <th><right><Button style={{width: 5, height: 5}} onClick={closeModal}>X</Button></right></th>
+                      <th><right><Button style={{width: 5, height: 5,position: 'absolute',
+                            right: 0,
+                            top: 15}} onClick={closeModal}>X</Button></right></th>
                       {errorValue && <Alert severity="error">{errorValue}</Alert>}
                       <TableRow style={{width: 100, paddingRight: 0}}>
                         <TableCell style={{paddingLeft: 20}}>
