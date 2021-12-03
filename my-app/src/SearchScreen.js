@@ -89,7 +89,7 @@ function SearchScreen() {
   const goToLogin = () => history.push('/');
   const [startDate, setDate] = useState(new Date());
   const [value, setValue] = useState([new Date(), new Date()]);
-  const [user2Info, setUser2Info] = useState(new Map([["user", history.location.state.get("user")], ["connections", history.location.state.get("connections")], ["requests", history.location.state.get("requests")], ['search', history.location.state.get('search')], ["selectedUser", history.location.state.get("selectedUser")], ["manSearch", []], ["searchType", ""]]));
+  const [user2Info, setUser2Info] = useState(new Map([["user", history.location.state.get("user")], ["connections", history.location.state.get("connections")], ["task", history.location.state.get("task")], ["requests", history.location.state.get("requests")], ['search', history.location.state.get('search')], ["selectedUser", history.location.state.get("selectedUser")], ["manSearch", []], ["searchType", ""]]));
 
   const [tempInfo, setInfo] = useState(new Map([["id", ""],["service", ""], ["timeBegin", ""], ["timeEnd", ""], ["day", ""], ["time1", ""], ["time2", ""]]));
 

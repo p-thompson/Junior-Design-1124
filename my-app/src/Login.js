@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Login() {
-    const [userInfo, setUserInfo] = useState(new Map([["user", ""], ["connections", []], ["task", []], ["requests", []], ["search", ""], ["selectedUser", ""], ['servAndAvail', '']]));
+    const [userInfo, setUserInfo] = useState(new Map([["user", ""], ["connections", "empty"], ["task", []], ["requests", "empty"], ["search", ""], ["selectedUser", ""], ['servAndAvail', '']]));
     const history = useHistory();
     const goToCreateAccount = () => history.push('/createaccount');
     const goToForgotPassword = () => history.push('/forgotpassword');
@@ -38,6 +38,24 @@ function Login() {
         } else if (passwordValue.length === 0) {
             setErrorValue("Please input a password!")
         } else {
+            fetch("http://localhost:8080/backend/rest/account/search/" + usernameValue)
+            .then(res => res.json())
+            .then((data) => {
+                setUserInfo(new Map(userInfo.set("search", data)))
+            })
+            .catch(err => {
+                throw new Error(err)
+            })
+
+            fetch("http://localhost:8080/backend/rest/account/task/" + usernameValue)
+                .then(res => res.json())
+                .then((data) => {
+                    setUserInfo(new Map(userInfo.set("task",data)))
+                })
+                .catch(err => {
+                    throw new Error(err)
+                })
+
             fetch("http://localhost:8080/backend/rest/account/" + usernameValue)
             .then(res => res.json())
             .then((data) => {
@@ -51,14 +69,6 @@ function Login() {
                 .then(res => res.json())
                 .then((data) => {
                     setUserInfo(new Map(userInfo.set("connections",data)))
-                })
-                .catch(err => {
-                    throw new Error(err)
-                })
-                fetch("http://localhost:8080/backend/rest/account/task/" + usernameValue)
-                .then(res => res.json())
-                .then((data) => {
-                    setUserInfo(new Map(userInfo.set("task",data)))
                 })
                 .catch(err => {
                     throw new Error(err)
@@ -79,21 +89,31 @@ function Login() {
 
             if (userInfo.get("user") == null) {
                 setErrorValue("That username does not exist!")
-            } else if (userInfo.get("user") != "") {
+            } else if (userInfo.get("user") != "" && userInfo.get("connections") != "empty") {
                 if (passwordValue != userInfo.get("user").password) {
                     setErrorValue("The password input is incorrect!")
-                } else {
-                    fetch("http://localhost:8080/backend/rest/account/search/" + usernameValue)
-                    .then(res => res.json())
-                    .then((data) => {
-                        setUserInfo(new Map(userInfo.set("search", data)))
-                    })
-                    .catch(err => {
-                        throw new Error(err)
-                    })
+                } else if (userInfo.get("requests") != "empty") {
                     goToDashboard()
                 }
             }
+
+            // if (userInfo.get("user") == null) {
+            //     setErrorValue("That username does not exist!")
+            // } else if (userInfo.get("user") != "") {
+            //     if (passwordValue != userInfo.get("user").password) {
+            //         setErrorValue("The password input is incorrect!")
+            //     } else {
+            //         fetch("http://localhost:8080/backend/rest/account/search/" + usernameValue)
+            //         .then(res => res.json())
+            //         .then((data) => {
+            //             setUserInfo(new Map(userInfo.set("search", data)))
+            //         })
+            //         .catch(err => {
+            //             throw new Error(err)
+            //         })
+            //         goToDashboard()
+            //     }
+            // }
         }
     }
 

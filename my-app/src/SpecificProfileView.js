@@ -74,7 +74,7 @@ function SpecificProfileView() {
     }));
 
     const history = useHistory();
-    const [user2Info, setUser2Info] = useState(new Map([["user", history.location.state.get("user")], ["connections", history.location.state.get("connections")], ["requests", history.location.state.get("requests")], ['search', history.location.state.get("search")], ["selectedUser", history.location.state.get("selectedUser")]]));
+    const [user2Info, setUser2Info] = useState(new Map([["user", history.location.state.get("user")], ["connections", history.location.state.get("connections")],  ["task", history.location.state.get("task")], ["requests", history.location.state.get("requests")], ['search', history.location.state.get("search")], ["selectedUser", history.location.state.get("selectedUser")]]));
     let selectedUser = history.location.state.get("selectedUser")
     const currID = history.location.state.get('user').id;
     const returnToProfiles = () => history.push('/dashboard', user2Info);

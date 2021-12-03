@@ -144,7 +144,7 @@ function AccountPersonalization() {
   const rating = "5.0";
   const bio = history.location.state.get("user").bio;
 
-  const goToUpdateAccount = () => history.push('/updateaccount');
+  const goToUpdateAccount = () => history.push('/updateaccount', history.location.state);
   const [notes, setNotes] = useState([]);
   const index = 3;
   const [timeRange, setTimeRange] = useState(new Map([["timeBegin", ""], ["timeEnd", ""]]));
@@ -287,7 +287,7 @@ function AccountPersonalization() {
             <Grid style={{paddingRight: 0, paddingLeft: 0}}>
 
               <Paper style={{width: 590, height: 510, paddingLeft: 0, backgroundColor: '#E1EBEE'}} className={classes.times}>
-                <center><h3 className={classes.avail}>Open Tasks</h3></center>
+                <center><h3 className={classes.avail}>Weekly Tasks</h3></center>
                 
                 <Paper className={classes.mytimes} style={{width: 530, height: 412, right: 10, backgroundColor: '#E1EBEE'}}>
                  
@@ -312,8 +312,7 @@ function AccountPersonalization() {
                             <tr>
                               <label style={{paddingLeft: 43}}htmlFor="name">Title: </label>
                               <th style={{paddingLeft: 16}}>
-                                <select onChange={event => setFormInfo(new Map(formInfo.set("service", event.target.value)))} style={{width: 208, background:  "#E1EBEE"}} > 
-                                  <option value="Choose">Choose...</option>    
+                                <select onChange={event => setFormInfo(new Map(formInfo.set("service", event.target.value)))} style={{width: 208, background:  "#E1EBEE"}} >   
                                   <option value="Babysit">Babysitting</option>
                                   <option value="Tutor">Tutoring</option>
                                   <option value="Transportation">Transportation</option>
@@ -328,7 +327,6 @@ function AccountPersonalization() {
                                   <select onChange={event => setFormInfo(new Map(formInfo.set("day", event.target.value)))} style={{width: 208, background:  "#E1EBEE"}} 
                                   
                                   > 
-                                    <option day="Choose">Choose...</option>
                                     <option day="Mon">Mondays</option>    
                                     <option day="Tues">Tuesdays</option>
                                     <option day="Weds">Wednesdays</option>
