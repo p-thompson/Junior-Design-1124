@@ -4,6 +4,8 @@ import "./Form";
 import { MuiThemeProvider } from "material-ui/styles";
 import FlipMove from "react-flip-move";
 import { useState } from "react";
+import RaisedButton from 'material-ui/RaisedButton';
+
 /*
 function CreateTask(props) {
   //const title = (props.task.service);
@@ -29,11 +31,25 @@ function CreateTask(props) {
 */
 function LoadTasks() {
   const history = useHistory();
-  const tasks = history.location.state.get("task");
-  const listItems = tasks.map((item) =>
-      <li>{(item.service).substring(0,1) + item.service.toLowerCase().substring(1, (item.service).length) + (item.service.substring(0,1) == "B" ? "ting" : "")} on 
+  //const tasks = history.location.state.get("task");
+  const deleteItem = (item) => {
+    console.log(item.id);
+    const newTasks = history.location.state.get("task").filter(el => el.id != item.id);
+    
+    history.location.state.set(new Map(history.location.state.set("task", newTasks)));
+    console.log(history.location.state.get("task"));
+    /*
+    const newtasks = tasks;
+    const left = newtasks.slice(0, index);
+    const right = newtasks.slice(index + 1, newtasks.length);
+    history.location.state.set(new Map(history.location.state.set("task", left.concat(right))))
+    */
+  }
+  const listItems = history.location.state.get("task").map((item, index) =>
+      <li onClick={() => deleteItem(item)} >{(item.service).substring(0,1) + item.service.toLowerCase().substring(1, (item.service).length) + (item.service.substring(0,1) == "B" ? "ting" : "")} on 
       {" " + (item.day).substring(0,1) + (item.day).substring(1,item.day.length).toLowerCase()} at 
-      {" "  + (item.timeBegin.substring(0,1) != '0' ? item.timeBegin.substring(0,1) : "") + (item.timeBegin).substring(1,5) + (item.timeBegin).substring(8, item.timeBegin.length)}</li>
+      {" "  + (item.timeBegin.substring(0,1) != '0' ? item.timeBegin.substring(0,1) : "") + (item.timeBegin).substring(1,5) + (item.timeBegin).substring(8, item.timeBegin.length)}
+      </li>
   );
 
   return (

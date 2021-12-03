@@ -168,7 +168,7 @@ function AccountPersonalization() {
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       width: '470px',
-      height: '400px',
+      height: '415px',
     },
  
   };
@@ -298,9 +298,9 @@ function AccountPersonalization() {
                     <Modal  style={customStyles} isOpen={show}>
                       <form >
                       <th>
-                      <center><h2 style={{paddingBottom: 20, paddingRight: 10}}>Create New Task</h2></center>
+                      <center><h2 style={{paddingBottom: 20, paddingLeft: 75}}>Create New Task</h2></center>
                       </th>
-                      <th><Button onClick={closeModal}>close</Button></th>
+                      <th><right><Button style={{width: 5, height: 5}} onClick={closeModal}>X</Button></right></th>
                       {errorValue && <Alert severity="error">{errorValue}</Alert>}
                       <TableRow style={{width: 100, paddingRight: 0}}>
                         <TableCell style={{paddingLeft: 20}}>
