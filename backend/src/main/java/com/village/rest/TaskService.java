@@ -21,4 +21,8 @@ public class TaskService {
     public List<Task> getTasksByUsername(String username) throws SQLException {
         return taskDao.getTasksByUsername(username);
     }
+
+    public int getLatestTaskId() throws SQLException {
+        return taskDao.getLatestTaskId();
+    }
 }

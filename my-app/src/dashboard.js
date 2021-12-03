@@ -13,6 +13,7 @@ import UserCard from './UserCard'
 import UserCard2 from './UserCard2'
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import useForceUpdate from 'use-force-update';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -56,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Dashboard() {
-
+  useForceUpdate();
   const handleDelete = async (id) => {
     await fetch('http://localhost:3000/dashboard/' + id, {
       method: 'DELETE'

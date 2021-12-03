@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 public class WebService {
     public static UserService userService = new UserService();
     public static TaskService taskService = new TaskService();
+    public static SearchService searchService = new SearchService();
     public static Gson g = new Gson();
 
 // ----------------------------- Account Methods ---------------------------------------
@@ -60,10 +61,22 @@ public class WebService {
     @Path("search/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response automaticSearchForParent(@PathParam("username") String username) throws SQLException {
-        SearchService searchService = new SearchService();
         List<User> volunteers = searchService.automaticSearchForParent(username);
         Response response = Response.status(200).entity(g.toJson(volunteers))
             .header("Access-Control-Allow-Origin", "*").build();
+        return response;
+    }
+
+    @GET
+    @Path("search/")
+    @Produces(MediaType.APPLICATION_JSON)
+    //@Consumes(MediaType.APPLICATION_JSON)
+    public Response manualSearchForParent() throws SQLException {
+        
+        List<User> volunteers = searchService.manualSearchForParent();
+        //System.out.println(g.toJson(volunteers));
+        Response response = Response.status(200).entity(g.toJson(volunteers))
+        .header("Access-Control-Allow-Origin", "*").build();
         return response;
     }
 
@@ -96,6 +109,16 @@ public class WebService {
     public Response getTasksByUsername(@PathParam("username") String username) throws SQLException {
         List<Task> tasks = taskService.getTasksByUsername(username);
         Response response = Response.status(200).entity(g.toJson(tasks))
+            .header("Access-Control-Allow-Origin", "*").build();
+        return response;
+    }
+
+    @GET
+    @Path("task/latest")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getLatestTaskId() throws SQLException {
+        int taskId = taskService.getLatestTaskId();
+        Response response = Response.status(200).entity(g.toJson(taskId))
             .header("Access-Control-Allow-Origin", "*").build();
         return response;
     }

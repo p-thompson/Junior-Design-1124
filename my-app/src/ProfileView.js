@@ -9,25 +9,31 @@ import anna from './photos/anna_smith.jpeg';
 import bob from './photos/bob_wilson.jpeg';
 import jane from './photos/jane_doe.jpg';
 import joe from './photos/joe_brown.jpg';
+import sally from './photos/sally_jones.jpg';
+import mike from './photos/mike_johnson.jpg';
 import stick from './photos/stickman_prof_pic.png';
 
 
 function CreateListing(props) {
 
 
-    const whichPhoto = () => {
-        if (props.user.id == 1) {
-          return jane;
-        } else if (props.user.id == 2) {
-          return joe;
-        } else if (props.user.id == 3) {
-          return anna;
-        } else if (props.user.id == 4) {
-          return bob;
-        } else {
-          return stick;
-        }
-      }
+  const whichPhoto = () => {
+    if (props.user.id == 1) {
+      return jane;
+    } else if (props.user.id == 2) {
+      return joe;
+    } else if (props.user.id == 3) {
+      return anna;
+    } else if (props.user.id == 4) {
+      return bob;
+    } else if (props.user.id == 5) {
+       return sally
+    } else if (props.user.id == 6) {
+      return mike
+    } else {
+      return stick;
+    }
+  }
     const history = useHistory();
     const goToSpecificView = () => {
         history.location.state.set("selectedUser", props.user);
@@ -59,13 +65,21 @@ function ProfileView() {
 
     const history = useHistory();
 
-    const searchResults = history.location.state.get("search");
+    var searchResults = [];
+    if (history.location.state.get("searchType") === "manual") {
+      searchResults = history.location.state.get("manSearch");
+    } else {
+      searchResults = history.location.state.get("search");
+    }
     
     let itemList=[];
-
-    searchResults.forEach((item, index) => {
+    if (searchResults.length === 0) {
+      itemList.push(<div>No Results Found</div>);
+    } else {
+      searchResults.forEach((item, index) => {
         itemList.push(<CreateListing user={item}/>);
     })
+    }
     return (
       <MuiThemeProvider>
             <Paper elevation={5} style={{padding: 50, height: '100vh', width:'90%', margin: "20px auto"}}>

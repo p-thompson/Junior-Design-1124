@@ -18,7 +18,7 @@ import AppBar from '@material-ui/core/AppBar';
 import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker'
 import moment from 'moment';
-import {$,jQuery} from 'jquery';
+import {$,event,jQuery} from 'jquery';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -77,13 +77,70 @@ const useStyles = makeStyles((theme) => ({
 
 
 function SearchScreen() {
-
   const classes = useStyles();
   const history = useHistory();
-  const goToProfileView = () => history.push('/profiles', history.location.state);
+  const goToProfileView = () => {
+    if (user2Info.get("manSearch") !== []) {
+      history.push('/profiles', user2Info);
+    } else {
+      history.push('/profiles', history.location.state);
+    }
+  }
   const goToLogin = () => history.push('/');
-  const [startDate, onChange] = useState(new Date());
+  const [startDate, setDate] = useState(new Date());
   const [value, setValue] = useState([new Date(), new Date()]);
+  const [user2Info, setUser2Info] = useState(new Map([["user", history.location.state.get("user")], ["connections", history.location.state.get("connections")], ["requests", history.location.state.get("requests")], ['search', history.location.state.get('search')], ["selectedUser", history.location.state.get("selectedUser")], ["manSearch", []], ["searchType", ""]]));
+
+  const [tempInfo, setInfo] = useState(new Map([["id", ""],["service", ""], ["timeBegin", ""], ["timeEnd", ""], ["day", ""], ["time1", ""], ["time2", ""]]));
+
+  function manSearch() {
+    var options = {weekday: 'long'};
+    const tempTask = {
+      "username": "void",
+      "day": new Intl.DateTimeFormat('en-US', options).format(tempInfo.get("day")),
+      "timeBegin": tempInfo.get("timeBegin").substring(0, tempInfo.get("timeBegin").length - 3) + ":00 " + tempInfo.get("timeBegin").substring(tempInfo.get("timeBegin").length - 2, tempInfo.get("timeBegin").length),
+      "timeEnd": tempInfo.get("timeEnd").substring(0, tempInfo.get("timeEnd").length - 3) + ":00 " + tempInfo.get("timeEnd").substring(tempInfo.get("timeEnd").length - 2, tempInfo.get("timeEnd").length),
+      "service": tempInfo.get("service"),
+    }
+
+    history.location.state.set("searchType", "manual");
+    setUser2Info((user2Info.set("searchType", "manual")));
+    // const tempTask = {
+    //   "username": "void",
+    //   "day": "Friday",
+    //   "timeBegin": "11:30:00 AM",
+    //   "timeEnd": "03:00:00 PM",
+    //   "service": "BABYSIT"
+    // }
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(tempTask)
+    };
+    fetch("http://localhost:8080/backend/rest/account/task", requestOptions)
+      .then(res => res.json())
+      .then((data) => {
+          //this.err.msg = "hi";
+          fetch("http://localhost:8080/backend/rest/account/search/")
+            .then(res2 => res2.json())
+            .then((data2) => {
+              setUser2Info(new Map(user2Info.set("manSearch", data2)))
+              goToProfileView();
+          })
+            .catch(err => {
+              throw new Error(err)
+          })
+      })
+      .catch(err => {
+          //console.log(err);
+          throw new Error(err);
+      })
+  }
+  function autoSearch() {
+    history.location.state.set("searchType", "automatic");
+    setUser2Info((user2Info.set("searchType", "automatic")));
+    goToProfileView();
+  }
 
 
   return (
@@ -110,31 +167,104 @@ function SearchScreen() {
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
+                      name="service"
                       autoWidth
+                      onChange={(e) => setInfo(new Map(tempInfo.set("service",e.target.value)))}
                     >
-                      <MenuItem value={10}>Tutoring</MenuItem>
-                      <MenuItem value={20}>Babysitting</MenuItem>
-                      <MenuItem value={30}>Transportation</MenuItem>
+                      <MenuItem value={"TUTOR"}>Tutoring</MenuItem>
+                      <MenuItem value={"BABYSIT"}>Babysitting</MenuItem>
+                      <MenuItem value={"TRANSPORTATION"}>Transportation</MenuItem>
                     </Select>
                   </FormControl>
                   <TableCell></TableCell>
                   <center><h2>Time Range</h2></center>
                   <center><TimeRangePicker
                     disableClock= {true}
-                    onChange={(newValue) => setValue(value)}
                     value={value}
+                    onChange={(e) => {
+                      if (e != null) {
+                        var newtime  = "";
+                        var newtime1 = "";
+                        if (typeof e[0] === 'string') {
+                          newtime = e[0];    
+                         
+                          setInfo(new Map(tempInfo.set("time1", e[0])));
+                          const hour = parseInt(newtime + "");
+                          if (hour < 12) {
+                            newtime += " AM";
+                          } else {
+                            newtime += " PM";
+                          }
+                          newtime1 = newtime;
+                          if (hour < 10 && hour > 1) {
+                            newtime = newtime.substring(1, newtime.length);;
+                          } else if (hour < 1 && hour >= 0) {
+                            newtime = "12" + newtime.substring(2, newtime.length);
+                      
+                          } else if (hour > 12) {
+                            const newhour = (parseInt(newtime.substring(0,2))) - 12;
+                            newtime = (newhour + "") + newtime.substring(2, newtime.length);
+                           
+                          }
+                          setInfo(new Map(tempInfo.set("time1", newtime)));
+                          // this.state.start = newtime;
+                          // this.state.time1 = newtime;
+                          //var zero = "0";
+                          //newtime = zero.concat(newtime);
+                          setInfo(new Map(tempInfo.set("timeBegin", newtime)));
+                         
+                        } 
+          
+                        if ( (typeof e[1] === 'string')) {
+                          newtime = e[1];   
+             
+                          setInfo(new Map(tempInfo.set("time2", e[1])));
+                          const hour = parseInt(newtime + "");
+                          if (hour < 12) {
+                            newtime += " AM";
+                          } else {
+                            newtime += " PM";
+                          }
+                          newtime1 = newtime;
+                          if (hour < 10 && hour > 1) {
+                            newtime = newtime.substring(1, newtime.length);;
+                          } else if (hour < 1 && hour >= 0) {
+                            newtime = "12" + newtime.substring(2, newtime.length);
+                      
+                          } else if (hour > 12) {
+                            const newhour = (parseInt(newtime.substring(0,2))) - 12;
+                            newtime = (newhour + "") + newtime.substring(2, newtime.length);
+                           
+                          }
+                          setInfo(new Map(tempInfo.set("time2", newtime)));
+                          // this.state.start = newtime;
+                          // this.state.time1 = newtime;
+                          var zero = "0";
+                          newtime = zero.concat(newtime);
+                          setInfo(new Map(tempInfo.set("timeEnd", newtime)));
+                          
+                        }
+
+                      }
+                      
+                    }}
                   /></center>
                   <TableCell></TableCell>
                   <center><h2>Date</h2></center>
                   <center><DatePicker 
+                  name="day"
                   value={startDate} 
-                  onChange={onChange} 
+                  onChange={(date) => {
+                    setDate(date)
+                    setInfo(new Map(tempInfo.set("day",date)))
+                    }
+                  } 
                  /></center>
                   <TableCell></TableCell>
                   {/* // TODO change these buttons to be different based on profile type (different names and functionality) */}
-                  <RaisedButton label="Enter" align="center" variant="contained" backgroundColor='#0077c0' labelColor="white"  fullWidth style={{margin: '15px 0'}} onClick={goToProfileView}>
+                  <RaisedButton label="Enter" align="center" variant="contained" backgroundColor='#0077c0' labelColor="white"  fullWidth style={{margin: '15px 0'}} onClick={manSearch}>
                   </RaisedButton>
-                    <RaisedButton label="Automatic Match" align="center" variant="contained" backgroundColor='#0077c0' labelColor="white" fullWidth style={{margin: '15px 0'}} onClick={goToProfileView}>
+                    <RaisedButton label="Automatic Match" align="center" variant="contained" backgroundColor='#0077c0' labelColor="white" fullWidth style={{margin: '15px 0'}} onClick={autoSearch}>
                     </RaisedButton>
             </Paper>
         </Grid>

@@ -29,7 +29,7 @@ function LoadTasks({ note}) {
   const history = useHistory();
   const tasks = history.location.state.get("task");
   //const [itemList, setItemList] = useState([]);
-  let itemList = []; 
+  const [itemList, setItemList] = useState([]);
   tasks.forEach((item, index) => {
     itemList.push(<CreateTask task={item}/>);
     //console.log(item);
