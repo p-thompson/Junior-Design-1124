@@ -194,6 +194,7 @@ function AccountPersonalization() {
       setErr(new Map(err.set("msg", "Please choose a Title")));
       setErr(new Map(err.set("sev", "error")));
       */
+      
     } else if (formInfo.get("day") == "Choose" || !formInfo.get("day") ) {
       console.log("fix day");
       /*
@@ -211,7 +212,29 @@ function AccountPersonalization() {
       */
     }
     else {
-      console.log("hi");
+      const myTask = {
+        
+        "username": myusername,
+        "day": formInfo.get("day").substring(0, formInfo.get("day").length - 1).toUpperCase(),
+        "timeBegin": formInfo.get("start").substring(0, formInfo.get("start").length - 3) + ":00 " + formInfo.get("start").substring(formInfo.get("start").length - 2, formInfo.get("start").length),
+        "timeEnd": formInfo.get("end").substring(0, formInfo.get("end").length - 3) + ":00 " + formInfo.get("end").substring(formInfo.get("end").length - 2, formInfo.get("end").length),
+        "service": formInfo.get("service").toUpperCase(),
+      };
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(myTask)
+      };
+      fetch("http://localhost:8080/backend/rest/account/task", requestOptions)
+        .then(res => res.json())
+        .then((data) => {
+            this.err.msg = "hi";
+        })
+        .catch(err => {
+            console.log(err);
+            //throw new Error(err);
+        })
+        console.log("added");
     }
 
   };
@@ -360,7 +383,7 @@ function AccountPersonalization() {
                                           //this.state.time1 = newtime;
                                           var zero = "0";
                                           setFormInfo(new Map(formInfo.set("start",zero.concat(newtime))));
-                                          //this.state.start = zero.concat(this.state.start);
+                                          //formInfo.get("start") = zero.concat(formInfo.get("start"));
                                         
                                         } 
                           
@@ -386,7 +409,7 @@ function AccountPersonalization() {
                                           //this.state.time2 = newtime;
                                           var zero = "0";
                                           setFormInfo(new Map(formInfo.set("end",zero.concat(newtime))));
-                                          //this.state.end = zero.concat(this.state.end);
+                                          //formInfo.get("end") = zero.concat(formInfo.get("end"));
                                           
                                           
                                         }
