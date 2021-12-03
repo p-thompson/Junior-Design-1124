@@ -32,12 +32,14 @@ function CreateTask(props) {
 function LoadTasks() {
   const history = useHistory();
   //const tasks = history.location.state.get("task");
+  var [listItems, setListItems] = useState([]);
   const deleteItem = (item) => {
     console.log(item.id);
     const newTasks = history.location.state.get("task").filter(el => el.id != item.id);
     
     history.location.state.set(new Map(history.location.state.set("task", newTasks)));
     console.log(history.location.state.get("task"));
+    setListItems(history.location.state.get("task"));
     /*
     const newtasks = tasks;
     const left = newtasks.slice(0, index);
@@ -45,7 +47,7 @@ function LoadTasks() {
     history.location.state.set(new Map(history.location.state.set("task", left.concat(right))))
     */
   }
-  const listItems = history.location.state.get("task").map((item, index) =>
+  listItems = history.location.state.get("task").map((item, index) =>
       <li onClick={() => deleteItem(item)} >{(item.service).substring(0,1) + item.service.toLowerCase().substring(1, (item.service).length) + (item.service.substring(0,1) == "B" ? "ting" : "")} on 
       {" " + (item.day).substring(0,1) + (item.day).substring(1,item.day.length).toLowerCase()} at 
       {" "  + (item.timeBegin.substring(0,1) != '0' ? item.timeBegin.substring(0,1) : "") + (item.timeBegin).substring(1,5) + (item.timeBegin).substring(8, item.timeBegin.length)}
