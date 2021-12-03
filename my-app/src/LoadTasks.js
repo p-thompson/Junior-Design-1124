@@ -4,42 +4,44 @@ import "./Form";
 import { MuiThemeProvider } from "material-ui/styles";
 import FlipMove from "react-flip-move";
 import { useState } from "react";
-
+/*
 function CreateTask(props) {
-  console.log(props);
   //const title = (props.task.service);
   //title = title.substring(0,1) + title.substring(1,title.length())
-  const title = (props.task.service).substring(0,1) + props.task.service.toLowerCase().substring(1, (props.task.service).length);
-  
+  var title = (props.task.service).substring(0,1) + props.task.service.toLowerCase().substring(1, (props.task.service).length); 
+  if (title.substring(0,1) == "B" || title.substring(0,2) == "Tu") {
+    title = title + "ing";
+  }
   var start = (props.task.timeBegin).substring(0,5) + (props.task.timeBegin).substring(8, props.task.timeBegin.length);
+  const day = (props.task.day).substring(0,1) + (props.task.day).substring(1,props.task.day.length).toLowerCase();
   if (start.substring(0,1) == '0') {
     start = start.substring(1, start.length);
   }
   return(
     <Grid>
       <Paper>
-        <li className="entry">{title} on {props.task.day} at {start}</li>
+        <li className="entry">{title} on {day} at {start}</li>
       </Paper>
     </Grid>
   )
  
 }
-
-function LoadTasks({ note}) {
+*/
+function LoadTasks() {
   const history = useHistory();
   const tasks = history.location.state.get("task");
-  //const [itemList, setItemList] = useState([]);
-  const [itemList, setItemList] = useState([]);
-  tasks.forEach((item, index) => {
-    itemList.push(<CreateTask task={item}/>);
-    //console.log(item);
-  })
+  const listItems = tasks.map((item) =>
+      <li>{(item.service).substring(0,1) + item.service.toLowerCase().substring(1, (item.service).length) + (item.service.substring(0,1) == "B" ? "ting" : "")} on 
+      {" " + (item.day).substring(0,1) + (item.day).substring(1,item.day.length).toLowerCase()} at 
+      {" "  + (item.timeBegin.substring(0,1) != '0' ? item.timeBegin.substring(0,1) : "") + (item.timeBegin).substring(1,5) + (item.timeBegin).substring(8, item.timeBegin.length)}</li>
+  );
+
   return (
     <div className="todoListMain">
       <div className="header">
         <ul style={{paddingLeft: 45, width: 490}} className="theList">
           <FlipMove duration={250} easing="ease-out">
-            {itemList}
+            {listItems}
           </FlipMove>
         </ul>
       </div>

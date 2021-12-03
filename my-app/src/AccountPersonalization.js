@@ -140,19 +140,24 @@ function AccountPersonalization() {
   myid = history.location.state.get("user").id;
   const fname = history.location.state.get("user").firstName;
   const lname = history.location.state.get("user").lastName;
+ 
   const rating = "5.0";
   const bio = history.location.state.get("user").bio;
-  const goToCreateTask = () => history.push('/createtask');
+
   const goToUpdateAccount = () => history.push('/updateaccount');
   const [notes, setNotes] = useState([]);
   const index = 3;
-  const [timeRange, setTimeRange] = useState(new Map([["start", ""], ["end", ""]]));
+  const [timeRange, setTimeRange] = useState(new Map([["timeBegin", ""], ["timeEnd", ""]]));
   const [show, setShow] = useState(false);
-  const [formInfo, setFormInfo] = useState(new Map([["service", ""], ["day", ""], ["start", ""], ["end", ""]]));
+  const [formInfo, setFormInfo] = useState(new Map([["service", ""], ["day", ""], ["timeBegin", ""], ["timeEnd", ""]]));
+  const defaultForm = new Map([["service", ""], ["day", ""], ["timeBegin", ""], ["timeEnd", ""]]);
   const[err,setErr] = useState(new Map([["msg", ""], ["sev", ""], ["vis", false]]));
+  const [errorValue, setErrorValue] = useState("");
   var obj = {
     table: []
   };
+
+
 
   const customStyles = {
     content: {
@@ -170,56 +175,34 @@ function AccountPersonalization() {
 
 
  
-  const handleAddTime = () => {
-
-
-    if (timeRange.get('start').length != 0 && timeRange.get('end').length != 0) {
-      const newContact = {
-        row: index,
-        day: document.getElementById("weekday").value,
-        start: timeRange.get("start"),
-        end: timeRange.get("end"),
-      };     
-    }
-  };
+ 
   const showForm = () => setShow(true);
+  const closeModal = () => setShow(false);
     
-  const triggerText = 'Open form';
-  const onSubmit = (event) => {
-    event.preventDefault(event);
+  const onFinalSubmit = (event) => {
+    event.preventDefault();
     if (formInfo.get("service") == "Choose" || !formInfo.get("service")) {
       console.log("fix title");
-      /*
-      setErr(new Map(err.set("vis", true)));
-      setErr(new Map(err.set("msg", "Please choose a Title")));
-      setErr(new Map(err.set("sev", "error")));
-      */
+      setErrorValue("Please choose a Title");
       
     } else if (formInfo.get("day") == "Choose" || !formInfo.get("day") ) {
       console.log("fix day");
-      /*
-      setErr(new Map(err.set("vis", true)));
-      setErr(new Map(err.set("msg", "Please choose a Day")));
-      setErr(new Map(err.set("sev", "error")));
-      */
+      setErrorValue("Please choose a Day");
     }
-    else if (formInfo.get("start") == "" || formInfo.get("end")  == "") {
+    else if (formInfo.get("timeBegin") == "" || formInfo.get("timeEnd")  == "") {
       console.log("fix start");
-      /*
-      setErr(new Map(err.set("vis", true)));
-      setErr(new Map(err.set("msg", "Please choose a Time")));
-      setErr(new Map(err.set("sev", "error")));
-      */
+      setErrorValue("Please choose a Time");
+
     }
     else {
       const myTask = {
         
-        "username": myusername,
         "day": formInfo.get("day").substring(0, formInfo.get("day").length - 1).toUpperCase(),
-        "timeBegin": formInfo.get("start").substring(0, formInfo.get("start").length - 3) + ":00 " + formInfo.get("start").substring(formInfo.get("start").length - 2, formInfo.get("start").length),
-        "timeEnd": formInfo.get("end").substring(0, formInfo.get("end").length - 3) + ":00 " + formInfo.get("end").substring(formInfo.get("end").length - 2, formInfo.get("end").length),
+        "timeBegin": formInfo.get("timeBegin").substring(0, formInfo.get("timeBegin").length - 3) + ":00 " + formInfo.get("timeBegin").substring(formInfo.get("timeBegin").length - 2, formInfo.get("timeBegin").length),
+        "timeEnd": formInfo.get("timeEnd").substring(0, formInfo.get("timeEnd").length - 3) + ":00 " + formInfo.get("timeEnd").substring(formInfo.get("timeEnd").length - 2, formInfo.get("timeEnd").length),
         "service": formInfo.get("service").toUpperCase(),
       };
+      console.log(formInfo.get("timeBegin"));
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
@@ -228,13 +211,19 @@ function AccountPersonalization() {
       fetch("http://localhost:8080/backend/rest/account/task", requestOptions)
         .then(res => res.json())
         .then((data) => {
-            this.err.msg = "hi";
+            //this.err.msg = "hi";
         })
         .catch(err => {
             console.log(err);
             //throw new Error(err);
         })
-        console.log("added");
+        //history.location.state.set(new Map(history.location.state.set("task", )))
+        //history.location.state.set([..."tasks", myTask]);
+        closeModal();
+        setErrorValue("");
+        const tasks = history.location.state.get("task");
+        tasks.push(myTask);
+        history.location.state.set(new Map(history.location.state.set("task", tasks)));
     }
 
   };
@@ -301,14 +290,18 @@ function AccountPersonalization() {
                 <Paper className={classes.mytimes} style={{width: 530, height: 412, right: 10, backgroundColor: '#E1EBEE'}}>
                  
                   <div id="taskcontainer">
-                    <Button onClick={showForm}>Add Task</Button>
+                    <MuiThemeProvider>
+                      <RaisedButton  onClick={showForm} backgroundColor='#0077c0' labelColor='white' variant="contained" style={{width: 400, margin: '15px 0'}} className="form-control btn btn-primary">
+                        Add Task
+                      </RaisedButton>
+                    </MuiThemeProvider>
                     <Modal  style={customStyles} isOpen={show}>
-                    <form style={{paddingLeft: 20}}> 
+                      <form >
                       <th>
                       <center><h2 style={{paddingBottom: 20, paddingRight: 10}}>Create New Task</h2></center>
                       </th>
-                      <th><Button>close</Button></th>
-                      {err.get("vis") && <Alert severity={err.get("vis")} >{err.get("msg") }</Alert>}
+                      <th><Button onClick={closeModal}>close</Button></th>
+                      {errorValue && <Alert severity="error">{errorValue}</Alert>}
                       <TableRow style={{width: 100, paddingRight: 0}}>
                         <TableCell style={{paddingLeft: 20}}>
                           <div  className="form-group">
@@ -379,11 +372,11 @@ function AccountPersonalization() {
                                             newtime = (newhour + "") + newtime.substring(2, newtime.length);
                                           
                                           }
-                                          setFormInfo(new Map(formInfo.set("start",newtime)));
+                                          setFormInfo(new Map(formInfo.set("timeBegin",newtime)));
                                           //this.state.time1 = newtime;
                                           var zero = "0";
-                                          setFormInfo(new Map(formInfo.set("start",zero.concat(newtime))));
-                                          //formInfo.get("start") = zero.concat(formInfo.get("start"));
+                                          setFormInfo(new Map(formInfo.set("timeBegin",zero.concat(newtime))));
+                                          //formInfo.get("timeBegin") = zero.concat(formInfo.get("timeBegin"));
                                         
                                         } 
                           
@@ -405,11 +398,11 @@ function AccountPersonalization() {
                                             newtime = (newhour + "") + newtime.substring(2, newtime.length);
                                             
                                           }
-                                          setFormInfo(new Map(formInfo.set("end",newtime)));
+                                          setFormInfo(new Map(formInfo.set("timeEnd",newtime)));
                                           //this.state.time2 = newtime;
                                           var zero = "0";
-                                          setFormInfo(new Map(formInfo.set("end",zero.concat(newtime))));
-                                          //formInfo.get("end") = zero.concat(formInfo.get("end"));
+                                          setFormInfo(new Map(formInfo.set("timeEnd",zero.concat(newtime))));
+                                          //formInfo.get("timeEnd") = zero.concat(formInfo.get("timeEnd"));
                                           
                                           
                                         }
@@ -426,7 +419,7 @@ function AccountPersonalization() {
                       </TableRow>
                       <div className="form-group">
                         <MuiThemeProvider>
-                          <RaisedButton  onClick={onSubmit} backgroundColor='#0077c0' labelColor='white' variant="contained" fullWidth style={{margin: '15px 0'}} className="form-control btn btn-primary" type="submit">
+                          <RaisedButton  onClick={onFinalSubmit} backgroundColor='#0077c0' labelColor='white' variant="contained" fullWidth style={{margin: '15px 0'}} className="form-control btn btn-primary">
                             Submit
                           </RaisedButton>
                           
