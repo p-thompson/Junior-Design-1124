@@ -235,6 +235,7 @@ function AccountPersonalization() {
             //throw new Error(err);
         })
         console.log("added");
+        history.location.state.task.push(myTask);
     }
 
   };
