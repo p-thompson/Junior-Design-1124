@@ -44,7 +44,7 @@ To run the system, the server must be built and deployed. To do this, open a Ter
 
 To prepare the client-side to run, open a terminal and navigate to the `my-app` folder in our project directory. Run `npm install` to install the relevant dependencies.
 
-Another thing that needs to be built before running our website is the relevant databases. In order to do this, you must add the demo_app database to your MySQL Workbench. Do this by opening the file Junior_Design_Final_Demo.sql in workbench and running the file. You will also need to add all predefined SQL procedures to the database. After you have added the demo_app database, run the files account_procedures.sql and search_procedures.sql. After running all of these files, your local database will be successfully built!
+Another thing that needs to be built before running our website is the local database. In order to do this, you must add the demo_app database to your MySQL Workbench. Do this by opening the file Junior_Design_Final_Demo.sql in workbench and running the file. You will also need to add all predefined SQL procedures to the database. After you have added the demo_app database, run the files account_procedures.sql and search_procedures.sql. After running all of these files, your local database will be successfully built!
 
 ### *Step 5: Run Instructions*
 Ensure the server is running (step 4). Run the client-side by running `npm run start` in the `my-app` folder in our project directory. This will open our website in your default browser, and you can start using it!
