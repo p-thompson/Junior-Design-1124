@@ -10,7 +10,7 @@ It Takes a Village is a website designed speicifcally for single parents in the 
   - React v17.0.2
   - Node.js v14.17.6
 
-- MySQL v8.0.26
+- MySQL v8.0.26 (This includes MySQL Workbench)
 - Apache Tomcat v9.0.54
 - Apache Maven v3.8.3
 - Code Editor of choice 
@@ -38,20 +38,21 @@ Once downloaded, open the file in your code editor.
 
 
 ### *Step 4: Installation/Build Instructions*
-Before your first deployment of Tomcat. Ensure the `mysql-connector-java-8.0.26.jar` file is in your Tomcat `lib` folder. If it is not, copy it from the project's `lib` folder, paste it into tomcat's `lib` folder. 
+Before your first deployment of Tomcat, ensure the `mysql-connector-java-8.0.26.jar` file is in your Tomcat `lib` folder. If it is not, copy it from our project's `lib` folder, and paste it into tomcat's `lib` folder. 
 
-To run the system, the server must be built and deployed. To do this, open a Terminal and navigate to the `backend` folder of the project. Run `mvn clean build` or `mvn clean install`. This will create a `target` folder in `backend`. In `target` there will be a file called `backend.war`. Copy this and paste it into the `webapps` folder of your Tomcat installation. For each additional deployment, remember to delete `work` folder in the tomcat directory, as it is auto-generated with each deployment. Then start up Tomcat, and the server will run. (You can do this from the commandline by opening a Terminal in your tomcat directory and running the startup script.)
+To run the system, the server must be built and deployed. To do this, open a Terminal and navigate to the `backend` folder of the project. Run `mvn clean build` or `mvn clean install`. This will create a `target` folder in `backend`. In `target` there will be a file called `backend.war`. Copy this and paste it into the `webapps` folder of your Tomcat installation. For each additional deployment, remember to delete `work` folder in the tomcat directory, as it is auto-generated with each deployment. Then start up Tomcat by navigating to the `bin` folder within the Tomcat Installation and running the command "startup", and the server will run.
 
 To prepare the client-side to run, open a terminal and navigate to the `my-app` folder in our project directory. Run `npm install` to install the relevant dependencies.
 
+Another thing that needs to be built before running our website is the relevant databases. In order to do this, you must add the demo_app database to your MySQL Workbench. Do this by opening the file Junior_Design_Final_Demo.sql in workbench and running the file. You will also need to add all predefined SQL procedures to the database. After you have added the demo_app database, run the files account_procedures.sql and search_procedures.sql. After running all of these files, your local database will be successfully built!
 
 ### *Step 5: Run Instructions*
-Ensure the server is running (step 4). Run the client-side by running `npm run start` in the `my-app` folder in our project directory.
+Ensure the server is running (step 4). Run the client-side by running `npm run start` in the `my-app` folder in our project directory. This will open our website in your default browser, and you can start using it!
 
 ### *Step 6: Troubleshooting*
 
 #### Environment Variables:
-The most common installation error you could run into is not having set the necessary environment variables set.
+The most common installation error you could run into is not having the necessary environment variables set.
 In order to learn where and how to edit your environment variables on your operating system see: https://www.schrodinger.com/kb/1842 
 
 `JAVA_HOME`: This environment variable is necessary in order to run the Apache Tomcat server. Either ensure that this exists in your system variables already, or create a new system variable under the title ‘JAVA_HOME’. The path for this variable should be the location of your Java installation directory. If you didn’t relocate it upon installation it should be ‘C:\Program Files\Java\jdk1.8.0_65’.
