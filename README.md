@@ -66,6 +66,15 @@ The extension can be accessed here : https://chrome.google.com/webstore/detail/m
 
 ## Release Notes
 
+It Takes a Village has been recently released for the first time, and is on version 1.0. 
+This project has undergone many major changes in order to bring new features and updates to this release. 
+
+Some of the new features include the overhaul of the task system, which now allows users to create tasks which include a title, date, and time, and are added to their task board and posted to the database upon submission. 
+In addition, manual search was created to allow users to be able to search for other users with overlapping availability whether they are volunteers or parents. Automatic matching is also now available for users to be effortlessly matched with other users who match their pre-entered availability. Once matched, users can request other users’ contact information which is made available once the request is accepted.
+
+Known defects of this application include the inability to delete tasks from the database from the UI layer. Other defects occur as a result of the asynchronous nature of certain states in our application, which can sometimes cause information to be updated at a slower pace.
+
+Corrected defects of this application include the inability for tasks to disappear from the UI when clicked. Additionally, when users click “accept request” on a user’s contact information request, the accepted profile will automatically pop up on their dashboard, which before would require refreshing in order to view changes.
 
 ## Contributors 
 
