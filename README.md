@@ -36,23 +36,18 @@ The code can be downloaded through this GitHub in your own preffered form (i.e. 
 Once downloaded, open the file in your code editor. 
 
 
-### *Step 4: Build Instructions*
+### *Step 4: Installation/Build Instructions*
+Before your first deployment of Tomcat. Ensure the `mysql-connector-java-8.0.26.jar` file is in your Tomcat `lib` folder. If it is not, copy it from the project's `lib` folder, paste it into tomcat's `lib` folder. 
+
+To run the system, the server must be built and deployed. To do this, open a Terminal and navigate to the `backend` folder of the project. Run `mvn clean build` or `mvn clean install`. This will create a `target` folder in `backend`. In `target` there will be a file called `backend.war`. Copy this and paste it into the `webapps` folder of your Tomcat installation. For each additional deployment, remember to delete `work` folder in the tomcat directory, as it is auto-generated with each deployment. Then start up Tomcat, and the server will run. (You can do this from the commandline by opening a Terminal in your tomcat directory and running the startup script.)
+
+To prepare the client-side to run, open a terminal and navigate to the `my-app` folder in our project directory. Run `npm install` to install the relevant dependencies.
 
 
-
-### *Step 5*
-Installation of actual application
-putting connector jar in tomcat folder
-
-npm install
-
+### *Step 5: Run Instructions*
+Ensure the server is running (step 4). Run the client-side by running `npm run start` in the `my-app` folder in our project directory.
 
 ### *Step 6*
-Run instructions
-
-npm start
-
-### *Step 7*
 Troubleshooting
 
 java home/ environement variable issues
