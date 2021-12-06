@@ -48,10 +48,20 @@ To prepare the client-side to run, open a terminal and navigate to the `my-app` 
 ### *Step 5: Run Instructions*
 Ensure the server is running (step 4). Run the client-side by running `npm run start` in the `my-app` folder in our project directory.
 
-### *Step 6*
-Troubleshooting
+### *Step 6: Troubleshooting*
 
-java home/ environement variable issues
+#### Environment Variables:
+The most common installation error you could run into is not having set the necessary environment variables set.
+In order to learn where and how to edit your environment variables on you operating system see: https://www.schrodinger.com/kb/1842 
+
+`JAVA_HOME`: This environment variable is necessary in order to run the Apache Tomcat server. Either ensure that this exists in your system variables already, or create a new system variable under the title ‘JAVA_HOME’. The path for this variable should be the location of your Java installation directory. If you didn’t relocate it upon installation it should be ‘C:\Program Files\Java\jdk1.8.0_65’.
+
+`MAVEN_HOME`: This environment variable is necessary in order to run Apache Maven. If you have already used Maven in the past this environment variable should be set, however make sure to double check. The system variable title should be ‘MAVEN_HOME’ and the path should be the location of Maven installation which can be found by putting ‘where mvn’ in your command line. 
+
+#### Google Chrome Extension:
+Another potential error could be that the web browser doesn’t trust the server. To fix this issue you can download the extension ‘Moesif Origin & CORS Changer’ in order to directly send the cross-domain request without receiving the Cross Origin Error. This extension acts a proxy between the web browser and server by telling the browser the server is ok to contact. We applied this fix because we had built the server so it can be trusted.
+
+The extension can be accessed here : https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc/related?hl=en-US 
 
 
 ## Release Notes
