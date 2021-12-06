@@ -11,7 +11,7 @@ It Takes a Village is a website designed speicifcally for single parents in the 
   - Node.js v14.17.6
 
 - MySQL v8.0.26
-- Apahce Tomcat v9.0.54
+- Apache Tomcat v9.0.54
 - Code Editor of choice 
   - We used VS Code v1.62.2
 
