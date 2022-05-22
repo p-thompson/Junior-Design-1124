@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, Component } from "react";
 import TaskItems from "./TaskItems";
 import "./Tasks.css";
 import {title, start, end, day} from "./Form";
@@ -7,10 +7,20 @@ import { Container } from './Container';
 class Tasks extends Component {
   constructor(props) {
     super(props);
+    fetch("http://localhost:8080/backend/rest/account/task")
+    .then(res => res.json())
+    .then((data) => {
+        this.state.items = (data)
+        console.log(data);
+    })
+    .catch(err => {
+      throw new Error(err)
+    })
 
     this.state = {
       items: []
     };
+    
     
     this.addItem = this.addItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
@@ -18,11 +28,12 @@ class Tasks extends Component {
   onSubmit = (event) => {
     event.preventDefault(event);
   };
+  
 
   addItem(e) {
     var newItem = {
       text: title,
-      day: moment(day).format("LL"),
+      day: day,
       starty: start,
       key: Date.now()
     };
@@ -37,6 +48,7 @@ class Tasks extends Component {
     console.log(title);
        
     e.preventDefault();
+    
   }
   
   deleteItem(key) {
@@ -48,6 +60,7 @@ class Tasks extends Component {
       items: filteredItems
     });
   }
+  
   render() {
     return (
       <div className="todoListMain">

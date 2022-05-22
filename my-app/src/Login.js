@@ -14,16 +14,12 @@ import CreateAccount from "./CreateAccount";
 import {Helmet} from 'react-helmet';
 import { green } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
-import useForceUpdate from 'use-force-update';
 
 const useStyles = makeStyles((theme) => ({
 }));
 
-
 function Login() {
-    const [userInfo, setUserInfo] = useState(new Map([["user", ""], ["connections", "empty"], ["requests", "empty"], ["search", []], 
-        ["selectedUser", ""], ['servAndAvail', ''], ["manSearch", []], ["searchType", ""]]));
-    useForceUpdate();
+    const [userInfo, setUserInfo] = useState(new Map([["user", ""], ["connections", "empty"], ["task", []], ["requests", "empty"], ["search", ""], ["selectedUser", ""], ['servAndAvail', '']]));
     const history = useHistory();
     const goToCreateAccount = () => history.push('/createaccount');
     const goToForgotPassword = () => history.push('/forgotpassword');
@@ -43,13 +39,23 @@ function Login() {
             setErrorValue("Please input a password!")
         } else {
             fetch("http://localhost:8080/backend/rest/account/search/" + usernameValue)
-                    .then(res => res.json())
-                    .then((data) => {
-                        setUserInfo(new Map(userInfo.set("search", data)))
-                    })
-                    .catch(err => {
-                        throw new Error(err)
-                    })
+            .then(res => res.json())
+            .then((data) => {
+                setUserInfo(new Map(userInfo.set("search", data)))
+            })
+            .catch(err => {
+                throw new Error(err)
+            })
+
+            fetch("http://localhost:8080/backend/rest/account/task/" + usernameValue)
+                .then(res => res.json())
+                .then((data) => {
+                    setUserInfo(new Map(userInfo.set("task",data)))
+                })
+                .catch(err => {
+                    throw new Error(err)
+                })
+
             fetch("http://localhost:8080/backend/rest/account/" + usernameValue)
             .then(res => res.json())
             .then((data) => {
@@ -81,7 +87,6 @@ function Login() {
                 throw new Error(err)
             })
 
-            // useForceUpdate();
             if (userInfo.get("user") == null) {
                 setErrorValue("That username does not exist!")
             } else if (userInfo.get("user") != "" && userInfo.get("connections") != "empty") {
@@ -91,6 +96,24 @@ function Login() {
                     goToDashboard()
                 }
             }
+
+            // if (userInfo.get("user") == null) {
+            //     setErrorValue("That username does not exist!")
+            // } else if (userInfo.get("user") != "") {
+            //     if (passwordValue != userInfo.get("user").password) {
+            //         setErrorValue("The password input is incorrect!")
+            //     } else {
+            //         fetch("http://localhost:8080/backend/rest/account/search/" + usernameValue)
+            //         .then(res => res.json())
+            //         .then((data) => {
+            //             setUserInfo(new Map(userInfo.set("search", data)))
+            //         })
+            //         .catch(err => {
+            //             throw new Error(err)
+            //         })
+            //         goToDashboard()
+            //     }
+            // }
         }
     }
 

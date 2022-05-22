@@ -108,3 +108,6 @@ INSERT INTO volunteer_days_available VALUES ('bobwilson88', 'Friday', '10:00', '
 INSERT INTO volunteer_services_provided VALUES ('annasmith20', true, true, true);
 INSERT INTO volunteer_days_available VALUES ('annasmith20', 'Tuesday', '7:00', '13:00');
 INSERT INTO volunteer_days_available VALUES ('annasmith20', 'Friday', '10:00', '17:00');
+
+INSERT INTO volunteer_services_provided VALUES ('sallyjones13', true, true, true);
+INSERT INTO volunteer_days_available VALUES ('sallyjones13', 'Tuesday', '7:00', '13:00');
